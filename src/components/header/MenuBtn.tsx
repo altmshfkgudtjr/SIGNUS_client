@@ -5,7 +5,6 @@ const Container = styled.div`
 	position: relative;
 	width: 40px;
 	height: 40px;
-	margin-right: 1rem;
 	cursor: pointer;
 
 	&:active,
@@ -21,10 +20,10 @@ const Icon  = styled.img`
 	padding: 8px;
 `;
 
-const SearchBtn = () => {
+const MenuBtn = () => {
 	return <Container>
-		<Icon src="/icons/1x/search.png" alt="검색" />
+		<Icon src="/icons/1x/menu.png" alt="메뉴" />
 	</Container>;
 }
 
-export default SearchBtn
+export default MenuBtn

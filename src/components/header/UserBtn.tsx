@@ -3,9 +3,11 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 	position: relative;
-	width: 40px;
+	width: auto;
 	height: 40px;
 	margin-right: 1rem;
+	font-size: 16px;
+	line-height: 40px;
 	cursor: pointer;
 
 	&:active,
@@ -21,10 +23,15 @@ const Icon  = styled.img`
 	padding: 8px;
 `;
 
-const SearchBtn = () => {
+const Message = styled.span`
+	vertical-align: top;
+`;
+
+const UserBtn = () => {
 	return <Container>
-		<Icon src="/icons/1x/search.png" alt="검색" />
+		<Icon src="/icons/1x/user.png" alt="사용자" />
+		<Message>로그인</Message>
 	</Container>;
 }
 
-export default SearchBtn
+export default UserBtn

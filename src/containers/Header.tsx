@@ -3,13 +3,15 @@ import styled from 'styled-components'
 // components
 import Logo from '../components/header/Logo'
 import SearchBtn from '../components/header/SearchBtn'
+import MenuBtn from '../components/header/MenuBtn'
+import UserBtn from '../components/header/UserBtn'
 // lib
 import media from '../lib/styles/media'
 import * as styles from '../lib/styles/styles'
 
 const Container = styled.header`
 		position: relative;
-		width: 100vw;
+		width: 100%;
 		height: 40px;
 		padding: 10px 0;
 `;
@@ -47,6 +49,8 @@ const Header = () => {
 				<Logo />
 				<BtnWrapper>
 					<SearchBtn />
+					<UserBtn />
+					<MenuBtn />
 				</BtnWrapper>
 			</Content>
 		</Container>
