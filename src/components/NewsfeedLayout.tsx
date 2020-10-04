@@ -18,7 +18,7 @@ const Layout = styled.div`
 		max-width: 1064px;
 	}
 	${media.medium} {
-		max-width: 100%;
+		max-width: 98%;
 	}
 `;
 

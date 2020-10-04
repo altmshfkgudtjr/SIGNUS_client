@@ -14,6 +14,7 @@ const Container = styled.header`
 		width: 100%;
 		height: 40px;
 		padding: 10px 0;
+		margin-bottom: 3rem;
 `;
 
 const Content = styled.div`

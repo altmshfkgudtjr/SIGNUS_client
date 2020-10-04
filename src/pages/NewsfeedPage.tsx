@@ -8,7 +8,7 @@ import Header from '../containers/Header'
 import Sidebar from '../containers/Sidebar'
 // components
 import NewsfeedLayout from '../components/NewsfeedLayout'
-import PostLayout from '../components/PostLayout'
+import PostLayout from '../components/post/PostLayout'
 
 const NewsfeedPage = () => {
 	return (

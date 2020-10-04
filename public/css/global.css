@@ -68,4 +68,25 @@ strong {
 	font-weight: 400;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	font-size: 1rem;
+	color: #232625;
+}
+
+::selection {
+	background-color: #c4ede1;
+}
+::-moz-selection {
+	background-color: #c4ede1;
+}
+
+::-webkit-scrollbar-track {
+	background-color: rgba(0,0,0,0);
+}
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+	background-color: rgba(0,0,0,0);
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	background-color: rgba(0,0,0,.15);
 }
