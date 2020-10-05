@@ -1,16 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import OptionWrapper from './OptionWrapper'
-import OptionItem from './OptionItem'
+import OptionWrapper from '../OptionWrapper'
+import OptionItem from '../OptionItem'
 // lib
-import * as styles from '../lib/styles/styles'
+import * as styles from '../../lib/styles/styles'
+import media from '../../lib/styles/media'
 
 const Container = styled.div`
 	position: relative;
 	display: inline-block;
 	width: 100%;
 	grid-row-end: span 1;
+
+	${media.small} {
+		display: none;
+	}
 `;
 
 const Content = styled.div`
@@ -65,8 +70,8 @@ const BoardInfo = ({icon_src, small_info, large_info}: BoardInfoProps) => {
 			</Content>
 
 			<OptionWrapper title="보기">
-				<OptionItem message="격자" onClick={() => {}} />
-				<OptionItem message="목록" onClick={() => {}} />
+				<OptionItem message="격자" onClick={() => {}} selected={true} />
+				<OptionItem message="목록" onClick={() => {}} selected={false} />
 			</OptionWrapper>
 		</Container>
 	);

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 // lib
 import * as styles from '../../lib/styles/styles'
-import { mediaQuery } from '../../lib/styles/media'
+import media from '../../lib/styles/media'
 
 const Container = styled.div`
 	position: relative;
@@ -16,13 +16,17 @@ const Container = styled.div`
 	grid-row-end: span 2;
 	border-radius: 4px;
 
-	&:hover,
-	&:active {
-		transform: translate(0, -10px);
-		box-shadow: ${styles.boxShadow.regular};
+	@media (min-width: 720px) {
+		&:hover,
+		&:active {
+			transform: translate(0, -10px);
+			box-shadow: ${styles.boxShadow.regular};
+		}
 	}
 
-	${mediaQuery(702)} {
+	${media.small} {
+		display: block;
+		min-height: 300px;
 		margin-bottom: 1rem;
 	}
 `;

@@ -15,6 +15,13 @@ const Container = styled.header`
 		height: 40px;
 		padding: 10px 0;
 		margin-bottom: 3rem;
+
+		${media.small} {
+			width: 98%;
+			padding: 5px 0;
+			margin: auto;
+			margin-bottom: .5rem;
+		}
 `;
 
 const Content = styled.div`
@@ -32,6 +39,9 @@ const Content = styled.div`
 		max-width: 1064px;
 	}
 	${media.medium} {
+		max-width: 95%;
+	}
+	${media.small} {
 		max-width: 100%;
 	}
 `;

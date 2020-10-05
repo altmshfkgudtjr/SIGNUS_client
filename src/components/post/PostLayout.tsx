@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import BoardInfo from '../BoardInfo'
+import BoardInfo from '../board/BoardInfo'
+import BoardInfoMobile from '../board/BoardInfoMobile'
 import PostTextWrapper from '../post/PostTextWrapper'
 import PostImageWrapper from '../post/PostImageWrapper'
 // lib
-import { mediaQuery } from '../../lib/styles/media'
+import media from '../../lib/styles/media'
 
 const Container = styled.div`
 	position: relative;
@@ -20,7 +21,7 @@ const PostWrapper = styled.div`
 	grid-gap: 2rem;
 	grid-auto-rows: 200px;
 
-	${mediaQuery(702)} {
+	${media.small} {
 		display: block;
 	}
 `;
@@ -36,6 +37,8 @@ const PostLayout = ({newsfeed}: PostLayoutProps) => {
 			<BoardInfo icon_src="/icons/1x/home.png"
 								 small_info="뉴스피드"
 								 large_info="Top News" />
+			<BoardInfoMobile small_info="뉴스피드"
+											 large_info="Top News" />
 			<PostTextWrapper />
 			<PostTextWrapper />
 			<PostImageWrapper />

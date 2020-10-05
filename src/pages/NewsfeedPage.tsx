@@ -7,14 +7,14 @@ import PopularityPage from '../pages/newsfeed/PopularityPage'
 import Header from '../containers/Header'
 import Sidebar from '../containers/Sidebar'
 // components
-import NewsfeedLayout from '../components/NewsfeedLayout'
+import BoardLayout from '../components/board/BoardLayout'
 import PostLayout from '../components/post/PostLayout'
 
 const NewsfeedPage = () => {
 	return (
 		<>
 			<Header></Header> 
-			<NewsfeedLayout>
+			<BoardLayout>
 				<PostLayout  newsfeed={
 					<>
 						<Route path="/" component={RecommendationPage} exact />
@@ -22,7 +22,7 @@ const NewsfeedPage = () => {
 					</>
 				}/>
 				<Sidebar />
-			</NewsfeedLayout>
+			</BoardLayout>
 		</>
 	);
 }

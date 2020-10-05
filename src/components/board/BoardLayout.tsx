@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 // lib
-import media from '../lib/styles/media'
+import media from '../../lib/styles/media'
 
 const Layout = styled.div`
 	position: relative;
@@ -18,15 +18,18 @@ const Layout = styled.div`
 		max-width: 1064px;
 	}
 	${media.medium} {
-		max-width: 98%;
+		max-width: 95%;
+	}
+	${media.small} {
+		max-width: 100%;
 	}
 `;
 
-type NewsfeedLayoutProps = {
+type BoardLayoutProps = {
 	children: any;
 };
 
-const NewsfeedLayout = ({children}: NewsfeedLayoutProps) => {
+const BoardLayout = ({children}: BoardLayoutProps) => {
 	return (
 		<Layout>
 			{children}
@@ -34,4 +37,4 @@ const NewsfeedLayout = ({children}: NewsfeedLayoutProps) => {
 	);
 }
 
-export default NewsfeedLayout
+export default BoardLayout

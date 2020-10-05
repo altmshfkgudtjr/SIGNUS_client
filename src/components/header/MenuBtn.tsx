@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+// lib
+import media from '../../lib/styles/media'
 
 const Container = styled.div`
 	position: relative;
-	width: 40px;
+	width: auto;
 	height: 40px;
 	cursor: pointer;
 
@@ -18,6 +20,12 @@ const Icon  = styled.img`
 	width: 24px;
 	height: 24px;
 	padding: 8px;
+
+	${media.small} {
+		width: 18px;
+		height: 18px;
+		padding: 11px 7px;
+	}
 `;
 
 const MenuBtn = () => {

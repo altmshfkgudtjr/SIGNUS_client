@@ -4,7 +4,10 @@ import styled from 'styled-components'
 import * as styles from '../lib/styles/styles'
 import palette from '../lib/styles/palette'
 
-const Container = styled.div`
+interface ContainerStyled {
+   selected: boolean;
+}
+const Container = styled.div<ContainerStyled>`
 	flex-grow: 1;
 	position: relative;
 	height: 2rem;
@@ -21,6 +24,15 @@ const Container = styled.div`
 			color: inherit;
 		}
 	}
+
+	${props => props.selected && `
+		& > div {
+			background-color: ${palette.teal4}
+		}
+		& > span {
+			color: inherit
+		}
+	`};
 `;
 
 const Icon = styled.div`
@@ -46,12 +58,13 @@ const Message = styled.span`
 
 type OptionItemProps = {
 	message: string,
-	onClick: ()=> void
+	onClick: ()=> void,
+	selected: boolean
 };
 
-const OptionItem = ({message, onClick}: OptionItemProps) => {
+const OptionItem = ({message, onClick, selected}: OptionItemProps) => {
 	return (
-		<Container onClick={onClick}>
+		<Container onClick={onClick} selected={selected}>
 			<Icon />
 			<Message>{message}</Message>
 		</Container>
