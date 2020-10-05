@@ -80,9 +80,9 @@ const OptionItem = styled.div<ContainerStyled>`
 const OptionIcon = styled.img`
 	position: relative;
 	display: block;
-	width: 18px;
-	height: 18px;
-	margin: 7px auto;
+	width: 20px;
+	height: 20px;
+	margin: 6px auto;
 `;
 
 

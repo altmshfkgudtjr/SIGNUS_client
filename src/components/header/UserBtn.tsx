@@ -29,9 +29,9 @@ const Icon  = styled.img`
 	padding: 8px;
 
 	${media.small} {
-		width: 18px;
-		height: 18px;
-		padding: 11px 7px;
+		width: 20px;
+		height: 20px;
+		padding: 10px 7px;
 	}
 `;
 
