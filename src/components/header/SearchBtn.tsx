@@ -34,9 +34,11 @@ const Icon  = styled.img`
 `;
 
 const SearchBtn = () => {
-	return <Container>
-		<Icon src="/icons/1x/search.png" alt="검색" />
-	</Container>;
+	return (
+		<Container>
+			<Icon src="/icons/1x/search.png" alt="검색" />
+		</Container>
+	);
 }
 
 export default SearchBtn

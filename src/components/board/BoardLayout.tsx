@@ -7,7 +7,7 @@ const Layout = styled.div`
 	position: relative;
 	display: flex;
 	width: 100%;
-	max-width: 1728px;
+	max-width: 1628px;
 	min-height: 100vh;
 	margin: 0 auto 200px auto;
 
@@ -15,7 +15,7 @@ const Layout = styled.div`
 		max-width: 1396px;
 	}
 	${media.large} {
-		max-width: 1064px;
+		max-width: 1232px;
 	}
 	${media.medium} {
 		max-width: 95%;

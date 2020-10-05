@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ContentWrapper from '../components/sidebar/ContentWrapper'
 import Title from '../components/sidebar/Title'
 // lib
-import { mediaQuery } from '../lib/styles/media'
+import media, { mediaQuery } from '../lib/styles/media'
 
 const Container = styled.div`
 	position: relative;
@@ -12,6 +12,12 @@ const Container = styled.div`
 	box-sizing: border-box;
 	padding-left: 2rem;
 
+	${media.large} {
+		max-width: 240px;
+	}
+	${media.medium} {
+		max-width: 300px;
+	}
 	${mediaQuery(1000)} {
 		width: 250px;
 	}

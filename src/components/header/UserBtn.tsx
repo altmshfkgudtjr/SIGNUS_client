@@ -8,7 +8,7 @@ const Container = styled.div`
 	width: auto;
 	height: 40px;
 	margin-right: 1rem;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 40px;
 	cursor: pointer;
 

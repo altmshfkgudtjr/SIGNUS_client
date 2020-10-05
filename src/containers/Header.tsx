@@ -1,71 +1,44 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 // components
-import Logo from '../components/header/Logo'
-import SearchBtn from '../components/header/SearchBtn'
-import MenuBtn from '../components/header/MenuBtn'
-import UserBtn from '../components/header/UserBtn'
+import HeaderStatic from '../components/HeaderStatic'
+import HeaderCover from '../components/HeaderCover'
 // lib
-import media from '../lib/styles/media'
-import * as styles from '../lib/styles/styles'
-
-const Container = styled.header`
-		position: relative;
-		width: 100%;
-		height: 40px;
-		padding: 10px 0;
-		margin-bottom: 3rem;
-
-		${media.small} {
-			width: 98%;
-			padding: 5px 0;
-			margin: auto;
-			margin-bottom: .5rem;
-		}
-`;
-
-const Content = styled.div`
-	position: relative;
-	display: flex;
-	max-width: 1728px;
-	margin: auto;
-	transition: .2s max-width ${styles.transition};
-	${styles.noselect}
-
-	${media.xlarge} {
-		max-width: 1396px;
-	}
-	${media.large} {
-		max-width: 1064px;
-	}
-	${media.medium} {
-		max-width: 95%;
-	}
-	${media.small} {
-		max-width: 100%;
-	}
-`;
-
-const BtnWrapper = styled.div`
-	position: relative;
-	display: flex;
-	flex-grow: 1;
-	justify-content: flex-end;
-`;
+import { throttle } from '../lib/lazyEvent'
 
 const Header = () => {
+	const [scrolled, setScrolled] = useState(false);
+	const prevScrollTop = useRef(0);
+
+	/* 스크롤했을 때, Header 노출 여부 결정 함수 */
+	const handleScrolled = useCallback(throttle(() => {
+		const scrollTop = window.scrollY;
+		const nextDirection = prevScrollTop.current > scrollTop ? 'UP' : 'DOWN';
+
+		if (scrollTop <= 100) {
+			setScrolled(false);
+		} else if (nextDirection === 'DOWN') {
+			setScrolled(false);
+		} else {
+			setScrolled(true);
+		}
+
+		prevScrollTop.current = scrollTop;
+	}, 100), []);
+
+	useEffect(() => {
+		document.addEventListener("scroll", handleScrolled);
+		return () => {
+			document.removeEventListener("scroll", handleScrolled);
+		}
+	}, [handleScrolled]);
+
 	return (
-		<Container>
-			<Content>
-				<Logo />
-				<BtnWrapper>
-					<SearchBtn />
-					<UserBtn />
-					<MenuBtn />
-				</BtnWrapper>
-			</Content>
-		</Container>
+		<>
+			<HeaderStatic />
+			<HeaderCover show={scrolled} />
+		</>
 	);
 }
 
 export default Header
+

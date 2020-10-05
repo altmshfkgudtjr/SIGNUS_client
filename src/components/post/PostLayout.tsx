@@ -18,7 +18,7 @@ const PostWrapper = styled.div`
 	position: relative;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-	grid-gap: 2rem;
+	grid-gap: 1rem;
 	grid-auto-rows: 200px;
 
 	${media.small} {

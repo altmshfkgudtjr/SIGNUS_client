@@ -2,13 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 // lib
 import * as styles from '../../lib/styles/styles'
-import media from '../../lib/styles/media'
 import palette from '../../lib/styles/palette'
 
 const Container = styled.div`
 	position: relative;
 	display: flex;
-	width: 98%;
+	width: 95%;
 	border-bottom: 1px solid ${palette.gray2};
 	margin: 0 auto .5rem auto;
 
@@ -26,7 +25,7 @@ const Content = styled.div`
 
 const SmallInfo = styled.div`
 	position: relative;
-	font-size: 10px;
+	font-size: 11px;
 	font-weight: 600;
 	opacity: .5;
 `;
