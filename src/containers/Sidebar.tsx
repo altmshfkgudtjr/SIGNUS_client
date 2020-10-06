@@ -19,7 +19,7 @@ const Container = styled.div`
 		max-width: 300px;
 	}
 	${mediaQuery(1000)} {
-		width: 250px;
+		width: 240px;
 	}
 	${mediaQuery(960)} {
 		display: none;

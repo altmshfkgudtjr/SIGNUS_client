@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 // components
 import Logo from './header/Logo'
@@ -47,7 +47,7 @@ const Content = styled.div`
 		max-width: 1396px;
 	}
 	${media.large} {
-		max-width: 1064px;
+		max-width: 1232px;
 	}
 	${media.medium} {
 		max-width: 95%;
@@ -65,16 +65,21 @@ const BtnWrapper = styled.div`
 `;
 
 type HeaderCoverProps = {
-	show: boolean
+	show: boolean,
+	searchWord: string,
+	setSearchWord: React.Dispatch<React.SetStateAction<string>>
 };
 
 const HeaderCover = ({show}: HeaderCoverProps) => {
+	const [searchDisplay, setSearchDisplay] = useState<boolean>(false);
+
 	return (
 		<Container show={show}>
 			<Content>
 				<Logo />
 				<BtnWrapper>
-					<SearchBtn />
+					<SearchBtn searchDisplay={searchDisplay}
+										 setSearchDisplay={setSearchDisplay} />
 					<UserBtn />
 					<MenuBtn />
 				</BtnWrapper>

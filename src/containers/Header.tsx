@@ -6,7 +6,8 @@ import HeaderCover from '../components/HeaderCover'
 import { throttle } from '../lib/lazyEvent'
 
 const Header = () => {
-	const [scrolled, setScrolled] = useState(false);
+	const [searchWord, setSearchWord] = useState<string>('');
+	const [scrolled, setScrolled] = useState<boolean>(false);
 	const prevScrollTop = useRef(0);
 
 	/* 스크롤했을 때, Header 노출 여부 결정 함수 */
@@ -34,8 +35,11 @@ const Header = () => {
 
 	return (
 		<>
-			<HeaderStatic />
-			<HeaderCover show={scrolled} />
+			<HeaderStatic searchWord={searchWord}
+										setSearchWord={setSearchWord} />
+			<HeaderCover show={scrolled}
+									 searchWord={searchWord}
+									 setSearchWord={setSearchWord} />
 		</>
 	);
 }

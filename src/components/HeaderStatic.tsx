@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 // components
 import Logo from './header/Logo'
+import SearchInput from './header/SearchInput'
 import SearchBtn from './header/SearchBtn'
 import MenuBtn from './header/MenuBtn'
 import UserBtn from './header/UserBtn'
@@ -36,7 +37,7 @@ const Content = styled.div`
 		max-width: 1396px;
 	}
 	${media.large} {
-		max-width: 1064px;
+		max-width: 1232px;
 	}
 	${media.medium} {
 		max-width: 95%;
@@ -53,13 +54,24 @@ const BtnWrapper = styled.div`
 	justify-content: flex-end;
 `;
 
-const Header = () => {
+type HeaderProps = {
+	searchWord: string,
+	setSearchWord: React.Dispatch<React.SetStateAction<string>>
+};
+
+const Header = ({searchWord, setSearchWord}: HeaderProps) => {
+	const [searchDisplay, setSearchDisplay] = useState<boolean>(false);
+
 	return (
 		<Container>
 			<Content>
 				<Logo />
 				<BtnWrapper>
-					<SearchBtn />
+					<SearchInput searchDisplay={searchDisplay}
+											 searchWord={searchWord}
+											 setSearchWord={setSearchWord} />
+					<SearchBtn searchDisplay={searchDisplay}
+										 setSearchDisplay={setSearchDisplay} />
 					<UserBtn />
 					<MenuBtn />
 				</BtnWrapper>

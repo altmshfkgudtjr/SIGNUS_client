@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 // lib
 import media from '../../lib/styles/media'
@@ -33,9 +33,22 @@ const Icon  = styled.img`
 	}
 `;
 
-const SearchBtn = () => {
+type SearchBtnProps = {
+	searchDisplay: boolean,
+	setSearchDisplay: React.Dispatch<React.SetStateAction<boolean>>
+};
+
+const SearchBtn = ({searchDisplay, setSearchDisplay}: SearchBtnProps) => {
+	const onClick = useCallback(() => {
+		if (searchDisplay) {
+			setSearchDisplay(false);
+		} else {
+			setSearchDisplay(true);
+		}
+	}, [searchDisplay, setSearchDisplay]);
+
 	return (
-		<Container>
+		<Container onClick={onClick}>
 			<Icon src="/icons/1x/search.png" alt="검색" />
 		</Container>
 	);
