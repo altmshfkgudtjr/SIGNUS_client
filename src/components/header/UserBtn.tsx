@@ -36,8 +36,10 @@ const Icon  = styled.img`
 `;
 
 const Message = styled.span`
+	position: relative;
+	height: 24px;
 	vertical-align: top;
-
+	
 	${media.small} {
 		display: none;
 	}

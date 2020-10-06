@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import OptionWrapper from '../OptionWrapper'
-import OptionItem from '../OptionItem'
+import OptionWrapper from '../commons/OptionWrapper'
+import OptionItem from '../commons/OptionItem'
 // lib
 import * as styles from '../../lib/styles/styles'
 import media from '../../lib/styles/media'

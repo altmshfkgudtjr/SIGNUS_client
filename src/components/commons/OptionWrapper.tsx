@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 // lib
-import * as styles from '../lib/styles/styles'
+import * as styles from '../../lib/styles/styles'
 
 const Container = styled.div`
 	position: relative;

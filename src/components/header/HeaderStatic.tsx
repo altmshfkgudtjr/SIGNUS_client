@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 // components
-import Logo from './header/Logo'
-import SearchInput from './header/SearchInput'
-import SearchBtn from './header/SearchBtn'
-import MenuBtn from './header/MenuBtn'
-import UserBtn from './header/UserBtn'
+import Logo from './Logo'
+import SearchInput from './SearchInput'
+import SearchBtn from './SearchBtn'
+import MenuBtn from './MenuBtn'
+import UserBtn from './UserBtn'
 // lib
-import media from '../lib/styles/media'
-import * as styles from '../lib/styles/styles'
+import media from '../../lib/styles/media'
+import * as styles from '../../lib/styles/styles'
 
 const Container = styled.header`
 		position: relative;
@@ -56,10 +56,11 @@ const BtnWrapper = styled.div`
 
 type HeaderProps = {
 	searchWord: string,
-	setSearchWord: React.Dispatch<React.SetStateAction<string>>
+	setSearchWord: React.Dispatch<React.SetStateAction<string>>,
+	setSearchModalDisplay: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-const Header = ({searchWord, setSearchWord}: HeaderProps) => {
+const Header = ({searchWord, setSearchWord, setSearchModalDisplay}: HeaderProps) => {
 	const [searchDisplay, setSearchDisplay] = useState<boolean>(false);
 
 	return (
@@ -68,10 +69,13 @@ const Header = ({searchWord, setSearchWord}: HeaderProps) => {
 				<Logo />
 				<BtnWrapper>
 					<SearchInput searchDisplay={searchDisplay}
+											 setSearchDisplay={setSearchDisplay}
 											 searchWord={searchWord}
 											 setSearchWord={setSearchWord} />
-					<SearchBtn searchDisplay={searchDisplay}
-										 setSearchDisplay={setSearchDisplay} />
+					<SearchBtn searchWord={searchWord}
+										 searchDisplay={searchDisplay}
+										 setSearchDisplay={setSearchDisplay}
+										 setSearchModalDisplay={setSearchModalDisplay} />
 					<UserBtn />
 					<MenuBtn />
 				</BtnWrapper>

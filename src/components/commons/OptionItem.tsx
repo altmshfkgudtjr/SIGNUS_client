@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 // lib
-import * as styles from '../lib/styles/styles'
-import palette from '../lib/styles/palette'
+import * as styles from '../../lib/styles/styles'
+import palette from '../../lib/styles/palette'
 
 interface ContainerStyled {
    selected: boolean;
@@ -18,6 +18,7 @@ const Container = styled.div<ContainerStyled>`
 	&:active,
 	&:hover {
 		& > div {
+			box-shadow: 0 0 .5rem ${palette.teal4};
 			background-color: ${palette.teal4};
 		}
 		& > span {
@@ -27,7 +28,8 @@ const Container = styled.div<ContainerStyled>`
 
 	${props => props.selected && `
 		& > div {
-			background-color: ${palette.teal4}
+			box-shadow: 0 0 .5rem ${palette.teal4};
+			background-color: ${palette.teal4};
 		}
 		& > span {
 			color: inherit

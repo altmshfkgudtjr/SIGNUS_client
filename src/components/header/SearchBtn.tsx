@@ -1,7 +1,9 @@
 import React, { useCallback } from 'react'
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 // lib
-import media from '../../lib/styles/media'
+import media, { mediaValue } from '../../lib/styles/media'
+import * as searchUtils from '../../lib/utils/searchUtils'
 
 const Container = styled.div`
 	position: relative;
@@ -34,18 +36,29 @@ const Icon  = styled.img`
 `;
 
 type SearchBtnProps = {
+	searchWord: string,
 	searchDisplay: boolean,
-	setSearchDisplay: React.Dispatch<React.SetStateAction<boolean>>
+	setSearchDisplay?: React.Dispatch<React.SetStateAction<boolean>>,
+	setSearchModalDisplay: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-const SearchBtn = ({searchDisplay, setSearchDisplay}: SearchBtnProps) => {
+const SearchBtn = ({searchWord, searchDisplay, setSearchDisplay, setSearchModalDisplay}: SearchBtnProps) => {
+	const history = useHistory();
+
 	const onClick = useCallback(() => {
 		if (searchDisplay) {
-			setSearchDisplay(false);
-		} else {
+			const prevKeyword = searchWord;
+			const keyword = searchUtils.changeKeyword(prevKeyword);
+			
+			if (searchUtils.searchChecker(keyword)) {
+				history.push('/search/' + keyword);
+			}
+		} else if (window.innerWidth <= mediaValue.small) {
+			setSearchModalDisplay(true);
+		} else if(setSearchDisplay) {
 			setSearchDisplay(true);
 		}
-	}, [searchDisplay, setSearchDisplay]);
+	}, [history, searchWord, searchDisplay, setSearchDisplay, setSearchModalDisplay]);
 
 	return (
 		<Container onClick={onClick}>

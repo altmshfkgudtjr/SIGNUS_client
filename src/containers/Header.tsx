@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
+// containers
+import SearchModal from './modal/SearchModal'
 // components
-import HeaderStatic from '../components/HeaderStatic'
-import HeaderCover from '../components/HeaderCover'
+import HeaderStatic from '../components/header/HeaderStatic'
+import HeaderCover from '../components/header/HeaderCover'
 // lib
 import { throttle } from '../lib/lazyEvent'
 
 const Header = () => {
+	const [searchModalDisplay, setSearchModalDisplay] = useState<boolean>(false);
 	const [searchWord, setSearchWord] = useState<string>('');
 	const [scrolled, setScrolled] = useState<boolean>(false);
 	const prevScrollTop = useRef(0);
@@ -36,10 +39,15 @@ const Header = () => {
 	return (
 		<>
 			<HeaderStatic searchWord={searchWord}
-										setSearchWord={setSearchWord} />
+										setSearchWord={setSearchWord}
+										setSearchModalDisplay={setSearchModalDisplay} />
 			<HeaderCover show={scrolled}
 									 searchWord={searchWord}
-									 setSearchWord={setSearchWord} />
+									 setSearchWord={setSearchWord}
+									 setSearchModalDisplay={setSearchModalDisplay} />
+			{searchModalDisplay && <SearchModal searchWord={searchWord}
+																					setSearchWord={setSearchWord}
+																					setSearchModalDisplay={setSearchModalDisplay} />}
 		</>
 	);
 }
