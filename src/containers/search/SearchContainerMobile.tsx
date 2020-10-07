@@ -1,21 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import SearchInput from '../../components/modal/search/SearchInput'
+import SearchInput from '../../components/search/SearchInput'
 import SearchBtn from '../../components/header/SearchBtn'
-import CloseBtn from '../../components/modal/search/CloseBtn'
+import CloseBtn from '../../components/search/CloseBtn'
 // lib
 import * as styles from '../../lib/styles/styles'
 import zIndex from '../../lib/styles/zIndex'
 import animations from '../../lib/styles/animations'
 
-type SearchModalProps = {
+type SearchContainerMobileProps = {
 	searchWord: string,
 	setSearchWord: React.Dispatch<React.SetStateAction<string>>,
 	setSearchModalDisplay: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-const SearchModal = ({searchWord, setSearchWord, setSearchModalDisplay}: SearchModalProps) => {
+const SearchContainerMobile = ({searchWord, setSearchWord, setSearchModalDisplay}: SearchContainerMobileProps) => {
 	return (
 		<Modal>
 			<ModalContent>
@@ -55,4 +55,4 @@ const ModalContent = styled.div`
 	animation: .3s ${animations.fadeInBottom} .2s;
 `;
 
-export default SearchModal
+export default SearchContainerMobile

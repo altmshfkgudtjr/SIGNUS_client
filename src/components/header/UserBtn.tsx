@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+// containers
+import AuthModal from '../../containers/modal/AuthModal'
 // lib
 import media from '../../lib/styles/media'
+import palette from '../../lib/styles/palette'
 
 const Container = styled.div`
 	position: relative;
@@ -15,6 +18,10 @@ const Container = styled.div`
 	&:active,
 	&:hover {
 		filter: invert(61%) sepia(19%) saturate(7010%) hue-rotate(122deg) brightness(94%) contrast(86%);
+
+		& > span {
+			color: #000;
+		}
 	}
 
 	${media.small} {
@@ -39,6 +46,9 @@ const Message = styled.span`
 	position: relative;
 	height: 24px;
 	vertical-align: top;
+	font-size: 14px;
+	font-weight: 600;
+	color: ${palette.gray6};
 	
 	${media.small} {
 		display: none;
@@ -46,10 +56,21 @@ const Message = styled.span`
 `;
 
 const UserBtn = () => {
-	return <Container>
-		<Icon src="/icons/1x/user.png" alt="사용자" />
-		<Message>로그인</Message>
-	</Container>;
+	const [modalShow, setModalShow] = useState<boolean>(false);
+
+	const onClick = () => {
+		setModalShow(!modalShow);
+	}
+
+	return (
+		<>
+			<Container onClick={onClick}>
+				<Icon src="/icons/1x/user.png" alt="사용자" />
+				<Message>로그인</Message>
+			</Container>
+			<AuthModal display={modalShow} onClose={onClick} />
+		</>
+	);
 }
 
 export default UserBtn

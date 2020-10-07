@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components'
 // lib
-import palette from '../../../lib/styles/palette'
-import * as searchUtils from '../../../lib/utils/searchUtils'
+import palette from '../../lib/styles/palette'
+import * as searchUtils from '../../lib/utils/searchUtils'
 
 type SearchInputProps = {
 	searchWord: string,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 // containers
-import SearchModal from './modal/SearchModal'
+import SearchContainerMobile from './search/SearchContainerMobile'
 // components
 import HeaderStatic from '../components/header/HeaderStatic'
 import HeaderCover from '../components/header/HeaderCover'
@@ -45,9 +45,9 @@ const Header = () => {
 									 searchWord={searchWord}
 									 setSearchWord={setSearchWord}
 									 setSearchModalDisplay={setSearchModalDisplay} />
-			{searchModalDisplay && <SearchModal searchWord={searchWord}
-																					setSearchWord={setSearchWord}
-																					setSearchModalDisplay={setSearchModalDisplay} />}
+			{searchModalDisplay && <SearchContainerMobile searchWord={searchWord}
+																										setSearchWord={setSearchWord}
+																										setSearchModalDisplay={setSearchModalDisplay} />}
 		</>
 	);
 }
