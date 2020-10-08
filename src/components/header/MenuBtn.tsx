@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+// containers
+import MenuModal from '../../containers/modal/MenuModal'
 // lib
 import media from '../../lib/styles/media'
+
+const MenuBtn = () => {
+	const [modalShow, setModalShow] = useState<boolean>(false);
+
+	const onShow = () => {
+		setModalShow(true);
+	}
+
+	const onClose = () => {
+		setModalShow(false);
+	}
+
+	return <Container onClick={onShow}>
+		<Icon src="/icons/1x/menu.png" alt="메뉴" />
+		<MenuModal display={modalShow} onClose={onClose} />
+	</Container>;
+}
 
 const Container = styled.div`
 	position: relative;
@@ -31,11 +50,5 @@ const Icon  = styled.img`
 		padding: 10px 7px;
 	}
 `;
-
-const MenuBtn = () => {
-	return <Container>
-		<Icon src="/icons/1x/menu.png" alt="메뉴" />
-	</Container>;
-}
 
 export default MenuBtn
