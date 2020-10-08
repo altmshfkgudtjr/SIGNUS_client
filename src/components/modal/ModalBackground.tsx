@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 // lib
 import zIndex from '../../lib/styles/zIndex'
+import animations from '../../lib/styles/animations'
 
 type ModalBackgroundType = {
 	children: React.ReactNode
@@ -21,6 +22,7 @@ const Background = styled.div`
 	justify-content: center;
 	background-color: rgba(249, 249, 249, 0.85);
 	z-index: ${zIndex.modal};
+	animation: .2s ${animations.fadeIn};
 `;
 
 export default ModalBackground

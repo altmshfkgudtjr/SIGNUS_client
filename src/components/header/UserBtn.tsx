@@ -6,6 +6,30 @@ import AuthModal from '../../containers/modal/AuthModal'
 import media from '../../lib/styles/media'
 import palette from '../../lib/styles/palette'
 
+const UserBtn = () => {
+	const [modalShow, setModalShow] = useState<boolean>(false);
+
+	const onShow = () => {
+		setModalShow(true);
+		(document.querySelector('body') as HTMLElement).style.overflow = 'hidden';
+	}
+
+	const onClose = () => {
+		setModalShow(false);
+		(document.querySelector('body') as HTMLElement).removeAttribute('style');
+	}
+
+	return (
+		<>
+			<Container onClick={onShow}>
+				<Icon src="/icons/1x/user.png" alt="사용자" />
+				<Message>로그인</Message>
+			</Container>
+			<AuthModal display={modalShow} onClose={onClose} />
+		</>
+	);
+}
+
 const Container = styled.div`
 	position: relative;
 	width: auto;
@@ -55,22 +79,5 @@ const Message = styled.span`
 	}
 `;
 
-const UserBtn = () => {
-	const [modalShow, setModalShow] = useState<boolean>(false);
-
-	const onClick = () => {
-		setModalShow(!modalShow);
-	}
-
-	return (
-		<>
-			<Container onClick={onClick}>
-				<Icon src="/icons/1x/user.png" alt="사용자" />
-				<Message>로그인</Message>
-			</Container>
-			<AuthModal display={modalShow} onClose={onClick} />
-		</>
-	);
-}
 
 export default UserBtn

@@ -18,7 +18,6 @@ const Container = styled.header`
 		margin-bottom: 3rem;
 
 		${media.small} {
-			width: 98%;
 			padding: 5px 0;
 			margin: auto;
 			margin-bottom: .5rem;
@@ -43,7 +42,7 @@ const Content = styled.div`
 		max-width: 95%;
 	}
 	${media.small} {
-		max-width: 100%;
+		max-width: 98%;
 	}
 `;
 

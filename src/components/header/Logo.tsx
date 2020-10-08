@@ -6,12 +6,13 @@ import media from '../../lib/styles/media'
 
 const Content = styled.img`
 	position: relative;
-	height: 40px;
+	height: 30px;
+	padding: 5px;
 	cursor: pointer;
 
 	${media.small} {
-		height: 32px;
-		padding: 4px 0;
+		height: 28px;
+		padding: 6px 0;
 	}
 `;
 

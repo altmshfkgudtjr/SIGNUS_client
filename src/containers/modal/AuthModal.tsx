@@ -2,13 +2,12 @@ import React from 'react'
 import Portal from '../../portal'
 // components
 import ModalBackground from '../../components/modal/ModalBackground'
-import AuthModalWrapper from '../../components/modal/AuthModalWrapper'
+import AuthModalWrapper from '../../components/modal/auth/AuthModalWrapper'
 
-type AuthModalProps = {
-	display: boolean,
-	onClose: () => void
-};
-
+interface AuthModalProps {
+	display: boolean;
+	onClose(): void;
+}
 const AuthModal = ({display, onClose}: AuthModalProps) => {
 	return (
 		<Portal id='modal'>

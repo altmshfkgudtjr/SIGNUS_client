@@ -1,13 +1,17 @@
 import React, { useEffect, useCallback, useRef } from 'react'
 import styled from 'styled-components'
+// components
+import AuthInfoContent from './AuthInfoContent'
+import Contour from './Contour'
+import AuthLoginContent from './AuthLoginContent'
 // lib
-import * as styles from '../../lib/styles/styles'
-import animations from '../../lib/styles/animations'
+import * as styles from '../../../lib/styles/styles'
+import animations from '../../../lib/styles/animations'
+import media from '../../../lib/styles/media'
 
-type AuthModalWrapperProps = {
-	onClose: () => void
+interface AuthModalWrapperProps {
+	onClose(): void;
 }
-
 const AuthModalWrapper = ({onClose}: AuthModalWrapperProps) => {
 	const ModalRef = useRef<HTMLInputElement>(null);
 
@@ -30,20 +34,32 @@ const AuthModalWrapper = ({onClose}: AuthModalWrapperProps) => {
 
 	return (
 		<Container ref={ModalRef}>
-			
+			<AuthInfoContent />
+			<Contour />
+			<AuthLoginContent onClose={onClose} />
 		</Container>
 	);
 }
 
 const Container = styled.div`
 	position: relative;
+	display: flex;
 	width: 100%;
-	max-width: 600px;
+	max-width: 700px;
 	height: 400px;
 	border-radius: 4px;
 	background-color: #FFF;
 	box-shadow: ${styles.boxShadow.regular};
 	animation: .5s ${animations.fadeIn};
+	box-sizing: border-box;
+	padding: 1rem;
+
+	${media.small} {
+		height: 100%;
+		width: 100%;
+		max-width: 800px;
+		animation: .5s ${animations.fadeInRight};
+	}
 `;
 
 export default AuthModalWrapper

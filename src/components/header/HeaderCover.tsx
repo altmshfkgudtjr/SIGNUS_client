@@ -54,7 +54,7 @@ const Content = styled.div`
 		max-width: 95%;
 	}
 	${media.small} {
-		max-width: 100%;
+		max-width: 98%;
 	}
 `;
 
