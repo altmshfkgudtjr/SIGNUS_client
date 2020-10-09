@@ -8,7 +8,7 @@ type ModalBackgroundType = {
 	children: React.ReactNode
 };
 const ModalBackground = ({children}: ModalBackgroundType) => {
-	return <Background>{children}</Background>;
+	return <Background data-type="modalBackground">{children}</Background>;
 };
 
 const Background = styled.div`

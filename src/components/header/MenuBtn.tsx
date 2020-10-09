@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 // containers
 import MenuModal from '../../containers/modal/MenuModal'
@@ -12,14 +12,18 @@ const MenuBtn = () => {
 		setModalShow(true);
 	}
 
-	const onClose = () => {
+	const onClose = useCallback(() => {
 		setModalShow(false);
-	}
+	}, [setModalShow]);
 
-	return <Container onClick={onShow}>
-		<Icon src="/icons/1x/menu.png" alt="메뉴" />
-		<MenuModal display={modalShow} onClose={onClose} />
-	</Container>;
+	return (
+		<>
+			<Container onClick={onShow}>
+				<Icon src="/icons/1x/menu.png" alt="메뉴" />
+			</Container>
+			<MenuModal display={modalShow} onClose={onClose} />
+		</>
+	);
 }
 
 const Container = styled.div`

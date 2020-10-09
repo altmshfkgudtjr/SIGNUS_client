@@ -8,7 +8,7 @@ const LoginBtn = () => {
 	return <Btn>로그인</Btn>
 }
 
-const Btn = styled.button`
+export const Btn = styled.button`
 	position: relative;
 	width: 100%;
 	height: 44px;

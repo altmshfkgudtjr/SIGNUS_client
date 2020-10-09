@@ -17,7 +17,8 @@ const App = () => {
 				? <Route path="*" component={RedirectPage} />
 				: <Switch>
 						<Route path="/" component={NewsfeedPage} exact />
-						<Route path="/:mode(best|group|award|job)" component={NewsfeedPage} exact />
+						<Route path="/best" component={NewsfeedPage} exact />
+						<Route path="/newsfeed/:mode(university|award|group|job)" component={NewsfeedPage} exact />
 						<Route path="*" component={NotFound} status={404} />
 					</Switch>
 			}

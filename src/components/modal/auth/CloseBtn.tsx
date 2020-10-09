@@ -19,7 +19,7 @@ const Btn = styled.div`
 	display: none;
 	width: 20px;
 	height: 40px;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 
 	&:active,
 	&:hover {

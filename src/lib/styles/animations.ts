@@ -54,6 +54,10 @@ const tooltip = keyframes`
 	50% { opacity: 1; } 
 	100% { opacity: 1; }
 `;
+const noticeSlider = keyframes`
+	0% { transform: translateX(100%); }
+	100% { transform: translateX(-100%); };
+`;
 const animations = {
 	fadeIn,
 	fadeOut,
@@ -67,7 +71,8 @@ const animations = {
 	fadeOutBottom,
 	zoomIn,
 	zoomOut,
-	tooltip
+	tooltip,
+	noticeSlider
 };
 
 export default animations

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Helmet, HelmetProvider } from "react-helmet-async"
 // components
 import BoardInfo from '../board/BoardInfo'
 import BoardInfoMobile from '../board/BoardInfoMobile'
@@ -31,23 +32,54 @@ type PostLayoutProps = {
 };
 
 const PostLayout = ({newsfeed}: PostLayoutProps) => {
-	return <Container>
-		{newsfeed}
-		<PostWrapper>
-			<BoardInfo icon_src="/icons/1x/home.png"
-								 small_info="뉴스피드"
-								 large_info="Top News" />
-			<BoardInfoMobile small_info="뉴스피드"
-											 large_info="Top News" />
-			<PostTextWrapper />
-			<PostTextWrapper />
-			<PostImageWrapper />
-			<PostTextWrapper />
-			<PostImageWrapper />
-			<PostImageWrapper />
-			<PostImageWrapper />
-		</PostWrapper>
-	</Container>;
+	const pathname = (window.location.pathname.split('/')[2] || window.location.pathname.split('/')[1]);
+	let pagename = '', pagetitle = '';
+
+	if (pathname === '') {
+		pagename = 'Top News';
+		pagetitle = '';
+	} else if (pathname === 'best') {
+		pagename = '인기';
+		pagetitle = ` - ${pagename}`;
+	} else if (pathname === 'university') {
+		pagename = '대학';
+		pagetitle = ` - ${pagename}`;
+	} else if (pathname === 'award') {
+		pagename = '공모전&행사';
+		pagetitle = ` - ${pagename}`;
+	} else if (pathname === 'group') {
+		pagename = '동아리&모임';
+		pagetitle = ` - ${pagename}`;
+	} else if (pathname === 'job') {
+		pagename = '진로&구인';
+		pagetitle = ` - ${pagename}`;
+	}
+
+	return (
+		<Container>
+			<HelmetProvider>
+				<Helmet>
+					<title>SIGNUS{pagetitle}</title>
+				</Helmet>
+			</HelmetProvider>
+			{newsfeed}
+			<PostWrapper>
+				<BoardInfo icon_src="/icons/1x/home.png"
+									 small_info="뉴스피드"
+									 large_info={pagename} />
+				<BoardInfoMobile small_info="뉴스피드"
+												 large_info={pagename} />
+				<PostTextWrapper />
+				<PostTextWrapper />
+				<PostImageWrapper />
+				<PostTextWrapper />
+
+				<PostImageWrapper />
+				<PostImageWrapper />
+				<PostImageWrapper />
+			</PostWrapper>
+		</Container>
+	);
 }
 
 export default PostLayout
