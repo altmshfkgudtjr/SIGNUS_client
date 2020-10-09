@@ -58,6 +58,12 @@ const noticeSlider = keyframes`
 	0% { transform: translateX(100%); }
 	100% { transform: translateX(-100%); };
 `;
+const doLike = keyframes`
+	0% { transform: scale(1, 1); }
+	50% { transform: scale(1.2, 1.2); }
+	80% { transform: scale(.9, .9); }
+	100% { transform: scale(1, 1); }
+`;
 const animations = {
 	fadeIn,
 	fadeOut,
@@ -72,7 +78,8 @@ const animations = {
 	zoomIn,
 	zoomOut,
 	tooltip,
-	noticeSlider
+	noticeSlider,
+	doLike
 };
 
 export default animations
