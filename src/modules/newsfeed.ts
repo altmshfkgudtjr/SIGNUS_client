@@ -7,7 +7,7 @@ export const addRecommendationPosts = () => (dispatch: any) => {
 		if (res) {
 			dispatch(addPosts(res));
 		} else {
-			console.log("Get recommendation posts failed.");
+			console.log("\n%c[Error]", 'color: #dc3545', "Get recommendation posts failed.\n\n");
 		}
 	});
 }
@@ -16,7 +16,7 @@ export const addPopularityPosts = () => (dispatch: any) => {
 		if (res) {
 			dispatch(addPosts(res));
 		} else {
-			console.log("Get popularity posts failed.");
+			console.log("\n%c[Error]", 'color: #dc3545', "Get popularity posts failed.\n\n");
 		}
 	});
 }
@@ -25,7 +25,7 @@ export const addCategoryPosts = (category: string) => (dispatch: any) => {
 		if (res) {
 			dispatch(addPosts(res));
 		} else {
-			console.log("Get popularity posts failed.");
+			console.log("\n%c[Error]", 'color: #dc3545', "Get category posts failed.\n\n");
 		}
 	});
 }
