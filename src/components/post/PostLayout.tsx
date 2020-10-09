@@ -9,24 +9,6 @@ import PostImageWrapper from '../post/PostImageWrapper'
 // lib
 import media from '../../lib/styles/media'
 
-const Container = styled.div`
-	position: relative;
-	width: auto;
-	flex-grow: 1;
-`;
-
-const PostWrapper = styled.div`
-	position: relative;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-	grid-gap: 1rem;
-	grid-auto-rows: 200px;
-
-	${media.small} {
-		display: block;
-	}
-`;
-
 type PostLayoutProps = {
 	newsfeed: React.ReactNode
 };
@@ -81,5 +63,23 @@ const PostLayout = ({newsfeed}: PostLayoutProps) => {
 		</Container>
 	);
 }
+
+const Container = styled.div`
+	position: relative;
+	width: auto;
+	flex-grow: 1;
+`;
+
+const PostWrapper = styled.div`
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	grid-gap: 1rem;
+	grid-auto-rows: 200px;
+
+	${media.small} {
+		display: block;
+	}
+`;
 
 export default PostLayout

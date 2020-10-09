@@ -6,6 +6,7 @@ import MenuAuthContent from './MenuAuthContent'
 import MenuBoardContent from './MenuBoardContent'
 import NoticeBar from './NoticeBar'
 import MenuLinkContent from './MenuLinkContent'
+import LogoutBtn from './LogoutBtn'
 // lib
 import * as styles from '../../../lib/styles/styles'
 import animations from '../../../lib/styles/animations'
@@ -45,6 +46,7 @@ const MenuModalWrapper = ({onClose}: MenuModalWrapperProps) => {
 			<MenuBoardContent onClose={onClose} />
 			<NoticeBar />
 			<MenuLinkContent onClose={onClose} />
+			<LogoutBtn onClose={onClose} />
 		</Container>
 	);
 }
@@ -52,18 +54,27 @@ const MenuModalWrapper = ({onClose}: MenuModalWrapperProps) => {
 const Container = styled.div`
 	position: fixed;
 	top: 10px;
-	right: 1rem; // 이 부분 media로 조정 calc 이용
+	right: calc((100% - 1628px)/2);
 	width: 100%;
 	max-width: 320px;
-	min-height: 600px;
+	min-height: 500px;
 	border-radius: 4px;
 	background-color: #FFF;
 	box-shadow: ${styles.boxShadow.regular};
 	animation: .2s ${animations.fadeIn};
 	box-sizing: border-box;
-	padding: 1rem .5rem;
+	padding: 1rem .5rem 2rem .5rem;
 	z-index: ${zIndex.modal};
 
+	${media.xlarge} {
+		right: calc((100% - 1396px)/2);
+	}
+	${media.large} {
+		right: calc((100% - 1232px)/2);
+	}
+	${media.medium} {
+		right: calc((5%)/2);
+	}
 	${media.small} {
 		top: 0;
 		right: 0;
@@ -71,6 +82,7 @@ const Container = styled.div`
 		width: 100%;
 		max-width: 800px;
 		animation: .5s ${animations.fadeInRight};
+		padding: 1rem 2rem;
 	}
 `;
 

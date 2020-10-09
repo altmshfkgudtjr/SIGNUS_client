@@ -33,7 +33,7 @@ const Container = styled.div`
 
 const Title = styled.div`
 	position: relative;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 600;
 	color: ${palette.gray7};
 	margin-bottom: 1rem;

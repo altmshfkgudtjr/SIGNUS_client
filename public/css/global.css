@@ -54,8 +54,7 @@
 }
 @font-face {
 	font-family: 'AppleSDGothicNeo';
-	src: local('※'), 
-		 url('/fonts/AppleSDGothicNeo/woff/AppleSDGothicNeoR.woff') format('woff'),
+	src: url('/fonts/AppleSDGothicNeo/woff/AppleSDGothicNeoR.woff') format('woff'),
 		 url('/fonts/AppleSDGothicNeo/woff2/AppleSDGothicNeoR.woff2') fromat('woff2'),
 		 url('/fonts/AppleSDGothicNeo/ttf/AppleSDGothicNeoR.woff2') fromat('ttf');
 	font-weight: 400;
@@ -106,7 +105,9 @@ strong {
 
 * {
 	outline: none;
-	font-family: 'AppleSDGothicNeo', 'SpoqaHanSans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+	font-family: "AppleSDGothicNeo", "SpoqaHanSans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: auto;
 	font-weight: 400;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	font-size: 1rem;

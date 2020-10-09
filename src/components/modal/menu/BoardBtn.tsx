@@ -41,8 +41,8 @@ const Content = styled(Link)`
 const Icon = styled.img`
 	position: relative;
 	display: block;
-	width: 32px;
-	height: 32px;
+	width: 30px;
+	height: 30px;
 	margin: auto;
 	opacity: .7;
 `;
@@ -52,7 +52,6 @@ const Message = styled.div`
 	width: 100%;
 	text-align: center;
 	font-size: 12px;
-	font-weight: 400;
 	line-height: 2rem;
 	color: ${palette.gray7};
 `;

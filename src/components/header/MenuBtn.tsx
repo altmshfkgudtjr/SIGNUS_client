@@ -3,17 +3,23 @@ import styled from 'styled-components'
 // containers
 import MenuModal from '../../containers/modal/MenuModal'
 // lib
-import media from '../../lib/styles/media'
+import media, { mediaValue } from '../../lib/styles/media'
 
 const MenuBtn = () => {
 	const [modalShow, setModalShow] = useState<boolean>(false);
 
 	const onShow = () => {
 		setModalShow(true);
+		if (window.innerWidth <= mediaValue.small) {
+			(document.querySelector('body') as HTMLElement).style.overflow = 'hidden';
+		}
 	}
 
 	const onClose = useCallback(() => {
 		setModalShow(false);
+		if (window.innerWidth <= mediaValue.small) {
+			(document.querySelector('body') as HTMLElement).removeAttribute('style');
+		}
 	}, [setModalShow]);
 
 	return (

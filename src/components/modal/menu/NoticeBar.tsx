@@ -10,7 +10,7 @@ const NoticeBar = () => {
 		<Container>
 			<Title>공지</Title>
 			<MessageWrapper>
-				<Message>공지사항</Message>
+				<Message>시그너스 V1 업데이트 변경사항</Message>
 			</MessageWrapper>
 		</Container>
 	);
@@ -31,6 +31,7 @@ const Container = styled.div`
 const Title = styled.span`
 	position: relative;
 	font-size: 14px;
+	line-height: 24px;
 	color: ${palette.gray7};
 	margin-right: 4px;
 	${styles.noselect}

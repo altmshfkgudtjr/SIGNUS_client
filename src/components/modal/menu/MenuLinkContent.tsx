@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import BoardBtn from './BoardBtn'
+import LinkBtn from './LinkBtn'
 // lib
 import * as styles from '../../../lib/styles/styles'
 import palette from '../../../lib/styles/palette'
@@ -14,7 +14,7 @@ const MenuLinkContent = ({onClose}: MenuLinkContentProps) => {
 		<Container>
 			<Title>메뉴</Title>
 			<ItemWrapper>
-
+				<LinkBtn to="/notice" message="공지사항" onClose={onClose} />
 			</ItemWrapper>
 		</Container>
 	);
@@ -23,12 +23,14 @@ const MenuLinkContent = ({onClose}: MenuLinkContentProps) => {
 const Container = styled.div`
 	position: relative;
 	width: 100%;
+	padding-bottom: .5rem;
+	border-bottom: 1px solid ${palette.gray1};
 	margin-bottom: 1rem;
 `;
 
 const Title = styled.div`
 	position: relative;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 600;
 	color: ${palette.gray7};
 	margin-bottom: 1rem;
