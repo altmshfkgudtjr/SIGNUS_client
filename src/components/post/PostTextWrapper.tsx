@@ -50,7 +50,7 @@ const Container = styled.a`
 	box-sizing: border-box;
 	padding: .5rem;
 
-	@media (min-width: 720px) {
+	@media (min-width: 703px) {
 		&:hover,
 		&:active {
 			transform: translate(0, -4px);

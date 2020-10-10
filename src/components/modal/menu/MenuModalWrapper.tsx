@@ -15,8 +15,10 @@ import zIndex from '../../../lib/styles/zIndex'
 
 interface MenuModalWrapperProps {
 	onClose(): void;
+	loginValid: boolean;
+	onLogout(): void;
 }
-const MenuModalWrapper = ({onClose}: MenuModalWrapperProps) => {
+const MenuModalWrapper = ({onClose, loginValid, onLogout}: MenuModalWrapperProps) => {
 	const ModalRef = useRef<HTMLInputElement>(null);
 
 	/* 메뉴 모달 닫기 */
@@ -42,11 +44,12 @@ const MenuModalWrapper = ({onClose}: MenuModalWrapperProps) => {
 	return (
 		<Container ref={ModalRef}>
 			<CloseBtn onClose={onClose} />
-			<MenuAuthContent onClose={onClose} />
+			<MenuAuthContent onClose={onClose}
+											 loginValid={loginValid} />
 			<MenuBoardContent onClose={onClose} />
 			<NoticeBar />
 			<MenuLinkContent onClose={onClose} />
-			<LogoutBtn onClose={onClose} />
+			{loginValid && <LogoutBtn onClose={onClose} onLogout={onLogout} />}
 		</Container>
 	);
 }

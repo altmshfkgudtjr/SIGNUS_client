@@ -54,7 +54,7 @@ const Container = styled.a`
 	grid-row-end: span 2;
 	border-radius: 4px;
 
-	@media (min-width: 720px) {
+	@media (min-width: 703px) {
 		&:hover,
 		&:active {
 			transform: translate(0, -4px);

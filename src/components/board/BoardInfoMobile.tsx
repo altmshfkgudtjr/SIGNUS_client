@@ -11,7 +11,7 @@ const Container = styled.div`
 	border-bottom: 1px solid ${palette.gray2};
 	margin: 0 auto .5rem auto;
 
-	@media (min-width: 702px) {
+	@media (min-width: 703px) {
 		display: none;
 	}
 `;

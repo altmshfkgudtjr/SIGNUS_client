@@ -9,8 +9,9 @@ import palette from '../../../lib/styles/palette'
 
 interface MenuAuthContentProps {
 	onClose(): void;
+	loginValid: boolean;
 }
-const MenuAuthContent = ({onClose}: MenuAuthContentProps) => {
+const MenuAuthContent = ({onClose, loginValid}: MenuAuthContentProps) => {
 	const [authModalShow, setAuthModalShow] = useState<boolean>(false);
 
 	const onAuthModalShow = () => {
@@ -30,8 +31,7 @@ const MenuAuthContent = ({onClose}: MenuAuthContentProps) => {
 	return (
 		<>
 			<Container>
-				<LoginBtn onClick={onLogin}>로그인</LoginBtn>
-
+				{!loginValid && <LoginBtn onClick={onLogin}>로그인</LoginBtn>}
 
 			</Container>
 			<AuthModal display={authModalShow} onClose={onAuthModalClose} />

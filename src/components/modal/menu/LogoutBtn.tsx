@@ -7,9 +7,11 @@ import media from '../../../lib/styles/media'
 
 interface LogoutBtnProps {
 	onClose(): void;
+	onLogout(): void;
 }
-const LogoutBtn = ({onClose}: LogoutBtnProps) => {
+const LogoutBtn = ({onClose, onLogout}: LogoutBtnProps) => {
 	const onClick = () => {
+		onLogout();
 		onClose();
 	};
 
