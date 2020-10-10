@@ -7,9 +7,10 @@ import palette from '../../../lib/styles/palette'
 interface UserAccountInputProps {
 	userId: string;
 	setUserId: React.Dispatch<React.SetStateAction<string>>;
-	onLogin(): void;
+	onAction(): void;
+	placeholder: string;
 }
-const UserAccountInput = forwardRef(({userId, setUserId, onLogin}: UserAccountInputProps, ref: any) => {
+const UserAccountInput = forwardRef(({userId, setUserId, onAction, placeholder}: UserAccountInputProps, ref: any) => {
 	/* 자동 포커스 실행 */
 	/* eslint-disable */
 	useEffect(() => {
@@ -21,14 +22,14 @@ const UserAccountInput = forwardRef(({userId, setUserId, onLogin}: UserAccountIn
 
 	const onKeyUp = (e: any) => {
 		if (e.keyCode === 13) {
-			onLogin();
+			onAction();
 			return;
 		}
 		setUserId(e.target.value);
 	};
 
 	return <Input type='text'
-								placeholder="시그너스계정"
+								placeholder={placeholder}
 								defaultValue={userId}
 								onKeyUp={onKeyUp}
 								ref={ref}></Input>;

@@ -7,19 +7,20 @@ import palette from '../../../lib/styles/palette'
 interface UserPasswordInputProps {
 	userPw: string;
 	setUserPw: React.Dispatch<React.SetStateAction<string>>;
-	onLogin(): void;
+	onAction(): void;
+	placeholder: string;
 }
-const UserPasswordInput = forwardRef(({userPw, setUserPw, onLogin}: UserPasswordInputProps, ref: any) => {
+const UserPasswordInput = forwardRef(({userPw, setUserPw, onAction, placeholder}: UserPasswordInputProps, ref: any) => {
 	const onKeyUp = (e: any) => {
 		if (e.keyCode === 13) {
-			onLogin();
+			onAction();
 			return;
 		}
 		setUserPw(e.target.value);
 	};
 
 	return <Input type='password' 
-								placeholder="비밀번호"
+								placeholder={placeholder}
 								onKeyUp={onKeyUp}
 								defaultValue={userPw}
 								ref={ref}></Input>

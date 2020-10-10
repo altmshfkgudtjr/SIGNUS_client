@@ -4,11 +4,12 @@ import styled from 'styled-components'
 import * as styles from '../../../lib/styles/styles'
 import palette from '../../../lib/styles/palette'
 
-interface LoginBtnProps {
+interface AuthBtnProps {
 	onClick(): void;
+	message: string;
 }
-const LoginBtn = ({onClick}: LoginBtnProps) => {
-	return <Btn onClick={onClick}>로그인</Btn>
+const AuthBtn = ({onClick, message}: AuthBtnProps) => {
+	return <Btn onClick={onClick}>{message}</Btn>
 }
 
 export const Btn = styled.button`
@@ -31,4 +32,4 @@ export const Btn = styled.button`
 	}
 `;
 
-export default LoginBtn
+export default AuthBtn

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 // containers
 import AuthModal from '../../../containers/modal/AuthModal'
 // components
-import { Btn } from '../auth/LoginBtn'
+import { Btn } from '../auth/AuthBtn'
 import UserContent from './UserContent'
 // lib
 import palette from '../../../lib/styles/palette'

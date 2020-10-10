@@ -4,11 +4,14 @@ import styled from 'styled-components'
 import * as styles from '../../../lib/styles/styles'
 import palette from '../../../lib/styles/palette'
 
-const AuthSigninBtn = () => {
+interface AuthSignUpBtnProps {
+	OpenSignUpContent(): void;
+}
+const AuthSignUpBtn = ({OpenSignUpContent}: AuthSignUpBtnProps) => {
 	return (
 		<Container>
 			<Info>아직 계정이 없으신가요?</Info>
-			<Btn>계정 만들기</Btn>
+			<Btn onClick={OpenSignUpContent}>계정 만들기</Btn>
 		</Container>
 	);
 }
@@ -43,4 +46,4 @@ const Btn = styled.button`
 	}
 `;
 
-export default AuthSigninBtn
+export default AuthSignUpBtn
