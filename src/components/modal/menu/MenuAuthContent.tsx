@@ -4,14 +4,16 @@ import styled from 'styled-components'
 import AuthModal from '../../../containers/modal/AuthModal'
 // components
 import { Btn } from '../auth/LoginBtn'
+import UserContent from './UserContent'
 // lib
 import palette from '../../../lib/styles/palette'
 
 interface MenuAuthContentProps {
 	onClose(): void;
 	loginValid: boolean;
+	name: string;
 }
-const MenuAuthContent = ({onClose, loginValid}: MenuAuthContentProps) => {
+const MenuAuthContent = ({onClose, loginValid, name}: MenuAuthContentProps) => {
 	const [authModalShow, setAuthModalShow] = useState<boolean>(false);
 
 	const onAuthModalShow = () => {
@@ -32,7 +34,7 @@ const MenuAuthContent = ({onClose, loginValid}: MenuAuthContentProps) => {
 		<>
 			<Container>
 				{!loginValid && <LoginBtn onClick={onLogin}>로그인</LoginBtn>}
-
+				{loginValid && <UserContent name={name} />}
 			</Container>
 			<AuthModal display={authModalShow} onClose={onAuthModalClose} />
 		</>

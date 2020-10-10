@@ -17,8 +17,9 @@ interface MenuModalWrapperProps {
 	onClose(): void;
 	loginValid: boolean;
 	onLogout(): void;
+	name: string;
 }
-const MenuModalWrapper = ({onClose, loginValid, onLogout}: MenuModalWrapperProps) => {
+const MenuModalWrapper = ({onClose, loginValid, onLogout, name}: MenuModalWrapperProps) => {
 	const ModalRef = useRef<HTMLInputElement>(null);
 
 	/* 메뉴 모달 닫기 */
@@ -45,7 +46,8 @@ const MenuModalWrapper = ({onClose, loginValid, onLogout}: MenuModalWrapperProps
 		<Container ref={ModalRef}>
 			<CloseBtn onClose={onClose} />
 			<MenuAuthContent onClose={onClose}
-											 loginValid={loginValid} />
+											 loginValid={loginValid}
+											 name={name} />
 			<MenuBoardContent onClose={onClose} />
 			<NoticeBar />
 			<MenuLinkContent onClose={onClose} />
@@ -66,7 +68,7 @@ const Container = styled.div`
 	box-shadow: ${styles.boxShadow.regular};
 	animation: .2s ${animations.fadeIn};
 	box-sizing: border-box;
-	padding: 1rem .5rem 2rem .5rem;
+	padding: 1rem 1rem 2rem 1rem;
 	z-index: ${zIndex.modal};
 
 	${media.xlarge} {

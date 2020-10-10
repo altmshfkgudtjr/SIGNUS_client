@@ -26,6 +26,7 @@ export const Login = (id: string, pw: string) => (dispatch: any) => {
 export const Logout = () => (dispatch: any) => {
 	window.localStorage.removeItem('tk');
 	dispatch(deleteUser());
+	window.location.reload();
 }
 
 /* 액션 */

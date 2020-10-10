@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 // lib
 import palette from '../../../lib/styles/palette'
+import * as styles from '../../../lib/styles/styles'
 
 interface BoardBtnProps {
 	src: string;
@@ -27,6 +28,7 @@ const Content = styled(Link)`
 	position: relative;
 	display: block;
 	padding: .5rem;
+	${styles.noselect}
 
 	&:active,
 	&:hover {

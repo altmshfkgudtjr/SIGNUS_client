@@ -42,12 +42,12 @@ const Name = styled.div`
 	font-weight: 600;
 	color: ${palette.gray6};
 	overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 
-  ${media.small} {
-  	max-width: 100px;
-  }
+	${media.small} {
+		max-width: 100px;
+	}
 `;
 
 export default UserBtn
