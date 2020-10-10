@@ -44,3 +44,20 @@ export const GetUser = () => {
 		}
 	});
 }
+
+/*
+	:::: 회원가입 ::::
+*/
+export const SignUp = (id: string, pw: string) => {
+	const sendData = {
+		id: id,
+		pw: pw
+	};
+	return Fetch("/api/user/signup", "POST", sendData).then((res) => {
+		if (res.msg === 'success') {
+			return res.result;
+		} else {
+			return false;
+		}
+	});
+}

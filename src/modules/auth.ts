@@ -29,6 +29,16 @@ export const Logout = () => (dispatch: any) => {
 	window.location.reload();
 }
 
+export const SignUp = (id: string, pw: string) => (dispatch: any) => {
+	authAPI.SignUp(id, pw).then((res: any) => {
+		if (res) {
+			dispatch(Login(id, pw));
+		} else {
+			console.log("\n%c[Error]", 'color: #dc3545', "Sign up failed.\n\n");
+		}
+	});
+}
+
 /* 액션 */
 const SET_USER = 'auth/SET_USER' as const;
 const DELETE_USER = 'auth/DELETE_USER' as const;

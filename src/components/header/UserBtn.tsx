@@ -11,7 +11,7 @@ interface UserBtnProps {
 const UserBtn = ({name}: UserBtnProps) => {
 	return (
 		<Container>
-			<Name>{name}님</Name>
+			<Name>{name} 님</Name>
 		</Container>
 	);
 }
