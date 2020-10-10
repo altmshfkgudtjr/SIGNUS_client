@@ -12,23 +12,28 @@ import PostShareBtn from './PostShareBtn'
 // lib
 import * as styles from '../../lib/styles/styles'
 import media from '../../lib/styles/media'
+// modules
+import { Post } from '../../modules/newsfeed'
 
-const PostImageWrapper = () => {
+interface PostImageWrapperProps {
+	post: Post;
+};
+const PostImageWrapper = ({post}: PostImageWrapperProps) => {
 	return (
-		<Container>
-			<PostImage src="" />
+		<Container href={post.url} target="_blank">
+			<PostImage src={post.img} />
 			
 			<PostContentWrapper>
-				<PostTitle message="청년 IT 프로토타입 공모전 <이노베이션 프로젝트> 참여팀 모집" />
-				<PostBody message="지원자격 경력 신입·경력 학력 고졸이상 우대 기본 우대 21세(2000년 생)~35세(1986년... 생) 더보기 기본우대 21세 (2000년 생)~35세(1986년생), 컴퓨터 장인." />
-				<PostDomain message="www.naver.com" />
+				<PostTitle message={post.title} />
+				<PostBody message={post.post} />
+				<PostDomain message={post.url} />
 				
 				<Blank />
 
-				<PostDate message="2020년 10월 9일" />
+				<PostDate date={post.date} endDate={post.end_date} />
 				<PostControllWrapper>
-					<PostLikeBtn like={3} />				
-					<PostShareBtn url="https://www.naver.com" />				
+					<PostLikeBtn like={post.fav_cnt} />				
+					<PostShareBtn url={post.url} />				
 				</PostControllWrapper>
 			</PostContentWrapper>
 		</Container>
@@ -36,14 +41,14 @@ const PostImageWrapper = () => {
 }
 
 
-const Container = styled.div`
+const Container = styled.a`
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	background-color: #FFF;
 	width: 100%;
 	box-shadow: ${styles.boxShadow.light};
-	transition: .3s ${styles.transition};
+	transition: .4s ${styles.transition};
 	cursor: pointer;
 	overflow: hidden;
 	grid-row-end: span 2;
@@ -52,7 +57,7 @@ const Container = styled.div`
 	@media (min-width: 720px) {
 		&:hover,
 		&:active {
-			transform: translate(0, -10px);
+			transform: translate(0, -4px);
 			box-shadow: ${styles.boxShadow.regular};
 		}
 	}

@@ -17,7 +17,6 @@ const Content = styled.div`
 	width: 100%;
 	height: auto;
 	font-size: 14px;
-	font-weight: 200;
 	line-height: 20px;
 	overflow: hidden;
 `;

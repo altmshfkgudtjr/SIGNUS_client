@@ -1,14 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
+// lib
+import * as postUtils from '../../lib/utils/postUtils'
 
 interface PostDateProps {
-	message: string
+	date: string,
+	endDate: string
 }
-const PostDate = ({message}: PostDateProps) => {
+const PostDate = ({date, endDate}: PostDateProps) => {
+	const message: string = endDate
+														? postUtils.dateFormatter(endDate)
+														: postUtils.dateFormatter(date);
+
 	return (
 		<Container>
 			<Icon src="/icons/1x/time.png" alt="날짜" />
-			<Content>{message}까지</Content>
+			<Content>{message}</Content>
 		</Container>
 	);
 }

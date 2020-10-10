@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 // lib
 import * as styles from '../../../lib/styles/styles'
 import palette from '../../../lib/styles/palette'
 
-const UserPasswordInput = () => {
-	return <Input type='password' placeholder="비밀번호"></Input>
+interface UserPasswordInputProps {
+	userPw: string;
+	setUserPw: React.Dispatch<React.SetStateAction<string>>;
+	onLogin(): void;
 }
+const UserPasswordInput = forwardRef(({userPw, setUserPw, onLogin}: UserPasswordInputProps, ref: any) => {
+	const onKeyUp = (e: any) => {
+		if (e.keyCode === 13) {
+			onLogin();
+			return;
+		}
+		setUserPw(e.target.value);
+	};
+
+	return <Input type='password' 
+								placeholder="비밀번호"
+								onKeyUp={onKeyUp}
+								defaultValue={userPw}
+								ref={ref}></Input>
+});
 
 const Input = styled.input`
 	position: relative;

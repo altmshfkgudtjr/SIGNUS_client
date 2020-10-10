@@ -10,9 +10,10 @@ import animations from '../../../lib/styles/animations'
 import media from '../../../lib/styles/media'
 
 interface AuthModalWrapperProps {
+	onLogin(id: string, pw: string): void;
 	onClose(): void;
 }
-const AuthModalWrapper = ({onClose}: AuthModalWrapperProps) => {
+const AuthModalWrapper = ({onLogin, onClose}: AuthModalWrapperProps) => {
 	const ModalRef = useRef<HTMLInputElement>(null);
 
 	/* 로그인 모달 닫기 */
@@ -36,7 +37,8 @@ const AuthModalWrapper = ({onClose}: AuthModalWrapperProps) => {
 		<Container ref={ModalRef}>
 			<AuthInfoContent />
 			<Contour />
-			<AuthLoginContent onClose={onClose} />
+			<AuthLoginContent onLogin={onLogin}
+												onClose={onClose} />
 		</Container>
 	);
 }

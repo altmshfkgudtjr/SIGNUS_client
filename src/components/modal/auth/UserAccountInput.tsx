@@ -1,22 +1,38 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, forwardRef } from 'react'
 import styled from 'styled-components'
 // lib
 import * as styles from '../../../lib/styles/styles'
 import palette from '../../../lib/styles/palette'
 
-const UserAccountInput = () => {
-	const InputRef = useRef<HTMLInputElement>(null);
-
+interface UserAccountInputProps {
+	userId: string;
+	setUserId: React.Dispatch<React.SetStateAction<string>>;
+	onLogin(): void;
+}
+const UserAccountInput = forwardRef(({userId, setUserId, onLogin}: UserAccountInputProps, ref: any) => {
+	/* 자동 포커스 실행 */
+	/* eslint-disable */
 	useEffect(() => {
-		if (InputRef.current) {
-			InputRef.current.focus();
+		if (ref.current) {
+			ref.current.focus();
 		}
 	}, []);
+	/* eslint-enable */
+
+	const onKeyUp = (e: any) => {
+		if (e.keyCode === 13) {
+			onLogin();
+			return;
+		}
+		setUserId(e.target.value);
+	};
 
 	return <Input type='text'
 								placeholder="시그너스계정"
-								ref={InputRef}></Input>;
-}
+								defaultValue={userId}
+								onKeyUp={onKeyUp}
+								ref={ref}></Input>;
+});
 
 const Input = styled.input`
 	position: relative;

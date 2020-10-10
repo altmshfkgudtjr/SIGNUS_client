@@ -4,8 +4,11 @@ import styled from 'styled-components'
 import * as styles from '../../../lib/styles/styles'
 import palette from '../../../lib/styles/palette'
 
-const LoginBtn = () => {
-	return <Btn>로그인</Btn>
+interface LoginBtnProps {
+	onClick(): void;
+}
+const LoginBtn = ({onClick}: LoginBtnProps) => {
+	return <Btn onClick={onClick}>로그인</Btn>
 }
 
 export const Btn = styled.button`

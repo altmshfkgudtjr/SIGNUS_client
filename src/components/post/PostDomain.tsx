@@ -7,7 +7,11 @@ interface PostDomainProps {
 	message: string
 }
 const PostDomain = ({message}: PostDomainProps) => {
-	return <Content>{message}</Content>;
+	const domain = message.startsWith('http')
+										? message.split('/')[2]
+										: message;
+
+	return <Content>{domain}</Content>;
 }
 
 const Content = styled.div`

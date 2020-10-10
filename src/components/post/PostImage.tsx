@@ -4,18 +4,20 @@ import styled from 'styled-components'
 import * as styles from '../../lib/styles/styles'
 
 interface PostImageProps {
-	src: string;
+	src: (string | number);
 }
 const PostImage = ({src}: PostImageProps) => {
+	const ImageSrc: string = String(src);
+
 	/* 이미지를 Load 하지 못했을 때, 실행 */
 	const onError = {'action': (e: any) => {
 		e.target.onerror = null;				// 무한 Trigger 방지
-		e.target.src= Math.random()<0.5? "/images/logoBgSmall.png":"/images/logoSmall.png";
+		e.target.src = Math.random()<0.5? "/images/logoBgSmall.png":"/images/logoSmall.png";
 	}};
 
 	return (
 		<Container>
-			<Img src={src} alt="Image"
+			<Img src={ImageSrc} alt="Image"
 					 onError={onError.action} />
 		</Container>
 	);
@@ -33,7 +35,7 @@ const Container = styled.div`
 	&:hover,
 	&:active {
 		> img {
-			transform: scale(1.4, 1.4);
+			transform: scale(1.2, 1.2);
 		}
 	}
 `;

@@ -14,7 +14,8 @@ const Content = styled.div`
 	width: 100%;
 	max-height: 72px;
 	font-weight: 600;
-	line-height: 24px;
+	line-height: 20px;
+	margin-bottom: 4px;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 3;

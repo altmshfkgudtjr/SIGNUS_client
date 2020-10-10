@@ -9,7 +9,7 @@ interface PostShareBtnProps {
 }
 const PostShareBtn = ({url}: PostShareBtnProps) => {
 	const onClick = () => {
-		console.log(url);
+		console.log("\n%c[미완성]", 'color: #dc3545', url ,"\n\n");
 	};
 
 	return (

@@ -5,11 +5,46 @@ import Logo from './Logo'
 import SearchInput from './SearchInput'
 import SearchBtn from './SearchBtn'
 import MenuBtn from './MenuBtn'
+import LoginBtn from './LoginBtn'
 import UserBtn from './UserBtn'
 // lib
 import media from '../../lib/styles/media'
 import * as styles from '../../lib/styles/styles'
 import zIndex from '../../lib/styles/zIndex'
+
+interface HeaderCoverProps {
+	show: boolean;
+	searchWord: string;
+	setSearchWord: React.Dispatch<React.SetStateAction<string>>;
+	setSearchModalDisplay: React.Dispatch<React.SetStateAction<boolean>>;
+	loginValid: boolean;
+	userName: string;
+};
+const HeaderCover = ({show, searchWord, setSearchWord, setSearchModalDisplay, loginValid, userName}: HeaderCoverProps) => {
+	const [searchDisplay, setSearchDisplay] = useState<boolean>(false);
+
+	return (
+		<Container show={show}>
+			<Content>
+				<Logo />
+				<BtnWrapper>
+					<SearchInput searchDisplay={searchDisplay}
+											 setSearchDisplay={setSearchDisplay}
+											 searchWord={searchWord}
+											 setSearchWord={setSearchWord} />
+					<SearchBtn searchWord={searchWord}
+										 searchDisplay={searchDisplay}
+										 setSearchDisplay={setSearchDisplay}
+										 setSearchModalDisplay={setSearchModalDisplay} />
+					<LoginBtn />
+					{loginValid && <UserBtn name={userName} />}
+					{!loginValid && <LoginBtn />}
+					<MenuBtn />
+				</BtnWrapper>
+			</Content>
+		</Container>
+	);
+}
 
 interface ContainerStyled {
    show: boolean;
@@ -64,36 +99,5 @@ const BtnWrapper = styled.div`
 	flex-grow: 1;
 	justify-content: flex-end;
 `;
-
-type HeaderCoverProps = {
-	show: boolean,
-	searchWord: string,
-	setSearchWord: React.Dispatch<React.SetStateAction<string>>,
-	setSearchModalDisplay: React.Dispatch<React.SetStateAction<boolean>>
-};
-
-const HeaderCover = ({show, searchWord, setSearchWord, setSearchModalDisplay}: HeaderCoverProps) => {
-	const [searchDisplay, setSearchDisplay] = useState<boolean>(false);
-
-	return (
-		<Container show={show}>
-			<Content>
-				<Logo />
-				<BtnWrapper>
-					<SearchInput searchDisplay={searchDisplay}
-											 setSearchDisplay={setSearchDisplay}
-											 searchWord={searchWord}
-											 setSearchWord={setSearchWord} />
-					<SearchBtn searchWord={searchWord}
-										 searchDisplay={searchDisplay}
-										 setSearchDisplay={setSearchDisplay}
-										 setSearchModalDisplay={setSearchModalDisplay} />
-					<UserBtn />
-					<MenuBtn />
-				</BtnWrapper>
-			</Content>
-		</Container>
-	);
-}
 
 export default HeaderCover

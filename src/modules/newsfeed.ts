@@ -42,9 +42,15 @@ type NewsfeedAction =
 
 /* 타입 */
 export type Post = {
-	id: number;
-	text: string;
-	done: boolean;
+	id: string,
+	title: string,
+	post: string,
+	img: (string | number),
+	fav_cnt: number,
+	view: number,
+	url: string,
+	date: string,
+	end_date: string
 };
 type PostsState = Post[];
 type WaitingPostsState = Post[];

@@ -15,7 +15,13 @@ interface PostLayoutProps {
 	posts: Post[]
 };
 const PostLayout = ({boardName, posts}: PostLayoutProps) => {
-	const Posts = posts.map((post, idx) => null);
+	const Posts = posts.map((post, idx) => {
+		if (typeof post['img'] === 'number') {
+			return <PostTextWrapper post={post} />;
+		} else {
+			return <PostImageWrapper post={post} />;
+		}
+	});
 
 	return (
 		<Container>
@@ -25,15 +31,6 @@ const PostLayout = ({boardName, posts}: PostLayoutProps) => {
 									 large_info={boardName} />
 				<BoardInfoMobile small_info="뉴스피드"
 												 large_info={boardName} />
-				<PostTextWrapper />
-				<PostTextWrapper />
-				<PostImageWrapper />
-				<PostTextWrapper />
-
-				<PostImageWrapper />
-				<PostImageWrapper />
-				<PostImageWrapper />
-
 				{Posts}
 			</PostWrapper>
 		</Container>
