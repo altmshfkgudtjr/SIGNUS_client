@@ -1,5 +1,6 @@
 import produce from 'immer';
 import * as noticeAPI from '../controllers/notice'
+import { initSnackbar } from './snackbar'
 
 /* Thunk 함수 */
 export const GetNotice = (postId: string) => (dispatch: any) => {
@@ -7,7 +8,7 @@ export const GetNotice = (postId: string) => (dispatch: any) => {
 		if (res) {
 			dispatch(addNotice(res));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Get a notice failed.\n\n");
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
 }
@@ -17,7 +18,7 @@ export const GetNoticeList = () => (dispatch: any) => {
 		if (res) {
 			dispatch(addNoticeList(res));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Get notices failed.\n\n");
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
 }
@@ -34,7 +35,7 @@ export const UpdateNotice = (title: string, post: string, noticeId: string) => (
 				}
 			));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Update notice failed.\n\n");
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
 }
@@ -44,7 +45,7 @@ export const DeleteNotice = (noticeId: string) => (dispatch: any) => {
 		if (res) {
 			dispatch(deleteNotice(noticeId));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Delete notice failed.\n\n");
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
 }

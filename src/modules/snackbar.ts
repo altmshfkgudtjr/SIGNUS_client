@@ -6,7 +6,7 @@ const RefEvent: ReturnType<typeof setTimeout>[] = [];
 /* Thunk 함수 */
 export const initSnackbar = (message: string, type: string) => async (dispatch: any) => {
 	if(RefEvent.length !== 0) {
-		let event = RefEvent.shift();
+		const event = RefEvent.shift();
 		clearTimeout(event);
 	}
 	dispatch(deleteSnackbar());
@@ -18,7 +18,7 @@ export const initSnackbar = (message: string, type: string) => async (dispatch: 
 				type: type
 			}
 		));
-		let event = setTimeout(function() {
+		const event = setTimeout(function() {
 			dispatch(deleteSnackbar());
 		}, 4000);
 		RefEvent.push(event);

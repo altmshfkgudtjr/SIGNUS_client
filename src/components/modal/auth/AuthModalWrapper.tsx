@@ -23,7 +23,10 @@ const AuthModalWrapper = ({onLogin, onSignUp, onClose}: AuthModalWrapperProps) =
 	/* 로그인 모달 닫기 */
 	const closeModal = useCallback((e: any) => {
 		const { current } = ModalRef;
-		if (current && current.contains(e.target)) {
+		const snackbarElem = !!e.path.filter((node: any) => node.id === 'snackbar')[0];
+		
+		if ((current && current.contains(e.target))
+				|| snackbarElem) {
 			return;
 		} else {
 			onClose();
@@ -31,9 +34,9 @@ const AuthModalWrapper = ({onLogin, onSignUp, onClose}: AuthModalWrapperProps) =
 	}, [onClose]);
 
 	useEffect(() => {
-		document.addEventListener('click', closeModal);
+		document.addEventListener('mousedown', closeModal);
 		return () => {
-			document.removeEventListener('click', closeModal);
+			document.removeEventListener('mousedown', closeModal);
 		};
 	}, [closeModal]);
 

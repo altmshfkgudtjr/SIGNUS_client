@@ -34,12 +34,14 @@ const Container = styled.div`
 	position: fixed;
 	top: 40px;
 	right: 50px;
-	width: 300px;
+	width: auto;
+	max-width: 300px;
 	height: auto;
 	z-index: ${zIndex.snackbar};
 
 	${media.small} {
 		width: 95%;
+		max-width: 800px;
 		top: initial;
 		bottom: 10px;
 		left: 0;

@@ -26,9 +26,11 @@ const MenuModalWrapper = ({onClose, loginValid, onLogout, name}: MenuModalWrappe
 	const closeModal = useCallback((e: any) => {
 		const { current } = ModalRef;
 		const modalElem = document.querySelector(`div[data-type=${"modalBackground"}]`) as HTMLElement;
+		const snackbarElem = !!e.path.filter((node: any) => node.id === 'snackbar')[0];
 		
 		if ((current && current.contains(e.target))
-				|| (modalElem && modalElem.contains(e.target))) {
+				|| (modalElem && modalElem.contains(e.target))
+				 || snackbarElem) {
 			return;
 		} else {
 			onClose();
@@ -36,9 +38,9 @@ const MenuModalWrapper = ({onClose, loginValid, onLogout, name}: MenuModalWrappe
 	}, [onClose]);
 
 	useEffect(() => {
-		document.addEventListener('click', closeModal);
+		document.addEventListener('mousedown', closeModal);
 		return () => {
-			document.removeEventListener('click', closeModal);
+			document.removeEventListener('mousedown', closeModal);
 		};
 	}, [closeModal]);
 

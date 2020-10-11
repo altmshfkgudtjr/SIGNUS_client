@@ -7,30 +7,15 @@ import palette from '../../lib/styles/palette'
 import animations from '../../lib/styles/animations'
 
 interface SnackbarProps {
-	onClick(): void;
+	onClick(e: any): void;
 	message: string;
 	type: string;
 }
 const Snackbar = ({onClick, message, type}: SnackbarProps)=> {
-	let imgSrc: string = '/icons/1x/info.png';
-	if (type === 'success') {
-		imgSrc = '/icons/1x/success.png';
-	} else if (type === 'error') {
-		imgSrc = '/icons/1x/warning.png';
-	} else if (type === 'warning') {
-		imgSrc = '/icons/1x/warning.png';
-	} else if (type === 'info') {
-		imgSrc = '/icons/1x/info.png';
-	} else {
-		imgSrc = '/icons/1x/info.png';
-		type = 'info';
-	}
-
 	return (
-	  <Container onClick={onClick} type={type}>
+	  <Container id='snackbar' onClick={onClick} type={type}>
 	  	<Content>
-	  	  <Icon src={imgSrc} alt={type} />
-	  	  {message}
+	  	  <Message>{message}</Message>
 	  	</Content>
 	  </Container>
 	);
@@ -41,7 +26,7 @@ interface ContainerStyled {
 }
 const Container = styled.div<ContainerStyled>`
 	position: relative;
-	width: 300px;
+	width: auto;
 	height: auto;
 	min-height: 2rem;
 	max-height: 800px;
@@ -60,8 +45,8 @@ const Container = styled.div<ContainerStyled>`
 		}};
 	box-shadow: ${styles.boxShadow.regular};
 	border-radius: 4px;
-	animation: ${animations.fadeInBottom} .4s cubic-bezier(0.25,0.1,0.25,1),
-				${animations.fadeOutBottom} .5s cubic-bezier(0.25,0.1,0.25,1) 3.6s;
+	animation: ${animations.fadeInBottom} .3s cubic-bezier(0.25,0.1,0.25,1),
+				${animations.fadeOut} .4s cubic-bezier(0.25,0.1,0.25,1) 3.8s;
 	cursor: pointer;
 	transition: .2s ${styles.transition};
 	${styles.noselect};
@@ -78,17 +63,12 @@ const Container = styled.div<ContainerStyled>`
 
 const Content = styled.div`
 	position: relative;
-	display: inline-block;
+	display: flex;
 	width: 100%;
 	height: auto;
 	min-height: 2rem;
-	line-height: 2rem;
 	box-sizing: border-box;
 	padding: 12px 20px;
-	color: white;
-	font-size: .9rem;
-	font-weight: 200;
-	word-break: keep-all;
 	vertical-align: top;
 
 	${media.small} {
@@ -97,19 +77,14 @@ const Content = styled.div`
 	}
 `;
 
-const Icon = styled.img`
+const Message = styled.div`
 	position: relative;
-	width: 20px;
-	height: 20px;
-	margin-top: 5px;
-	padding-right: 16px;
-	line-height: 2rem;
-	filter: invert(99%) sepia(1%) saturate(53%) hue-rotate(98deg) brightness(118%) contrast(100%);
-	vertical-align: top;
-
-	${media.small} {
-		margin-top: .1rem;
-	}
+	flex-grow: 1;
+	color: #FFF;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 200;
+	word-break: keep-all;
 `;
 
 export default Snackbar

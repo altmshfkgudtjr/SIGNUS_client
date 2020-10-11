@@ -1,5 +1,6 @@
 import produce from 'immer';
 import * as authAPI from '../controllers/auth'
+import { initSnackbar } from './snackbar'
 
 /* Thunk 함수 */
 export const GetUser = () => (dispatch: any) => {
@@ -7,7 +8,7 @@ export const GetUser = () => (dispatch: any) => {
 		if (res) {
 			dispatch(setUser(res));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Get user's info failed.\n\n");
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
 }
@@ -18,7 +19,7 @@ export const Login = (id: string, pw: string) => (dispatch: any) => {
 			window.localStorage.setItem('tk', res['access_token']);
 			window.location.reload();
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Login failed.\n\n");
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
 }
@@ -34,7 +35,7 @@ export const SignUp = (id: string, pw: string) => (dispatch: any) => {
 		if (res) {
 			dispatch(Login(id, pw));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Sign up failed.\n\n");
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
 }

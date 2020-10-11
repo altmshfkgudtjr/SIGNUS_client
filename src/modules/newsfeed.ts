@@ -1,5 +1,6 @@
 import produce from 'immer';
 import * as newfeedAPI from '../controllers/newsfeed'
+import { initSnackbar } from './snackbar'
 
 /* Thunk 함수 */
 export const addRecommendationPosts = () => (dispatch: any) => {
@@ -7,8 +8,8 @@ export const addRecommendationPosts = () => (dispatch: any) => {
 		if (res) {
 			dispatch(addPosts(res));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Get recommendation posts failed.\n\n");
-		}
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			}
 	});
 }
 export const addPopularityPosts = () => (dispatch: any) => {
@@ -16,8 +17,8 @@ export const addPopularityPosts = () => (dispatch: any) => {
 		if (res) {
 			dispatch(addPosts(res));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Get popularity posts failed.\n\n");
-		}
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			}
 	});
 }
 export const addCategoryPosts = (category: string) => (dispatch: any) => {
@@ -25,7 +26,7 @@ export const addCategoryPosts = (category: string) => (dispatch: any) => {
 		if (res) {
 			dispatch(addPosts(res));
 		} else {
-			console.log("\n%c[Error]", 'color: #dc3545', "Get category posts failed.\n\n");
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
 }

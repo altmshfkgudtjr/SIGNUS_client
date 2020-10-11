@@ -1,3 +1,8 @@
+export type validationType = {
+	valid: boolean,
+	type: string
+};
+
 /* 빈 값 검사 */
 export const emptyChecker = (keyword: string): boolean => {
 	if (keyword === '') {
@@ -7,22 +12,53 @@ export const emptyChecker = (keyword: string): boolean => {
 }
 
 /* 아이디 값 유효성 검사 */
-export const validationIdChecker = (keyword: string): boolean => {
+export const validationIdChecker = (keyword: string): validationType => {
+	if (keyword.length < 2) {
+		return {
+			valid: false,
+			type: "TOO_SHORT"
+		};
+	}
 
-	return true;
+	if (100 < keyword.length) {
+		return {
+			valid: false,
+			type: "TOO_LONG"
+		};
+	}
+
+	return {
+		valid: true,
+		type: "SUCCESS"
+	};
 }
 
 /* 비밀번호 값 유효성 검사 */
-export const validationPwChecker = (keyword: string): boolean => {
+export const validationPwChecker = (keyword: string): validationType => {
+	if (keyword.length < 6) {
+		return {
+			valid: false,
+			type: "TOO_SHORT"
+		};
+	}
 
-	return true;
+	if (100 < keyword.length) {
+		return {
+			valid: false,
+			type: "TOO_LONG"
+		};
+	}
+
+	return {
+		valid: true,
+		type: "SUCCESS"
+	};
 }
 
 /* 비밀번호 재확인 값 유효성 검사 */
 export const validationRePwChecker = (pw: string, rePw: string): boolean => {
-	if (pw !== rePw) {
-		return false;
+	if (pw === rePw) {
+		return true;
 	}
-
-	return true;
+	return false;
 }

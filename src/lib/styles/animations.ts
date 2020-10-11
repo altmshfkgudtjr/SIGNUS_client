@@ -9,36 +9,36 @@ const fadeOut = keyframes`
 	100% { opacity: 0; }
 `;
 const fadeInTop = keyframes`
-	0% { opacity: 0; top: -50%; }
-	100% { opacity: 1; top: 0px; }
+	0% { opacity: 0; transform: translate(0, -50%); }
+	100% { opacity: 1; transform: translate(0, 0); }
 `;
 const fadeOutTop = keyframes`
-	0% { opacity: 1; bottom: 0px; }
-	100% { opacity: 0; bottom: -50%; }
+	0% { opacity: 1; transform: translate(0, 0); }
+	100% { opacity: 0; transform: translate(0, -50%); }
 `;
 const fadeInBottom = keyframes`
-	0% { opacity: 0; bottom: -50%; }
-	100% { opacity: 1; bottom: 0px; }
+	0% { opacity: 0; transform: translate(0, 50%); }
+	100% { opacity: 1; transform: translate(0, 0); }
 `;
 const fadeOutBottom = keyframes`
-	0% { opacity: 1; bottom: 0px; }
-	100% { opacity: 0; bottom: -50%; }
+	0% { opacity: 1; transform: translate(0, 0); }
+	100% { opacity: 0; transform: translate(0, 50%); }
 `;
 const fadeInLeft = keyframes`
-	0% { opacity: 0; left: -50%; }
-	100% { opacity: 1; left: 0px; }
+	0% { opacity: 0; transform: translate(-50%, 0); }
+	100% { opacity: 1; transform: translate(0, 0); }
 `;
 const fadeOutLeft = keyframes`
-	0% { opacity: 1; left: 0px; }
-	100% { opacity: 0; left: -50%; }
+	0% { opacity: 1; transform: translate(0, 0); }
+	100% { opacity: 0; transform: translate(-50%, 0); }
 `;
 const fadeInRight = keyframes`
-	0% { opacity: 0; right: -50%; }
-	100% { opacity: 1; right: 0px; }
+	0% { opacity: 0; transform: translate(50%, 0); }
+	100% { opacity: 1; transform: translate(0, 0); }
 `;
 const fadeOutRight = keyframes`
-	0% { opacity: 1; right: 0px; }
-	100% { opacity: 0; right: -50%; }
+	0% { opacity: 1; transform: translate(0, 0); }
+	100% { opacity: 0; transform: translate(50%, 0); }
 `;
 const zoomIn = keyframes`
 	0% { opacity: 0; transform: scale(.5, .5); }
