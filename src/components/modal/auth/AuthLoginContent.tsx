@@ -14,9 +14,9 @@ import * as authUtils from '../../../lib/utils/authUtils'
 interface AuthLoginContentProps {
 	onLogin(id: string, pw: string): void;
 	onClose(): void;
-	OpenSignUpContent(): void;
+	openSignUpContent(): void;
 }
-const AuthLoginContent = ({onLogin, onClose, OpenSignUpContent}: AuthLoginContentProps) => {
+const AuthLoginContent = ({onLogin, onClose, openSignUpContent}: AuthLoginContentProps) => {
 	const [userId, setUserId] = useState<string>('');
 	const [userPw, setUserPw] = useState<string>('');
 	const InputIdRef: React.RefObject<HTMLInputElement> = createRef();
@@ -50,7 +50,7 @@ const AuthLoginContent = ({onLogin, onClose, OpenSignUpContent}: AuthLoginConten
 												 ref={InputPwRef}
 												 placeholder="비밀번호" />
 			<AuthBtn onClick={onClick} message="로그인" />
-			<AuthSignUpBtn OpenSignUpContent={OpenSignUpContent} />
+			<AuthSignUpBtn openSignUpContent={openSignUpContent} />
 		</Container>
 	);
 }

@@ -5,13 +5,13 @@ import * as styles from '../../../lib/styles/styles'
 import palette from '../../../lib/styles/palette'
 
 interface AuthSignUpBtnProps {
-	OpenSignUpContent(): void;
+	openSignUpContent(): void;
 }
-const AuthSignUpBtn = ({OpenSignUpContent}: AuthSignUpBtnProps) => {
+const AuthSignUpBtn = ({openSignUpContent}: AuthSignUpBtnProps) => {
 	return (
 		<Container>
 			<Info>아직 계정이 없으신가요?</Info>
-			<Btn onClick={OpenSignUpContent}>계정 만들기</Btn>
+			<Btn onClick={openSignUpContent}>계정 만들기</Btn>
 		</Container>
 	);
 }

@@ -5,7 +5,7 @@ import Portal from '../../portal'
 import ModalBackground from '../../components/modal/ModalBackground'
 import AuthModalWrapper from '../../components/modal/auth/AuthModalWrapper'
 // modules
-import { Login } from '../../modules/auth'
+import { Login, SignUp } from '../../modules/auth'
 
 interface AuthModalProps {
 	display: boolean;
@@ -19,10 +19,16 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 		dispatch(Login(id, pw));
 	}
 
+	/* 회원가입 */
+	const onSignUp = (id: string, pw: string) => {
+		dispatch(SignUp(id, pw));
+	}
+
 	return (
 		<Portal id='modal'>
 			{display && <ModalBackground>
 				<AuthModalWrapper onLogin={onLogin}
+													onSignUp={onSignUp}
 													onClose={onClose} />
 			</ModalBackground>}
 		</Portal>

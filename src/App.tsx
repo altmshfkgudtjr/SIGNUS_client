@@ -5,6 +5,8 @@ import { Switch, Route } from 'react-router-dom'
 import NewsfeedPage from './pages/NewsfeedPage'
 import NotFound from './pages/NotFound'
 import RedirectPage from './pages/RedirectPage'
+// containers
+import Snackbar from './containers/Snackbar'
 // modules
 import { GetUser } from './modules/auth'
 
@@ -35,6 +37,7 @@ const App = () => {
 						<Route path="*" component={NotFound} status={404} />
 					</Switch>
 			}
+			<Snackbar />
 		</>
 	);
 }

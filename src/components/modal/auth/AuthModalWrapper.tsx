@@ -12,9 +12,10 @@ import media from '../../../lib/styles/media'
 
 interface AuthModalWrapperProps {
 	onLogin(id: string, pw: string): void;
+	onSignUp(id: string, pw: string): void;
 	onClose(): void;
 }
-const AuthModalWrapper = ({onLogin, onClose}: AuthModalWrapperProps) => {
+const AuthModalWrapper = ({onLogin, onSignUp, onClose}: AuthModalWrapperProps) => {
 	const [loginDisplay, setLoginDisplay] = useState<boolean>(true);
 	const [signupDisplay, setSignupDisplay] = useState<boolean>(false);
 	const ModalRef = useRef<HTMLInputElement>(null);
@@ -37,7 +38,7 @@ const AuthModalWrapper = ({onLogin, onClose}: AuthModalWrapperProps) => {
 	}, [closeModal]);
 
 	/* 회원가입 Form 열기 */
-	const OpenSignUpContent = () => {
+	const openSignUpContent = () => {
 		setTimeout(function() {
 			setLoginDisplay(false);
 			setSignupDisplay(true);
@@ -45,7 +46,7 @@ const AuthModalWrapper = ({onLogin, onClose}: AuthModalWrapperProps) => {
 	}
 
 	/* 로그인 Form 열기 */
-	const OpenLoginContent = () => {
+	const openLoginContent = () => {
 		setTimeout(function() {
 			setLoginDisplay(true);
 			setSignupDisplay(false);
@@ -58,8 +59,9 @@ const AuthModalWrapper = ({onLogin, onClose}: AuthModalWrapperProps) => {
 			<Contour />
 			{loginDisplay && <AuthLoginContent onLogin={onLogin}
 																				 onClose={onClose}
-																				 OpenSignUpContent={OpenSignUpContent} />}
-			{signupDisplay && <AuthSignUpContent OpenLoginContent={OpenLoginContent} />}
+																				 openSignUpContent={openSignUpContent} />}
+			{signupDisplay && <AuthSignUpContent onSignUp={onSignUp}
+																					 openLoginContent={openLoginContent} />}
 		</Container>
 	);
 }

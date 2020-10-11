@@ -4,6 +4,7 @@ import ReduxThunk from 'redux-thunk';
 import newsfeed from '../modules/newsfeed'
 import auth from '../modules/auth'
 import notice from '../modules/notice'
+import snackbar from '../modules/snackbar'
 
 /* 
 	Combine Reducers
@@ -11,7 +12,8 @@ import notice from '../modules/notice'
 const reducers = combineReducers({
 	newsfeed,
 	auth,
-	notice
+	notice,
+	snackbar
 });
 
 export type RootState = ReturnType<typeof reducers>;

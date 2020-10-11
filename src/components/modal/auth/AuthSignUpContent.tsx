@@ -10,9 +10,10 @@ import media from '../../../lib/styles/media'
 import * as authUtils from '../../../lib/utils/authUtils'
 
 interface AuthSignUpContentProps {
-	OpenLoginContent(): void;
+	onSignUp(id: string, pw: string): void;
+	openLoginContent(): void;
 };
-const AuthSignUpContent = ({OpenLoginContent}: AuthSignUpContentProps) => {
+const AuthSignUpContent = ({onSignUp, openLoginContent}: AuthSignUpContentProps) => {
 	const [userId, setUserId] = useState<string>('');
 	const [userPw, setUserPw] = useState<string>('');
 	const [userRePw, setUserRePw] = useState<string>('');
@@ -20,6 +21,7 @@ const AuthSignUpContent = ({OpenLoginContent}: AuthSignUpContentProps) => {
 	const InputPwRef: React.RefObject<HTMLInputElement> = createRef();
 	const InputRePwRef: React.RefObject<HTMLInputElement> = createRef();
 
+	/* 회원가입 실행 */
 	const onClick = () => {
 		if (!authUtils.emptyChecker(userId) && InputIdRef.current) {
 			console.log("\n%c[Snackbar]", 'color: #ff9800', "ID를 입력해주십시오.", "\n\n");
@@ -34,11 +36,27 @@ const AuthSignUpContent = ({OpenLoginContent}: AuthSignUpContentProps) => {
 			InputRePwRef.current.focus();
 			return;
 		}
+
+		if (!authUtils.validationIdChecker(userId) && InputIdRef.current) {
+			console.log("\n%c[Snackbar]", 'color: #ff9800', "ID가 유효하지않습니다.", "\n\n");
+			InputIdRef.current.focus();
+			return;
+		} else if (!authUtils.validationPwChecker(userPw) && InputPwRef.current) {
+			console.log("\n%c[Snackbar]", 'color: #ff9800', "PW가 유효하지않습니다.", "\n\n");
+			InputPwRef.current.focus();
+			return;
+		} else if (!authUtils.validationRePwChecker(userPw, userRePw) && InputRePwRef.current) {
+			console.log("\n%c[Snackbar]", 'color: #ff9800', "PW 재확인값이 유효하지않습니다.", "\n\n");
+			InputRePwRef.current.focus();
+			return;
+		}
+
+		onSignUp(userId, userPw);
 	}
 
 	return (
 		<Container>
-			<BackBtn onClose={OpenLoginContent} />
+			<BackBtn onClose={openLoginContent} />
 			<UserAccountInput userId={userId}
 												setUserId={setUserId}
 												onAction={onClick}
