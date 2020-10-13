@@ -18,11 +18,10 @@ const SearchInput = ({searchWord, setSearchWord}: SearchInputProps) => {
 	/* 검색바 키 입력 이벤트 */
 	const onKeyUp = (e: any) => {
 		if (e.keyCode === 13) {
-			const prevKeyword = e.target.value;
-			const keyword = searchUtils.changeKeyword(prevKeyword);
+			const keyword = e.target.value;
 
 			if (searchUtils.searchChecker(keyword)) {
-				history.push('/search/' + keyword);
+				history.push('/search?q=' + keyword);
 			}
 		} else if (e.target) {
 			setSearchWord(e.target.value);

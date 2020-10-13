@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { Helmet, HelmetProvider } from "react-helmet-async"
 // components
 import PostLayout from '../components/post/PostLayout'
 // modules
@@ -8,52 +7,29 @@ import { RootState } from '../store/index'
 import { addRecommendationPosts, addPopularityPosts, addCategoryPosts } from '../modules/newsfeed'
 
 interface BoardProps {
-	newsfeed: React.ReactNode;
+	boardName: string;
 };
-const Board = ({newsfeed}: BoardProps) => {
+const Board = ({boardName}: BoardProps) => {
 	const dispatch = useDispatch();
-	const pathname = (window.location.pathname.split('/')[2] || window.location.pathname.split('/')[1]);
-	let boardName = '', pagetitle = '';
+	const posts = useSelector((state: RootState) => state.newsfeed.posts);
 
-	if (pathname === '') {
+	if (boardName === '') {
 		boardName = 'Top News';
-		pagetitle = '';
 		dispatch(addRecommendationPosts());
-	} else if (pathname === 'best') {
-		boardName = '인기';
-		pagetitle = ` - ${boardName}`;
+	} else if (boardName === '인기') {
 		dispatch(addPopularityPosts());
-	} else if (pathname === 'university') {
-		boardName = '대학';
-		pagetitle = ` - ${boardName}`;
+	} else if (boardName === '대학') {
 		dispatch(addCategoryPosts('대학교'));
-	} else if (pathname === 'award') {
-		boardName = '공모전&행사';
-		pagetitle = ` - ${boardName}`;
+	} else if (boardName === '공모전&행사') {
 		dispatch(addCategoryPosts('공모전-행사'));
-	} else if (pathname === 'group') {
-		boardName = '동아리&모임';
-		pagetitle = ` - ${boardName}`;
+	} else if (boardName === '동아리&모임') {
 		dispatch(addCategoryPosts('진로-구인'));
-	} else if (pathname === 'job') {
-		boardName = '진로&구인';
-		pagetitle = ` - ${boardName}`;
+	} else if (boardName === '진로&구인') {
 		dispatch(addCategoryPosts('동아리-모임'));
 	}
 
-	const posts = useSelector((state: RootState) => state.newsfeed.posts);
-
 	return (
-		<>
-			<HelmetProvider>
-				<Helmet>
-					<title>SIGNUS{pagetitle}</title>
-				</Helmet>
-			</HelmetProvider>
-			{newsfeed}
-
-			<PostLayout boardName={boardName} posts={posts} />
-		</>
+		<PostLayout boardName={boardName} posts={posts} />
 	);
 }
 

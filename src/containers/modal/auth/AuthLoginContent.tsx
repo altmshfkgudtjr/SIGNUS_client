@@ -2,17 +2,17 @@ import React, { useState, createRef } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // components
-import CloseBtn from './CloseBtn'
-import Logo from './Logo'
-import UserAccountInput from './UserAccountInput'
-import UserPasswordInput from './UserPasswordInput'
-import AuthBtn from './AuthBtn'
-import AuthSignUpBtn from './AuthSignUpBtn'
+import CloseBtn from 'components/modal/auth/CloseBtn'
+import Logo from 'components/modal/auth/Logo'
+import UserAccountInput from 'components/modal/auth/UserAccountInput'
+import UserPasswordInput from 'components/modal/auth/UserPasswordInput'
+import AuthBtn from 'components/modal/auth/AuthBtn'
+import AuthSignUpBtn from 'components/modal/auth/AuthSignUpBtn'
 // lib
-import media from '../../../lib/styles/media'
-import * as authUtils from '../../../lib/utils/authUtils'
+import media from 'lib/styles/media'
+import * as authUtils from 'lib/utils/authUtils'
 // modules
-import { initSnackbar } from '../../../modules/snackbar'
+import { initSnackbar } from 'modules/snackbar'
 
 interface AuthLoginContentProps {
 	onLogin(id: string, pw: string): void;

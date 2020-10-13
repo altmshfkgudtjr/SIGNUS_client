@@ -38,7 +38,7 @@ const UserPasswordInput = forwardRef(({userPw, setUserPw, onAction, placeholder,
 const Container = styled.div`
 	position: relative;
 	width: 100%;
-	margin-bottom: 1.2rem;
+	margin-bottom: 20px;
 `;
 
 interface InputStyled {
@@ -54,7 +54,6 @@ const Input = styled.input<InputStyled>`
 																				? props.defaultValue.length > 0 ? palette.teal4 : palette.gray1
 																				: props.defaultValue.length > 0 ? palette.red4 : palette.red1
 	};
-	font-size: 14px;
 	transition: .2s ${styles.transition};
 
 	&::placeholder {
@@ -72,8 +71,8 @@ const Input = styled.input<InputStyled>`
 const Message = styled.div`
 	position: absolute;
 	width: 100%;
-	font-size: 10px;
-	line-height: 10px;
+	font-size: 12px;
+	line-height: 12px;
 	top: -2px;
 	text-align: right;
 	color: ${palette.gray4};

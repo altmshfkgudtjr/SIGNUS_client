@@ -7,7 +7,7 @@ import PostTextWrapper from '../post/PostTextWrapper'
 import PostImageWrapper from '../post/PostImageWrapper'
 // lib
 import media from '../../lib/styles/media'
-// modules
+// types
 import { Post } from '../../modules/newsfeed'
 
 interface PostLayoutProps {

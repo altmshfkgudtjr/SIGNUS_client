@@ -36,7 +36,6 @@ const HeaderCover = ({show, searchWord, setSearchWord, setSearchModalDisplay, lo
 										 searchDisplay={searchDisplay}
 										 setSearchDisplay={setSearchDisplay}
 										 setSearchModalDisplay={setSearchModalDisplay} />
-					<LoginBtn />
 					{loginValid && <UserBtn name={userName} />}
 					{!loginValid && <LoginBtn />}
 					<MenuBtn />

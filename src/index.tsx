@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter } from 'react-router-dom'
@@ -10,7 +11,9 @@ import store from './store/index'
 ReactDOM.render(
 	<BrowserRouter>
 		<Provider store={store}>
-		<App />
+			<HelmetProvider>
+				<App />
+			</HelmetProvider>
 		</Provider>
 	</BrowserRouter>, 
 	document.getElementById('root')

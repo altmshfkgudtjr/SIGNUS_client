@@ -5,9 +5,3 @@ export const searchChecker = (keyword: string): boolean => {
 	}
 	return true;
 }
-
-/* 검색어 공백 및 + 치환 */
-export const changeKeyword = (keyword: string): string => {
-	return keyword.replace(/\+/gi, '%2B')
-								.replace(/ /gi, '+');
-}

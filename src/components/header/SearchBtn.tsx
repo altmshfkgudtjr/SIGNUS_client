@@ -47,11 +47,8 @@ const SearchBtn = ({searchWord, searchDisplay, setSearchDisplay, setSearchModalD
 
 	const onClick = useCallback(() => {
 		if (searchDisplay) {
-			const prevKeyword = searchWord;
-			const keyword = searchUtils.changeKeyword(prevKeyword);
-			
-			if (searchUtils.searchChecker(keyword)) {
-				history.push('/search/' + keyword);
+			if (searchUtils.searchChecker(searchWord)) {
+				history.push('/search?q=' + searchWord);
 			}
 		} else if (window.innerWidth <= mediaValue.small) {
 			setSearchModalDisplay(true);

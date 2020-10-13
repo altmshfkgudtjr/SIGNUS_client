@@ -3,10 +3,10 @@ import styled from 'styled-components'
 // lib
 import media from 'lib/styles/media'
 
-interface BoardLayoutProps {
+interface SearchLayoutProps {
 	children: React.ReactNode
 };
-const BoardLayout = ({children}: BoardLayoutProps) => {
+const SearchLayout = ({children}: SearchLayoutProps) => {
 	return (
 		<Layout>
 			{children}
@@ -36,4 +36,4 @@ const Layout = styled.div`
 	}
 `;
 
-export default BoardLayout
+export default SearchLayout

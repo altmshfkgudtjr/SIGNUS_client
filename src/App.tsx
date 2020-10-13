@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 // Pages
-import NewsfeedPage from './pages/NewsfeedPage'
-import NotFound from './pages/NotFound'
-import RedirectPage from './pages/RedirectPage'
+import NewsfeedPage from 'pages/NewsfeedPage'
+import SearchPage from 'pages/SearchPage'
+import NotFound from 'pages/NotFound'
+import RedirectPage from 'pages/RedirectPage'
 // containers
-import Snackbar from './containers/Snackbar'
+import Snackbar from 'containers/Snackbar'
 // modules
-import { GetUser } from './modules/auth'
+import { GetUser } from 'modules/auth'
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
 						<Route path="/" component={NewsfeedPage} exact />
 						<Route path="/best" component={NewsfeedPage} exact />
 						<Route path="/newsfeed/:mode(university|award|group|job)" component={NewsfeedPage} exact />
+						<Route path="/search" component={SearchPage} exact />
 						<Route path="*" component={NotFound} status={404} />
 					</Switch>
 			}

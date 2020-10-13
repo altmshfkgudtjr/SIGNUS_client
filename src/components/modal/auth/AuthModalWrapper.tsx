@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import styled from 'styled-components'
+// containers
+import AuthLoginContent from 'containers/modal/auth/AuthLoginContent'
+import AuthSignUpContent from 'containers/modal/auth/AuthSignUpContent'
 // components
-import AuthInfoContent from './AuthInfoContent'
-import Contour from './Contour'
-import AuthLoginContent from './AuthLoginContent'
-import AuthSignUpContent from './AuthSignUpContent'
+import AuthInfoContent from 'components/modal/auth/AuthInfoContent'
+import Contour from 'components/modal/auth/Contour'
 // lib
-import * as styles from '../../../lib/styles/styles'
-import animations from '../../../lib/styles/animations'
-import media from '../../../lib/styles/media'
+import * as styles from 'lib/styles/styles'
+import animations from 'lib/styles/animations'
+import media from 'lib/styles/media'
 
 interface AuthModalWrapperProps {
 	onLogin(id: string, pw: string): void;

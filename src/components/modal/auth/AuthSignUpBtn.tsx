@@ -20,7 +20,7 @@ const Container = styled.div`
 	position: relative;
 	width: 100%;
 	height: 20px;
-	margin-top: 64px;
+	margin-top: 52px;
 	text-align: right;
 `;
 

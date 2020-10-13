@@ -13,6 +13,13 @@ export const emptyChecker = (keyword: string): boolean => {
 
 /* 아이디 값 유효성 검사 */
 export const validationIdChecker = (keyword: string): validationType => {
+	if (!emptyChecker(keyword)) {
+		return {
+			valid: false,
+			type: "EMPTY"
+		}
+	}
+
 	if (keyword.length < 2) {
 		return {
 			valid: false,
@@ -20,7 +27,7 @@ export const validationIdChecker = (keyword: string): validationType => {
 		};
 	}
 
-	if (100 < keyword.length) {
+	if (50 < keyword.length) {
 		return {
 			valid: false,
 			type: "TOO_LONG"
@@ -35,6 +42,13 @@ export const validationIdChecker = (keyword: string): validationType => {
 
 /* 비밀번호 값 유효성 검사 */
 export const validationPwChecker = (keyword: string): validationType => {
+	if (!emptyChecker(keyword)) {
+		return {
+			valid: false,
+			type: "EMPTY"
+		}
+	}
+
 	if (keyword.length < 6) {
 		return {
 			valid: false,
@@ -56,9 +70,22 @@ export const validationPwChecker = (keyword: string): validationType => {
 }
 
 /* 비밀번호 재확인 값 유효성 검사 */
-export const validationRePwChecker = (pw: string, rePw: string): boolean => {
-	if (pw === rePw) {
-		return true;
+export const validationRePwChecker = (pw: string, rePw: string): validationType => {
+	if (!emptyChecker(rePw)) {
+		return {
+			valid: false,
+			type: "EMPTY"
+		}
 	}
-	return false;
+
+	if (pw !== rePw) {
+		return {
+			valid: false,
+			type: "DIFFERENCE"
+		}
+	}
+	return {
+		valid: true,
+		type: "SUCCESS"
+	};
 }
