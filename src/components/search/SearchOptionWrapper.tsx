@@ -73,6 +73,7 @@ const SearchOptionWrapper = () => {
 const Container = styled.div`
 	position: relative;
 	width: 300px;
+	padding-right: 2rem;
 
 	${media.small} {
 		width: 100%;
