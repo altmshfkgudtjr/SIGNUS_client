@@ -1,45 +1,56 @@
 import React from 'react'
 import styled from 'styled-components'
+// components
+import PageInfo from 'components/commons/PageInfo'
 // lib
-import * as styles from '../../lib/styles/styles'
-import palette from '../../lib/styles/palette'
+import * as styles from 'lib/styles/styles'
+import palette from 'lib/styles/palette'
+import media, { mediaValue } from 'lib/styles/media'
+
+interface BoardInfoMobileProps {
+	small_info: string;
+	large_info: string;
+};
+const BoardInfoMobile = ({small_info, large_info}: BoardInfoMobileProps) => {
+	return (
+		<Container>
+			<PageInfo small_info={small_info}
+								large_info={large_info} />
+
+			<OptionWrapper>
+				<OptionItem selected={true}>
+					<OptionIcon src="/icons/1x/card_view.png" alt="격자" />
+				</OptionItem>
+				<OptionItem selected={false}>
+					<OptionIcon src="/icons/1x/list_view.png" alt="목록" />
+				</OptionItem>
+			</OptionWrapper>
+		</Container>
+	);
+}
 
 const Container = styled.div`
 	position: relative;
 	display: flex;
 	width: 95%;
+	height: auto;
 	border-bottom: 1px solid ${palette.gray2};
 	margin: 0 auto .5rem auto;
 
-	@media (min-width: 703px) {
+	@media (min-width: ${mediaValue.small + 1}px) {
 		display: none;
 	}
-`;
-
-const Content = styled.div`
-	position: relative;
-	width: 100%;
-	flex-grow: 1;
-	${styles.noselect}
-`;
-
-const SmallInfo = styled.div`
-	position: relative;
-	font-size: 11px;
-	font-weight: 600;
-	opacity: .5;
-`;
-
-const LargeInfo = styled.div`
-	position: relative;
-	font-size: 24px;
-	font-weight: 600;
 `;
 
 const OptionWrapper = styled.div`
 	position: relative;
 	display: flex;
 	justify-content: flex-end;
+	margin-right: .5rem;
+
+	${media.small} {
+		margin-right: 0;
+	}
 `;
 
 interface ContainerStyled {
@@ -64,6 +75,7 @@ const OptionItem = styled.div<ContainerStyled>`
 	&:active,
 	&:hover {
 		& > img {
+			opacity: 1;
 			filter: invert(61%) sepia(19%) saturate(7010%) hue-rotate(122deg) brightness(94%) contrast(86%);
 		}
 	}
@@ -72,6 +84,7 @@ const OptionItem = styled.div<ContainerStyled>`
 		border-bottom: 1.5px solid ${palette.teal4};
 
 		& > img {
+			opacity: 1;
 			filter: invert(61%) sepia(19%) saturate(7010%) hue-rotate(122deg) brightness(94%) contrast(86%);
 		}
 	`};
@@ -83,32 +96,7 @@ const OptionIcon = styled.img`
 	width: 20px;
 	height: 20px;
 	margin: 6px auto;
+	opacity: .4;
 `;
-
-
-type BoardInfoMobileProps = {
-	small_info: string,
-	large_info: string
-};
-
-const BoardInfoMobile = ({small_info, large_info}: BoardInfoMobileProps) => {
-	return (
-		<Container>
-			<Content>
-				<SmallInfo>{small_info}</SmallInfo>
-				<LargeInfo>{large_info}</LargeInfo>
-			</Content>
-
-			<OptionWrapper>
-				<OptionItem selected={true}>
-					<OptionIcon src="/icons/1x/card_view.png" alt="격자" />
-				</OptionItem>
-				<OptionItem selected={false}>
-					<OptionIcon src="/icons/1x/list_view.png" alt="목록" />
-				</OptionItem>
-			</OptionWrapper>
-		</Container>
-	);
-}
 
 export default BoardInfoMobile

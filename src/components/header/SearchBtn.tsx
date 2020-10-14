@@ -16,10 +16,6 @@ const Container = styled.div`
 	&:hover {
 		filter: invert(61%) sepia(19%) saturate(7010%) hue-rotate(122deg) brightness(94%) contrast(86%);
 	}
-
-	${media.small} {
-		margin-right: .5rem;
-	}
 `;
 
 const Icon  = styled.img`

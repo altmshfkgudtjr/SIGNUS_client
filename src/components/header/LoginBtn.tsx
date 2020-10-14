@@ -47,10 +47,6 @@ const Container = styled.div`
 			color: #000;
 		}
 	}
-
-	${media.small} {
-		margin-right: .5rem;
-	}
 `;
 
 const Icon  = styled.img`

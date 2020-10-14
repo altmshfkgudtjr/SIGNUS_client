@@ -75,7 +75,7 @@ const Content = styled.div`
 		max-width: 95%;
 	}
 	${media.small} {
-		max-width: 98%;
+		max-width: 95%;
 	}
 `;
 

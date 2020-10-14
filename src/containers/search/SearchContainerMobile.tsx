@@ -52,7 +52,7 @@ const ModalContent = styled.div`
 	margin: auto;
 	height: 40px;
 	padding: 5px 0;
-	animation: .3s ${animations.fadeInBottom} .2s;
+	animation: ${animations.fadeInBottom} .6s;
 `;
 
 export default SearchContainerMobile

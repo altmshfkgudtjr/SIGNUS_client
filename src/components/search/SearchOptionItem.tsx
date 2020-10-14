@@ -4,13 +4,13 @@ import styled from 'styled-components'
 import * as styles from 'lib/styles/styles'
 import palette from 'lib/styles/palette'
 
-interface OptionItemProps {
+interface SearchOptionItemProps {
 	message: string;
 	onClick(): void;
 	selected: boolean;
 };
 
-const OptionItem = ({message, onClick, selected}: OptionItemProps) => {
+const SearchOptionItem = ({message, onClick, selected}: SearchOptionItemProps) => {
 	return (
 		<Container onClick={onClick} selected={selected}>
 			<Icon />
@@ -73,4 +73,4 @@ const Message = styled.span`
 	color: ${palette.gray3};
 `;
 
-export default OptionItem
+export default SearchOptionItem

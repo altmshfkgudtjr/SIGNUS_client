@@ -1,21 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import BoardInfo from 'components/board/BoardInfo'
-import BoardInfoMobile from 'components/board/BoardInfoMobile'
 import PostTextWrapper from 'components/post/PostTextWrapper'
 import PostImageWrapper from 'components/post/PostImageWrapper'
 // lib
 import media from 'lib/styles/media'
+import palette from 'lib/styles/palette'
 // types
 import { Post } from 'modules/newsfeed'
 
-interface PostLayoutProps {
-	boardName: string;
-	imgSrc: string;
+interface SearchPostWrapperProps {
 	posts: Post[]
 };
-const PostLayout = ({boardName, imgSrc, posts}: PostLayoutProps) => {
+const SearchPostWrapper = ({posts}: SearchPostWrapperProps) => {
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
 			return <PostTextWrapper post={post} />;
@@ -27,11 +24,6 @@ const PostLayout = ({boardName, imgSrc, posts}: PostLayoutProps) => {
 	return (
 		<Container>
 			<PostWrapper>
-				<BoardInfo icon_src={imgSrc}
-									 small_info="뉴스피드"
-									 large_info={boardName} />
-				<BoardInfoMobile small_info="뉴스피드"
-												 large_info={boardName} />
 				{Posts}
 			</PostWrapper>
 		</Container>
@@ -42,6 +34,11 @@ const Container = styled.div`
 	position: relative;
 	width: auto;
 	flex-grow: 1;
+
+	${media.small} {
+		margin-top: .5rem;
+		border-top: .5rem solid ${palette.gray1};
+	}
 `;
 
 const PostWrapper = styled.div`
@@ -56,4 +53,4 @@ const PostWrapper = styled.div`
 	}
 `;
 
-export default PostLayout
+export default SearchPostWrapper

@@ -1,20 +1,23 @@
 import React from 'react'
-// import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // components
-import SearchLayout from 'components/search/SearchLayout'
+import SearchOptionWrapper from 'components/search/SearchOptionWrapper'
+import SearchPostWrapper from 'components/search/SearchPostWrapper'
 // modules
-// import { RootState } from 'store/index'
+import { RootState } from 'store/index'
 
 interface SearchProps {
 	keyword: string
 };
 const Search = ({keyword}: SearchProps) => {
 	// const dispatch = useDispatch();
+	const posts = useSelector((state: RootState) => state.search.posts);
 
 	return (
-		<SearchLayout>
-			
-		</SearchLayout>
+		<>
+			<SearchOptionWrapper />
+			<SearchPostWrapper posts={posts} />
+		</>
 	);
 }
 

@@ -10,7 +10,7 @@ import PostLikeBtn from './PostLikeBtn'
 import PostShareBtn from './PostShareBtn'
 // lib
 import * as styles from '../../lib/styles/styles'
-import media from '../../lib/styles/media'
+import media, { mediaValue } from '../../lib/styles/media'
 // modules
 import { Post } from '../../modules/newsfeed'
 
@@ -50,7 +50,7 @@ const Container = styled.a`
 	box-sizing: border-box;
 	padding: .5rem;
 
-	@media (min-width: 703px) {
+	@media (min-width: ${mediaValue.small + 1}px) {
 		&:hover,
 		&:active {
 			transform: translate(0, -4px);

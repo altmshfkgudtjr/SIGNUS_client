@@ -3,10 +3,10 @@ import styled from 'styled-components'
 // lib
 import media from 'lib/styles/media'
 
-interface SearchLayoutProps {
+interface NoticeLayoutProps {
 	children: React.ReactNode
 };
-const SearchLayout = ({children}: SearchLayoutProps) => {
+const NoticeLayout = ({children}: NoticeLayoutProps) => {
 	return (
 		<Layout>
 			{children}
@@ -37,4 +37,4 @@ const Layout = styled.div`
 	}
 `;
 
-export default SearchLayout
+export default NoticeLayout

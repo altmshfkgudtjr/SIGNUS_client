@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from "react-helmet-async"
 import { useHistory } from 'react-router-dom';
-import { Route } from 'react-router-dom'
 // containers
 import Header from 'containers/Header'
 import Sidebar from 'containers/Sidebar'

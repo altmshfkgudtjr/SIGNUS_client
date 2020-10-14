@@ -1,10 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import ReduxThunk from 'redux-thunk';
 // Reducers
-import newsfeed from '../modules/newsfeed'
-import auth from '../modules/auth'
-import notice from '../modules/notice'
-import snackbar from '../modules/snackbar'
+import newsfeed from 'modules/newsfeed'
+import auth from 'modules/auth'
+import notice from 'modules/notice'
+import snackbar from 'modules/snackbar'
+import search from 'modules/search'
 
 /* 
 	Combine Reducers
@@ -13,7 +14,8 @@ const reducers = combineReducers({
 	newsfeed,
 	auth,
 	notice,
-	snackbar
+	snackbar,
+	search
 });
 
 export type RootState = ReturnType<typeof reducers>;
