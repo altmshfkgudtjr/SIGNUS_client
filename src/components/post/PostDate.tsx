@@ -4,13 +4,13 @@ import styled from 'styled-components'
 import * as postUtils from '../../lib/utils/postUtils'
 
 interface PostDateProps {
-	date: string,
-	endDate: string
+	date: {$date: number},
+	endDate: {$date: number}
 }
 const PostDate = ({date, endDate}: PostDateProps) => {
-	const message: string = endDate
-														? postUtils.dateFormatter(endDate)
-														: postUtils.dateFormatter(date);
+	const message: string = new Date(endDate.$date).getTime() === new Date(32503680000000).getTime()
+														? postUtils.dateFormatter(date.$date)
+														: postUtils.dateFormatter(endDate.$date);
 
 	return (
 		<Container>

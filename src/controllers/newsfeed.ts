@@ -6,7 +6,7 @@ import Fetch from './fetch'
 export const RecommendationPosts = () => {
 	return Fetch("/api/signus/v1/newsfeed/recom", "GET").then((res) => {
 		if (res.msg === 'success') {
-			return res.result;
+			return JSON.parse(res.result);
 		} else {
 			return false;
 		}
@@ -19,7 +19,7 @@ export const RecommendationPosts = () => {
 export const PopularityPosts = (callback?: Function, failed?: Function) => {
 	return Fetch("/api/signus/v1/newsfeed/popular", "GET").then((res) => {
 		if (res.msg === 'success') {
-			return res.result;
+			return JSON.parse(res.result);
 		} else {
 			return false;
 		}
@@ -36,7 +36,7 @@ export const PopularityPosts = (callback?: Function, failed?: Function) => {
 export const CategoryPosts = (category: string, callback?: Function, failed?: Function) => {
 	return Fetch("/api/signus/v1/newsfeed/"+category, "GET").then((res) => {
 		if (res.msg === 'success') {
-			return res.result;
+			return JSON.parse(res.result);
 		} else {
 			return false;
 		}

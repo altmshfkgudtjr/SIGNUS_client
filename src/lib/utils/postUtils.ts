@@ -1,4 +1,4 @@
-export const dateFormatter = (date: string): string => {
+export const dateFormatter = (date: number): string => {
 	const a = new Date();
 	const b = new Date(date);
 	

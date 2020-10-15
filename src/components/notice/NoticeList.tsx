@@ -26,6 +26,7 @@ const NoticeList = ({noticeList}: NoticeListProps) => {
 
 const Container = styled.div`
 	position: relative;
+	width: 100%;
 	flex-grow: 1;
 
 	${media.small} {

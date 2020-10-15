@@ -54,5 +54,5 @@
     ]
   },
   "license": "MIT",
-  "proxy": "http://localhost:5000"
+  "proxy": "http://203.250.148.39:8080"
 }

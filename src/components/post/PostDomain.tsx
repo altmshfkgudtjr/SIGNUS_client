@@ -16,7 +16,6 @@ const PostDomain = ({message}: PostDomainProps) => {
 
 const Content = styled.div`
 	position: relative;
-	flex-shrink: 0;
 	width: fit-content;
 	line-height: 20px;
 	overflow: hidden;

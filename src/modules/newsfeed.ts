@@ -43,15 +43,15 @@ type NewsfeedAction =
 
 /* 타입 */
 export type Post = {
-	id: string,
+	_id: {$oid: string},
 	title: string,
 	post: string,
 	img: (string | number),
 	fav_cnt: number,
 	view: number,
 	url: string,
-	date: string,
-	end_date: string
+	date: {$date: number},
+	end_date: {$date: number}
 };
 type PostsState = Post[];
 type WaitingPostsState = Post[];

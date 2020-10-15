@@ -10,7 +10,6 @@ const PostTitle = ({message}: PostTitleProps) => {
 
 const Content = styled.div`
 	position: relative;
-	flex-shrink: 0;
 	width: 100%;
 	max-height: 72px;
 	font-weight: 600;

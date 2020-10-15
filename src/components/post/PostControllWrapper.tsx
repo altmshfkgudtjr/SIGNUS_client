@@ -12,7 +12,6 @@ const PostControllWrapper = ({children}: PostControllWrapperProps) => {
 
 const Container = styled.div`
 	position: relative;
-	flex-shrink: 0;
 	display: flex;
 	width: 100%;
 	height: 40px;

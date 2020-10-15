@@ -1,14 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 // lib
 import palette from 'lib/styles/palette'
 
 const NoticeSideMenuMoreBtn = () => {
-	return <Btn>more</Btn>;
+	return <Btn to="/notice">more</Btn>;
 }
 
-const Btn = styled.button`
+const Btn = styled(Link)`
 	position: relative;
+	width: 40px;
+	text-align: center;
 	display: block;
 	margin-left: auto;
 	padding: 0;

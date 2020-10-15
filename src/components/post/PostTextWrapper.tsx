@@ -19,14 +19,17 @@ interface PostTextWrapperProps {
 };
 const PostTextWrapper = ({post}: PostTextWrapperProps) => {
 	return (
-		<Container href={post.url} target="_blank">
-			<PostTitle message={post.title} />
-			<PostBody message={post.post} />
-			<PostDomain message={post.url} />
-			
-			<Blank />
+		<Container>
+			<PostLink href={post.url} target="_blank">
+				<PostTitle message={post.title} />
+				<PostBody message={post.post} />
+				<PostDomain message={post.url} />
+				
+				<Blank />
 
-			<PostDate date={post.date} endDate={post.end_date} />
+				<PostDate date={post.date} endDate={post.end_date} />
+			</PostLink>
+
 			<PostControllWrapper>
 				<PostLikeBtn like={post.fav_cnt} />				
 				<PostShareBtn url={post.url} />				
@@ -35,10 +38,10 @@ const PostTextWrapper = ({post}: PostTextWrapperProps) => {
 	);
 }
 
-const Container = styled.a`
-	position: relative;
+const Container = styled.div`
 	display: flex;
 	flex-direction: column;
+	align-content: space-between;
 	background-color: #FFF;
 	width: 100%;
 	box-shadow: ${styles.boxShadow.light};
@@ -65,8 +68,13 @@ const Container = styled.a`
 	}
 `;
 
+const PostLink = styled.a`
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+`;
+
 const Blank = styled.div`
-	position: relative;
 	flex-grow: 1;
 `;
 

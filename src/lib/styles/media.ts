@@ -5,7 +5,7 @@ export const mediaQuery = (maxWidth: number) => `
 export const mediaValue = {
 	xlarge : 1728,
 	large : 1440,
-	medium : 1200,
+	medium : 1248,
 	small : 702,
 	xsmall : 350	
 };

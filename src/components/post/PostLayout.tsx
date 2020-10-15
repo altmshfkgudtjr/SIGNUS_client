@@ -18,9 +18,9 @@ interface PostLayoutProps {
 const PostLayout = ({boardName, imgSrc, posts}: PostLayoutProps) => {
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
-			return <PostTextWrapper post={post} />;
+			return <PostTextWrapper key={post['_id']['$oid']} post={post} />;
 		} else {
-			return <PostImageWrapper post={post} />;
+			return <PostImageWrapper key={post['_id']['$oid']} post={post} />;
 		}
 	});
 
@@ -40,7 +40,7 @@ const PostLayout = ({boardName, imgSrc, posts}: PostLayoutProps) => {
 
 const Container = styled.div`
 	position: relative;
-	width: auto;
+	width: 100%;
 	flex-grow: 1;
 `;
 
@@ -48,7 +48,7 @@ const PostWrapper = styled.div`
 	position: relative;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-	grid-gap: 1rem;
+	gap: 1rem;
 	grid-auto-rows: 200px;
 
 	${media.small} {

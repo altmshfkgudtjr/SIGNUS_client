@@ -26,7 +26,7 @@ const PostImage = ({src}: PostImageProps) => {
 const Container = styled.div`
 	position: relative;
 	width: 100%;
-	height: 232px;
+	height: 222px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
