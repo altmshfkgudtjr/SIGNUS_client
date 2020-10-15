@@ -3,8 +3,8 @@ import * as noticeAPI from '../controllers/notice'
 import { initSnackbar } from './snackbar'
 
 /* Thunk 함수 */
-export const GetNotice = (postId: string) => (dispatch: any) => {
-	noticeAPI.GetNotice(postId).then((res: any) => {
+export const GetNotice = (noticeId: string) => (dispatch: any) => {
+	noticeAPI.GetNotice(noticeId).then((res: any) => {
 		if (res) {
 			dispatch(addNotice(res));
 		} else {
@@ -14,7 +14,7 @@ export const GetNotice = (postId: string) => (dispatch: any) => {
 }
 
 export const GetNoticeList = () => (dispatch: any) => {
-	noticeAPI.GetNotice(undefined).then((res: any) => {
+	noticeAPI.GetNotice(null).then((res: any) => {
 		if (res) {
 			dispatch(addNoticeList(res));
 		} else {
@@ -30,8 +30,10 @@ export const UpdateNotice = (title: string, post: string, noticeId: string) => (
 				{
 					id: noticeId,
 					title: title,
+					author: '',
 					post: post,
-					date: ''
+					date: '',
+					valid: false
 				}
 			));
 		} else {
@@ -50,31 +52,45 @@ export const DeleteNotice = (noticeId: string) => (dispatch: any) => {
 	});
 }
 
+export const Validation = (userId: string) => (dispatch: any, getState: Function) => {
+	const state = getState();
+	if (!!userId && userId === state.notice.notice.author) {
+		dispatch(validationNotice(true));
+	} else {
+		dispatch(validationNotice(false));
+	}
+}
+
 
 /* 액션 */
 const ADD_NOTICE = 'notice/ADD_NOTICE' as const;
 const ADD_NOTICELIST = 'notice/ADD_NOTICELIST' as const;
 const UPDATE_NOTICE = 'notice/UPDATE_NOTICE' as const;
 const DELETE_NOTICE = 'notice/DELETE_NOTICE' as const;
+const VALIDATION_NOTICE = 'notice/VALIDATION_NOTICE' as const;
 
-export const addNotice = (notice: Notice) => ({type: ADD_NOTICE, payload: notice});
-export const addNoticeList = (noticeList: Notice[]) => ({type: ADD_NOTICELIST, payload: noticeList});
+export const addNotice = (notice: any) => ({type: ADD_NOTICE, payload: notice});
+export const addNoticeList = (noticeList: any[]) => ({type: ADD_NOTICELIST, payload: noticeList});
 export const updateNotice = (notice: Notice) => ({type: UPDATE_NOTICE, payload: notice});
 export const deleteNotice = (noticeId: string) => ({type: DELETE_NOTICE, payload: noticeId});
+export const validationNotice = (valid: boolean) => ({type: VALIDATION_NOTICE, payload: valid});
 
 type AuthAction =
 	| ReturnType<typeof addNotice>
 	| ReturnType<typeof addNoticeList>
 	| ReturnType<typeof updateNotice>
 	| ReturnType<typeof deleteNotice>
+	| ReturnType<typeof validationNotice>
 
 
 /* 타입 */
-type Notice = {
+export type Notice = {
 	id: string,
 	title: string,
+	author: string,
 	post: string,
-	date: string
+	date: string,
+	valid: boolean
 };
 
 
@@ -88,8 +104,10 @@ const initialState: NoticeState = {
 	notice: {
 		id: '',
 		title: '',
+		author: '',
 		post: '',
-		date: ''
+		date: '',
+		valid: false
 	}
 };
 
@@ -100,13 +118,24 @@ function newsfeed(state: NoticeState = initialState, action: AuthAction): Notice
 		case ADD_NOTICE:
 			/* 단일 공지사항 설정 */
 			return produce(state, draft => {
-				draft.notice = action.payload;
+				draft.notice.id = action.payload['_id'];
+				draft.notice.title = action.payload['title'];
+				draft.notice.author = action.payload['author'];
+				draft.notice.post = action.payload['post'];
+				draft.notice.date = action.payload['date'];
 			});
 
 		case ADD_NOTICELIST:
 			/* 공지사항 전체 추가 */
 			return produce(state, draft => {
-				draft.noticeList = action.payload;
+				draft.noticeList = action.payload.map(notice => ({
+					id: notice['_id'],
+					title: notice['title'],
+					author: notice['author'],
+					post: notice['post'],
+					date: notice['date'],
+					valid: false
+				}));
 			});
 
 		case UPDATE_NOTICE:
@@ -128,9 +157,17 @@ function newsfeed(state: NoticeState = initialState, action: AuthAction): Notice
 				if (draft.notice.id === action.payload) {
 					draft.notice.id = '';
 					draft.notice.title = '';
+					draft.notice.author = '';
 					draft.notice.post = '';
 					draft.notice.date = '';
+					draft.notice.valid = false;
 				}
+			});
+
+		case VALIDATION_NOTICE:
+			/* 공지사항 권한 변경 */
+			return produce(state, draft => {
+				draft.notice.valid = action.payload;
 			});
 
 		default:

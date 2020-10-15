@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 // lib
 import media from '../../lib/styles/media'
 

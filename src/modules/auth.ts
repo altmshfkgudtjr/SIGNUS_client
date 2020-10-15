@@ -45,7 +45,7 @@ export const SignUp = (id: string, pw: string) => (dispatch: any) => {
 const SET_USER = 'auth/SET_USER' as const;
 const DELETE_USER = 'auth/DELETE_USER' as const;
 
-export const setUser = (user: User) => ({type: SET_USER, payload: user});
+export const setUser = (user: any) => ({type: SET_USER, payload: user});
 export const deleteUser = () => ({type: DELETE_USER});
 
 type AuthAction =
@@ -55,10 +55,11 @@ type AuthAction =
 
 /* 타입 */
 type User = {
-	user_id: string,
-	fav_list: any[],
-	view_list: any[],
-	newsfeed_list: any[]
+	id: string,
+	favList: any[],
+	viewList: any[],
+	newsfeedList: any[],
+	searchList: any[]
 };
 
 
@@ -70,10 +71,11 @@ type AuthState = {
 const initialState: AuthState = {
 	login: false,
 	user: {
-		user_id: '',
-		fav_list: [],
-		view_list: [],
-		newsfeed_list: []
+		id: '',
+		favList: [],
+		viewList: [],
+		newsfeedList: [],
+		searchList: []
 	}
 };
 
@@ -85,7 +87,11 @@ function newsfeed(state: AuthState = initialState, action: AuthAction): AuthStat
 			/* 사용자 로그인 */
 			return produce(state, draft => {
 				draft.login = true;
-				draft.user = action.payload;
+				draft.user.id = action.payload['user_id'];
+				draft.user.favList = action.payload['fav_list'];
+				draft.user.viewList = action.payload['view_list'];
+				draft.user.newsfeedList = action.payload['newsfeed_list'];
+				draft.user.searchList = action.payload['search_list'];
 			});
 
 		case DELETE_USER:
@@ -93,10 +99,11 @@ function newsfeed(state: AuthState = initialState, action: AuthAction): AuthStat
 			return produce(state, draft => {
 				draft.login = false;
 				draft.user = {
-					user_id: '',
-					fav_list: [],
-					view_list: [],
-					newsfeed_list: []
+					id: '',
+					favList: [],
+					viewList: [],
+					newsfeedList: [],
+					searchList: []
 				};
 			});
 

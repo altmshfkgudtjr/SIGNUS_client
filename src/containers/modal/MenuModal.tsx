@@ -13,7 +13,7 @@ interface MenuModalProps {
 }
 const MenuModal = ({display, onClose}: MenuModalProps) => {
 	const loginValid = useSelector((state: RootState) => state.auth.login);
-	const name = useSelector((state: RootState) => state.auth.user.user_id);
+	const name = useSelector((state: RootState) => state.auth.user.id);
 	const dispatch = useDispatch();
 
 	/* 로그아웃 실행 함수 */

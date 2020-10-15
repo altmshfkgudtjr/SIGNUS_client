@@ -35,7 +35,11 @@ const Icon = styled.div`
 `;
 
 const Writer = styled.div`
-	font-weight: 600
+	font-weight: 600;
+	max-width: 130px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 ;`;
 
 const Date = styled.div`

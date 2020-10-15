@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom'
 import NewsfeedPage from 'pages/NewsfeedPage'
 import SearchPage from 'pages/SearchPage'
 import NoticePage from 'pages/NoticePage'
+import NoticeListPage from 'pages/NoticeListPage'
 import NotFound from 'pages/NotFound'
 import RedirectPage from 'pages/RedirectPage'
 // containers
@@ -35,9 +36,10 @@ const App = () => {
 				: <Switch>
 						<Route path="/" component={NewsfeedPage} exact />
 						<Route path="/best" component={NewsfeedPage} exact />
-						<Route path="/newsfeed/:mode(university|award|group|job)" component={NewsfeedPage} exact />
+						<Route path="/newsfeed/:board(university|award|group|job)" component={NewsfeedPage} exact />
 						<Route path="/search" component={SearchPage} exact />
-						<Route path="/notice" component={NoticePage} exact />
+						<Route path="/notice" component={NoticeListPage} exact />
+						<Route path="/notice/:noticeId" component={NoticePage} exact />
 						<Route path="*" component={NotFound} status={404} />
 					</Switch>
 			}

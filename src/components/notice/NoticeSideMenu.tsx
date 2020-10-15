@@ -7,20 +7,33 @@ import NoticeSideMenuItem from 'components/notice/NoticeSideMenuItem'
 import NoticeSideMenuMoreBtn from 'components/notice/NoticeSideMenuMoreBtn'
 // lib
 import media from 'lib/styles/media'
+// types
+import { Notice as NoticeType } from 'modules/notice'
 
-const NoticeSideMenu = () => {
+interface NoticeSideMenuProps {
+	info: string;
+	noticeList: NoticeType[];
+}
+const NoticeSideMenu = ({info, noticeList}: NoticeSideMenuProps) => {
+	const notices = noticeList.map(
+		notice => <NoticeSideMenuItem key={notice.id}
+																	noticeId={notice.id}
+																	message={notice.title}
+																	date={notice.date} />
+	);
+
 	return (
 		<Container>
 			<InfoContainer>
 				<PageInfo icon_src="/icons/1x/message.png"
 									small_info="공지사항"
-									large_info="Notice" />
+									large_info={info} />
 			</InfoContainer>
 			
 			<NoticeListWrapper>
 				<NoticeSideMenuTitle />
 				<ItemContainer>
-					
+					{notices}
 				</ItemContainer>
 				<NoticeSideMenuMoreBtn />
 			</NoticeListWrapper>
@@ -37,6 +50,7 @@ const Container = styled.div`
 
 	${media.small} {
 		width: 100%;
+		padding-right: 0;
 	}
 `;
 

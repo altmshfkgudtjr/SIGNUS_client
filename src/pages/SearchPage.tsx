@@ -1,6 +1,5 @@
 import React from 'react'
 import { Helmet } from "react-helmet-async"
-import { useHistory } from 'react-router-dom';
 // containers
 import Header from 'containers/Header'
 import Sidebar from 'containers/Sidebar'
@@ -8,9 +7,11 @@ import Search from 'containers/Search'
 // components
 import SearchLayout from 'components/search/SearchLayout'
 
-const SearchPage = () => {
-	const history = useHistory();
-	const keyword = decodeURI(history.location.search.slice(3));
+interface RouteProps {
+	location: any;
+}
+const SearchPage = ({location}: RouteProps) => {
+	const keyword = decodeURI(location.search.slice(3));
 
 	return (
 		<>

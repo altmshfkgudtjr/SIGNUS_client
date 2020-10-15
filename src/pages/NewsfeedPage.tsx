@@ -7,8 +7,11 @@ import Board from '../containers/Board'
 // components
 import BoardLayout from '../components/board/BoardLayout'
 
-const NewsfeedPage = () => {
-	const pathname = (window.location.pathname.split('/')[2] || window.location.pathname.split('/')[1]);
+interface RouteProps {
+	match: any;
+}
+const NewsfeedPage = ({match}: RouteProps) => {
+	const pathname = !!match.params['board'] ? match.params['board'] : match.path.slice(1);
 	let boardName = '', pagetitle = '';
 
 	if (pathname === '') {
