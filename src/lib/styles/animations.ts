@@ -64,6 +64,11 @@ const doLike = keyframes`
 	80% { transform: scale(.9, .9); }
 	100% { transform: scale(1, 1); }
 `;
+const blink = keyframes`
+	0% { opacity: 1; }
+	50% { opacity: .5; }
+	100% { opacity: 1; }
+`;
 const animations = {
 	fadeIn,
 	fadeOut,
@@ -79,7 +84,8 @@ const animations = {
 	zoomOut,
 	tooltip,
 	noticeSlider,
-	doLike
+	doLike,
+	blink
 };
 
 export default animations

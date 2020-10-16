@@ -20,7 +20,7 @@ const Board = ({boardName}: BoardProps) => {
 	const dispatch = useDispatch();
 	const posts = useSelector((state: RootState) => state.newsfeed.posts);
 	const [imgSrc, setImgSrc] = useState<string>('/icons/1x/home.png');
-	const [loading, setLoading] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
@@ -29,6 +29,19 @@ const Board = ({boardName}: BoardProps) => {
 			return <PostImageWrapper key={post['_id']['$oid']} post={post} />;
 		}
 	});
+
+	const loadingCount = new Array(8).fill(undefined);
+	const LoadingPosts = loadingCount.map(
+		(node, idx) => <PostLoadingWrapper key={idx} />
+	);
+
+	useEffect(() => {
+		if (Posts.length === 0) {
+			setLoading(true);
+		} else {
+			setLoading(false);
+		}
+	}, [Posts]);
 
 	/* 페이지네이션 함수 */
 	const pagination = useCallback(throttle(async () => {
@@ -44,12 +57,14 @@ const Board = ({boardName}: BoardProps) => {
 		if (scrollBottom < 1000) {
 			setLoading(true);
 			await dispatch(loadPosts());
-			setLoading(false);
+			// setLoading(false);
 		}
-	}, 100), []);
+	}, 100), [loading]);
 
 	/* 페이지네이션 등록 */
 	useEffect(() => {
+		window.scrollTo(0,0);
+
 		document.addEventListener('scroll', pagination);
 		return () => {
 			document.removeEventListener('scroll', pagination);
@@ -88,7 +103,7 @@ const Board = ({boardName}: BoardProps) => {
 											 large_info={boardName} />
 			{Posts}
 
-			{loading && <PostLoadingWrapper />}
+			{loading && LoadingPosts}
 		</PostLayout>
 	);
 }

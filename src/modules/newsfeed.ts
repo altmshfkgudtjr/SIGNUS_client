@@ -23,8 +23,10 @@ export const addPopularityPosts = () => (dispatch: any) => {
 	newfeedAPI.PopularityPosts().then(res => {
 		if (res) {
 			const posts = res.splice(0,40);
-			dispatch(initPosts(posts));
-			dispatch(pushPosts(res));
+			dispatch(initPosts({
+				posts: posts, 
+				waits: res
+			}));
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 			}
@@ -36,8 +38,10 @@ export const addCategoryPosts = (category: string) => (dispatch: any) => {
 	newfeedAPI.CategoryPosts(category).then(res => {
 		if (res) {
 			const posts = res.splice(0,40);
-			dispatch(initPosts(posts));
-			dispatch(pushPosts(res));
+			dispatch(initPosts({
+				posts: posts, 
+				waits: res
+			}));
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}

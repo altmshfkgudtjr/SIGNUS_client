@@ -5,6 +5,7 @@ import NoticePostTitle from './NoticePostTitle'
 import NoticePostInfo from './NoticePostInfo'
 import NoticePostController from './NoticePostController'
 import NoticePostText from './NoticePostText'
+import NoticePostLinkBtn from './NoticePostLinkBtn'
 // lib
 import media from 'lib/styles/media'
 import palette from 'lib/styles/palette'
@@ -24,6 +25,7 @@ const NoticePost = ({notice, onEdit, onDelete}: NoticePostProps) => {
 																								onDelete={onDelete} />}
 			<NoticePostInfo userId={notice.author} date={notice.date} />
 			<NoticePostText text={notice.post} />
+			<NoticePostLinkBtn/>
 		</Container>
 	);
 }

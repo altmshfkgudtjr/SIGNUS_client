@@ -16,7 +16,7 @@ const Container = styled.div`
 	word-break: keep-all;
 
 	${media.small} {
-		font-size: 32px;
+		font-size: 28px;
 		margin-bottom: 1rem;
 	}
 `;
