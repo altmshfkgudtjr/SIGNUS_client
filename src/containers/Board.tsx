@@ -57,7 +57,7 @@ const Board = ({boardName}: BoardProps) => {
 		if (scrollBottom < 1000) {
 			setLoading(true);
 			await dispatch(loadPosts());
-			// setLoading(false);
+			setLoading(false);
 		}
 	}, 100), [loading]);
 

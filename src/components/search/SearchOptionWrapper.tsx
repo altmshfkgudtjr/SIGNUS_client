@@ -77,6 +77,7 @@ const Container = styled.div`
 
 	${media.small} {
 		width: 100%;
+		padding-right: 0;
 	}
 `;
 

@@ -1,30 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import PostTextWrapper from 'components/post/PostTextWrapper'
-import PostImageWrapper from 'components/post/PostImageWrapper'
+import SearchKeywordInfo from 'components/search/SearchKeywordInfo'
 // lib
 import media from 'lib/styles/media'
 import palette from 'lib/styles/palette'
-// types
-import { Post } from 'modules/newsfeed'
 
 interface SearchPostWrapperProps {
-	posts: Post[]
+	keyword: string;
+	children: React.ReactNode;
 };
-const SearchPostWrapper = ({posts}: SearchPostWrapperProps) => {
-	const Posts = posts.map((post, idx) => {
-		if (typeof post['img'] === 'number') {
-			return <PostTextWrapper post={post} />;
-		} else {
-			return <PostImageWrapper post={post} />;
-		}
-	});
-
+const SearchPostWrapper = ({keyword, children}: SearchPostWrapperProps) => {
 	return (
 		<Container>
+			<SearchKeywordInfo keyword={keyword} />
 			<PostWrapper>
-				{Posts}
+				{children}
 			</PostWrapper>
 		</Container>
 	);
