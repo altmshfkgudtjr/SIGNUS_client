@@ -1,28 +1,16 @@
 import React, { useEffect, useCallback, useRef } from 'react'
 import styled from 'styled-components'
-// components
-import CloseBtn from '../auth/CloseBtn'
-import MenuAuthContent from './MenuAuthContent'
-import MenuBoardContent from './MenuBoardContent'
-import NoticeBar from './NoticeBar'
-import MenuLinkContent from './MenuLinkContent'
-import LogoutBtn from './LogoutBtn'
 // lib
 import * as styles from '../../../lib/styles/styles'
 import animations from '../../../lib/styles/animations'
 import media from '../../../lib/styles/media'
 import zIndex from '../../../lib/styles/zIndex'
-// type
-import { Notice } from 'modules/notice'
 
 interface MenuModalWrapperProps {
 	onClose(): void;
-	loginValid: boolean;
-	onLogout(): void;
-	name: string;
-	notice: (Notice | undefined);
+	children: React.ReactNode
 }
-const MenuModalWrapper = ({onClose, loginValid, onLogout, name, notice}: MenuModalWrapperProps) => {
+const MenuModalWrapper = ({onClose, children}: MenuModalWrapperProps) => {
 	const ModalRef = useRef<HTMLInputElement>(null);
 
 	/* 메뉴 모달 닫기 */
@@ -49,14 +37,7 @@ const MenuModalWrapper = ({onClose, loginValid, onLogout, name, notice}: MenuMod
 
 	return (
 		<Container ref={ModalRef}>
-			<CloseBtn onClose={onClose} />
-			<MenuAuthContent onClose={onClose}
-											 loginValid={loginValid}
-											 name={name} />
-			<MenuBoardContent onClose={onClose} />
-			<NoticeBar notice={notice} />
-			<MenuLinkContent onClose={onClose} />
-			{loginValid && <LogoutBtn onClose={onClose} onLogout={onLogout} />}
+			{children}
 		</Container>
 	);
 }
@@ -93,6 +74,10 @@ const Container = styled.div`
 		max-width: 800px;
 		animation: .5s ${animations.fadeInRight};
 		padding: 1rem 2rem;
+		overflow: auto;
+	}
+	${media.xsmall} {
+		padding: 1rem;
 	}
 `;
 

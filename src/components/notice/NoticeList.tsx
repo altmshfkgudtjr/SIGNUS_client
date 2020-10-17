@@ -32,7 +32,6 @@ const Container = styled.div`
 	${media.small} {
 		margin-top: .5rem;
 		border-top: .5rem solid ${palette.gray1};
-		padding: 1rem;
 	}
 `;
 

@@ -64,7 +64,7 @@ const Container = styled.header<ContainerStyled>`
 		};
 
 		${media.small} {
-			padding: 0;
+			padding: .5rem 0;
 			margin: auto;
 			margin-bottom: .5rem;
 		}

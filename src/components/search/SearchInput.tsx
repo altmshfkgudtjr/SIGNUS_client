@@ -58,9 +58,9 @@ const Container = styled.div`
 const Input = styled.input`
 	position: relative;
 	width: 100%;
-	padding: 10px 0 4px 0;
+	padding: 10px 0 6px 0;
 	border-bottom: 1px solid ${palette.gray5};
-	font-size: 14px;
+	font-size: 16px;
 
 	::placeholder {
 		color: ${palette.gray4};

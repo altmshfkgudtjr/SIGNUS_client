@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 // components
 import PostLinkWrapper from './PostLinkWrapper'
@@ -14,6 +14,8 @@ import * as styles from '../../lib/styles/styles'
 import media, { mediaValue } from '../../lib/styles/media'
 // types
 import { Post } from '../../modules/newsfeed'
+// controllers
+import * as postAPI from 'controllers/post'
 
 interface PostTextWrapperProps {
 	post: Post;
@@ -21,9 +23,16 @@ interface PostTextWrapperProps {
 	userLikedPosts: string[];
 };
 const PostTextWrapper = ({post, userValid, userLikedPosts}: PostTextWrapperProps) => {
+	/* 조회수 API 실행 */
+	const onClick = () => {
+		postAPI.PostView(post._id['$oid']);
+	}
+
 	return (
 		<Container>
-			<PostLinkWrapper postId={post._id['$oid']} postUrl={post.url}>
+			<PostLinkWrapper postId={post._id['$oid']}
+											 postUrl={post.url}
+											 onClick={onClick}>
 				<PostTitle message={post.title} />
 				<PostBody message={post.post} />
 				<PostDomain message={post.url} />
@@ -57,7 +66,6 @@ const Container = styled.div`
 	grid-row-end: span 1;
 	border-radius: 4px;
 	box-sizing: border-box;
-	padding: .5rem;
 
 	@media (min-width: ${mediaValue.small + 1}px) {
 		&:hover,

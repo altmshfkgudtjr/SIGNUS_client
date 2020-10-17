@@ -15,6 +15,8 @@ import * as styles from '../../lib/styles/styles'
 import media, { mediaValue } from '../../lib/styles/media'
 // types
 import { Post } from '../../modules/newsfeed'
+// controllers
+import * as postAPI from 'controllers/post'
 
 interface PostImageWrapperProps {
 	post: Post;
@@ -22,11 +24,20 @@ interface PostImageWrapperProps {
 	userLikedPosts: string[];
 };
 const PostImageWrapper = ({post, userValid, userLikedPosts}: PostImageWrapperProps) => {
+	/* 조회수 API 실행 */
+	const onClick = () => {
+		postAPI.PostView(post._id['$oid']);
+	}
+
 	return (
 		<Container>
-			<PostLinkWrapper postId={post._id['$oid']} postUrl={post.url}>
+			<a href={post.url} target="_blank">
 				<PostImage src={post.img} />
-				
+			</a>
+
+			<PostLinkWrapper postId={post._id['$oid']} 
+											 postUrl={post.url}
+											 onClick={onClick}>
 				<PostContentWrapper>
 					<PostTitle message={post.title} />
 					<PostBody message={post.post} />
@@ -62,7 +73,6 @@ const Container = styled.div`
 	overflow: hidden;
 	border-radius: 4px;
 	box-sizing: border-box;
-	padding: 0 .5rem .5rem .5rem;
 
 	@media (min-width: ${mediaValue.small + 1}px) {
 		&:hover,
@@ -89,7 +99,7 @@ const PostContentWrapper = styled.div`
 	flex-direction: column;
 	align-content: space-between;
 	box-sizing: border-box;
-	padding-top: .5rem;
+	padding: .5rem;
 `;
 
 export default PostImageWrapper

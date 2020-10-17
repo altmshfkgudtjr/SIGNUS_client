@@ -5,18 +5,19 @@ import AuthModal from '../../containers/modal/AuthModal'
 // lib
 import media from '../../lib/styles/media'
 import palette from '../../lib/styles/palette'
+import * as commonUtils from 'lib/utils/commonUtils'
 
 const LoginBtn = () => {
 	const [modalShow, setModalShow] = useState<boolean>(false);
 
 	const onShow = () => {
 		setModalShow(true);
-		(document.querySelector('body') as HTMLElement).style.overflow = 'hidden';
+		commonUtils.modalToggle(true);
 	}
 
 	const onClose = () => {
 		setModalShow(false);
-		(document.querySelector('body') as HTMLElement).removeAttribute('style');
+		commonUtils.modalToggle(false);
 	}
 
 	return (
@@ -46,6 +47,10 @@ const Container = styled.div`
 		& > span {
 			color: #000;
 		}
+	}
+
+	${media.small} {
+		margin-right: .5rem;
 	}
 `;
 

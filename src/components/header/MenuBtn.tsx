@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import MenuModal from '../../containers/modal/MenuModal'
 // lib
 import media, { mediaValue } from '../../lib/styles/media'
+import * as commonUtils from 'lib/utils/commonUtils'
 
 const MenuBtn = () => {
 	const [modalShow, setModalShow] = useState<boolean>(false);
@@ -11,14 +12,14 @@ const MenuBtn = () => {
 	const onShow = () => {
 		setModalShow(true);
 		if (window.innerWidth <= mediaValue.small) {
-			(document.querySelector('body') as HTMLElement).style.overflow = 'hidden';
+			commonUtils.modalToggle(true);
 		}
 	}
 
 	const onClose = useCallback(() => {
 		setModalShow(false);
 		if (window.innerWidth <= mediaValue.small) {
-			(document.querySelector('body') as HTMLElement).removeAttribute('style');
+			commonUtils.modalToggle(false);
 		}
 	}, [setModalShow]);
 

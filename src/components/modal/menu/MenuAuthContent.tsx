@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 // containers
-import AuthModal from '../../../containers/modal/AuthModal'
+import AuthModal from 'containers/modal/AuthModal'
 // components
-import { Btn } from '../auth/AuthBtn'
+import { Btn } from 'components/modal/auth/AuthBtn'
 import UserContent from './UserContent'
 // lib
-import palette from '../../../lib/styles/palette'
+import palette from 'lib/styles/palette'
+import * as commonUtils from 'lib/utils/commonUtils'
 
 interface MenuAuthContentProps {
 	onClose(): void;
@@ -18,12 +19,12 @@ const MenuAuthContent = ({onClose, loginValid, name}: MenuAuthContentProps) => {
 
 	const onAuthModalShow = () => {
 		setAuthModalShow(true);
-		(document.querySelector('body') as HTMLElement).style.overflow = 'hidden';
+		commonUtils.modalToggle(true);
 	}
 
 	const onAuthModalClose = () => {
 		setAuthModalShow(false);
-		(document.querySelector('body') as HTMLElement).removeAttribute('style');
+		commonUtils.modalToggle(false);
 	}
 
 	const onLogin = () => {

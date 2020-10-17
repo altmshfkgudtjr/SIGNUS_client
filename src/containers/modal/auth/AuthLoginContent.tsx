@@ -75,6 +75,9 @@ const Container = styled.div`
 		width: 100%;
 		padding: 0 1rem;
 	}
+	${media.xsmall} {
+		padding: 0;
+	}
 `;
 
 export default AuthLoginContent

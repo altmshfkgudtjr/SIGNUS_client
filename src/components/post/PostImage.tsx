@@ -35,7 +35,8 @@ const Container = styled.div`
 	&:hover,
 	&:active {
 		> img {
-			transform: scale(1.2, 1.2);
+			transform: scale(.6, .6);
+			/*transform: scale(1.2, 1.2);*/
 		}
 	}
 `;
@@ -43,8 +44,10 @@ const Container = styled.div`
 const Img = styled.img`
 	position: relative;
 	display: block;
-	width: auto;
-	max-height: 100%;
+	/*width: auto;*/
+	/*max-height: 100%;*/
+	height: auto;
+	max-width: 100%;
 	transition: .5s ${styles.transition};
 `;
 

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import ContentWrapper from '../components/sidebar/ContentWrapper'
 import Title from '../components/sidebar/Title'
 import NoticeSideMenuItem from 'components/notice/NoticeSideMenuItem'
+import Copyright from 'components/commons/Copyright'
 // lib
 import media, { mediaQuery } from '../lib/styles/media'
 // modules
@@ -37,6 +38,8 @@ const Sidebar = () => {
 				<ContentWrapper>
 					<Title message="인기 키워드"></Title>
 				</ContentWrapper>
+
+				<Copyright />
 			</StickyWrapper>
 		</Container>
 	);

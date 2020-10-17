@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 // lib
-import palette from '../../../lib/styles/palette'
-import * as styles from '../../../lib/styles/styles'
+import * as styles from 'lib/styles/styles'
+import palette from 'lib/styles/palette'
 
 interface BoardBtnProps {
 	src: string;

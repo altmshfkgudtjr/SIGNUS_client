@@ -7,18 +7,27 @@ import palette from '../../../lib/styles/palette'
 import animations from '../../../lib/styles/animations'
 // type
 import { Notice } from 'modules/notice'
+import * as commonUtils from 'lib/utils/commonUtils'
 
 interface NoticeBarProps {
 	notice: (Notice | undefined);
+	onClose(): void;
 }
-const NoticeBar = ({notice}: NoticeBarProps) => {
+const NoticeBar = ({notice, onClose}: NoticeBarProps) => {
 	const location = useLocation();
 
 	const title = notice ? notice.title : "공지사항이 없습니다.";
 	const link = notice ? `/notice/${notice.id}` : location.pathname;
 
+	const onClick = () => {
+		commonUtils.modalToggle(false);
+		if (!notice || location.pathname === `/notice/${notice.id}`) {
+			onClose();
+		}
+	}
+
 	return (
-		<Container to={link}>
+		<Container to={link} onClick={onClick}>
 			<Title>공지</Title>
 			<MessageWrapper>
 				<Message>{title}</Message>

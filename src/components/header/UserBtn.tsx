@@ -26,6 +26,10 @@ const Container = styled.div`
 	font-size: 14px;
 	line-height: 40px;
 	${styles.noselect}
+
+	${media.small} {
+		margin-right: .5rem;
+	}
 `;
 
 const Name = styled.div`

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import Portal from '../../portal'
+import Portal from 'portal'
 // components
-import ModalBackground from '../../components/modal/ModalBackground'
-import AuthModalWrapper from '../../components/modal/auth/AuthModalWrapper'
+import ModalBackground from 'components/modal/ModalBackground'
+import AuthModalWrapper from 'components/modal/auth/AuthModalWrapper'
 // modules
-import { Login, SignUp } from '../../modules/auth'
+import { Login, SignUp } from 'modules/auth'
 
 interface AuthModalProps {
 	display: boolean;

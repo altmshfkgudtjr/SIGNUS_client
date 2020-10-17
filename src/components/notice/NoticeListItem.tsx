@@ -6,6 +6,7 @@ import NoticePostInfo from './NoticePostInfo'
 // lib
 import * as styles from 'lib/styles/styles'
 import palette from 'lib/styles/palette'
+import media from 'lib/styles/media'
 // types
 import { Notice as NoticeType } from 'modules/notice'
 
@@ -37,12 +38,25 @@ const Container = styled(Link)`
 	&:hover {
 		background-color: ${palette.gray1};
 	}
+
+	${media.small} {
+		width: 95%;
+		border-bottom: none;
+		box-shadow: ${styles.boxShadow.light};
+		padding: 1rem .5rem;
+		margin: .5rem auto 0 auto;
+	}
 `;
 
 const Title = styled.div`
 	font-size: 20px;
 	font-weight: 600;
 	margin-bottom: 1rem;
+
+	${media.small} {
+		font-size: 16px;
+		margin-bottom: .5rem;
+	}
 `;
 
 const Post = styled.div`
@@ -50,6 +64,13 @@ const Post = styled.div`
 	font-size: 14px;
 	font-weight: 200;
 	margin-bottom: 1rem;
+
+	${media.small} {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+	}
 `;
 
 export default NoticeListItem

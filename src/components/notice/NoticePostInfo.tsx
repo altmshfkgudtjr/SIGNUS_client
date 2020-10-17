@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 // lib
 import palette from 'lib/styles/palette'
+import media from 'lib/styles/media'
 
 interface NoticePostInfoProps {
 	userId: string;
@@ -20,14 +21,19 @@ const NoticePostInfo = ({userId, date}: NoticePostInfoProps) => {
 
 const Container = styled.div`
 	display: flex;
-	align-items:flex-start;
+	align-items: center;
+
+	${media.small} {
+		& * {
+			font-size: 14px;
+		}
+	}
 `;
 
 const Icon = styled.div`
 	width: 8px;
 	height: 8px;
 	border-radius: 8px;
-	margin: .5rem 0;
 	vertical-align: top;
 	box-shadow: 0 0 .5rem ${palette.teal4};
 	background-color: ${palette.teal4};

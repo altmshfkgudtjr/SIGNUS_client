@@ -1,5 +1,5 @@
 import Fetch from './fetch'
-
+/* eslint-disable */
 /* 
 	:::: 공지사항 단일반환 & 전체반환 ::::
 */
@@ -85,6 +85,7 @@ export const GetNotice = (postId: (string | null)) => {
 		}
 	});
 }
+/* eslint-enable */
 
 /* 
 	:::: 공지사항 추가 ::::
