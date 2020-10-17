@@ -31,7 +31,7 @@ const PostImageWrapper = ({post, userValid, userLikedPosts}: PostImageWrapperPro
 
 	return (
 		<Container>
-			<a href={post.url} target="_blank">
+			<a href={post.url} target="_blank" rel="noopener noreferrer">
 				<PostImage src={post.img} />
 			</a>
 
@@ -99,7 +99,6 @@ const PostContentWrapper = styled.div`
 	flex-direction: column;
 	align-content: space-between;
 	box-sizing: border-box;
-	padding: .5rem;
 `;
 
 export default PostImageWrapper

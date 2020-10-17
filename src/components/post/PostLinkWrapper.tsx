@@ -10,7 +10,8 @@ interface PostLinkWrapperProps {
 const PostLinkWrapper = ({postId, postUrl, onClick, children}: PostLinkWrapperProps) => {
 	return <Container onClick={onClick}
 										href={postUrl}
-										target="_blank">{children}</Container>;
+										target="_blank"
+										rel="noopener noreferrer">{children}</Container>;
 }
 
 const Container = styled.a`

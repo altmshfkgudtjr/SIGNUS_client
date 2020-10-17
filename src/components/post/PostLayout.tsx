@@ -25,8 +25,8 @@ const Container = styled.div`
 const PostWrapper = styled.div`
 	position: relative;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-	gap: 1rem;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 2rem;
 	grid-auto-rows: 200px;
 
 	${media.small} {

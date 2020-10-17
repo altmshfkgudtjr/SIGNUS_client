@@ -16,7 +16,6 @@ const Container = styled.div`
 	width: 100%;
 	height: 40px;
 	border-top: 1px solid ${palette.gray1};
-	margin-top: .5rem;
 `;
 
 export default PostControllWrapper
