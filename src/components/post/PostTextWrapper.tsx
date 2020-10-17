@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 // components
 import PostLinkWrapper from './PostLinkWrapper'
@@ -18,8 +18,9 @@ import { Post } from '../../modules/newsfeed'
 interface PostTextWrapperProps {
 	post: Post;
 	userValid: boolean;
+	userLikedPosts: string[];
 };
-const PostTextWrapper = ({post, userValid}: PostTextWrapperProps) => {
+const PostTextWrapper = ({post, userValid, userLikedPosts}: PostTextWrapperProps) => {
 	return (
 		<Container>
 			<PostLinkWrapper postId={post._id['$oid']} postUrl={post.url}>
@@ -35,7 +36,8 @@ const PostTextWrapper = ({post, userValid}: PostTextWrapperProps) => {
 			<PostControllWrapper>
 				<PostLikeBtn postId={post._id['$oid']}
 										 like={post.fav_cnt}
-										 userValid={userValid} />				
+										 userValid={userValid}
+										 userLikedPosts={userLikedPosts} />				
 				<PostShareBtn url={post.url} />				
 			</PostControllWrapper>
 		</Container>

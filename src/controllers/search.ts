@@ -7,7 +7,7 @@ export const Search = (keyword: string) => {
 	};
 	return Fetch("/api/signus/v1/search", "POST", sendData).then((res) => {
 		if (res.msg === 'success') {
-			return res.result;
+			return JSON.parse(res.result.posts);
 		} else {
 			return false;
 		}

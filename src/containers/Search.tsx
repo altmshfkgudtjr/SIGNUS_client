@@ -20,6 +20,7 @@ const Search = ({keyword}: SearchProps) => {
 	const posts = useSelector((state: RootState) => state.search.posts);
 	const [loading, setLoading] = useState<boolean>(false);
 	const userValid = useSelector((state: RootState) => state.auth.login);
+	const userLikedPosts: string[] = useSelector((state: RootState) => state.auth.user.favList).map(post => post._id);
 
 	const loadingCount = new Array(8).fill(undefined);
 	const LoadingPosts = loadingCount.map(
@@ -28,9 +29,15 @@ const Search = ({keyword}: SearchProps) => {
 
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
-			return <PostTextWrapper key={idx} post={post} userValid={userValid} />;
+			return <PostTextWrapper key={idx} 
+															post={post} 
+															userValid={userValid}
+															userLikedPosts={userLikedPosts} />;
 		} else {
-			return <PostImageWrapper key={idx} post={post} userValid={userValid} />;
+			return <PostImageWrapper key={idx} 
+															 post={post} 
+															 userValid={userValid}
+															 userLikedPosts={userLikedPosts} />;
 		}
 	});
 

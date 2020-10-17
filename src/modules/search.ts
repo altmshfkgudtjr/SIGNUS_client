@@ -9,11 +9,10 @@ export const searchKeyword = (keyword: string) => (dispatch: any) => {
 	dispatch(clearPosts());
 	searchAPI.Search(keyword).then(res => {
 		if (res) {
-			const prevPosts = res.posts;
-			const posts = prevPosts.splice(0,40);
+			const posts = res.splice(0,40);
 			dispatch(initPosts({
 				posts: posts, 
-				waits: prevPosts
+				waits: res
 			}));
 			window.scrollTo(0,0);
 		} else {

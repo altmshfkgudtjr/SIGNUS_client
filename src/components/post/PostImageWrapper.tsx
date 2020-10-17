@@ -19,8 +19,9 @@ import { Post } from '../../modules/newsfeed'
 interface PostImageWrapperProps {
 	post: Post;
 	userValid: boolean;
+	userLikedPosts: string[];
 };
-const PostImageWrapper = ({post, userValid}: PostImageWrapperProps) => {
+const PostImageWrapper = ({post, userValid, userLikedPosts}: PostImageWrapperProps) => {
 	return (
 		<Container>
 			<PostLinkWrapper postId={post._id['$oid']} postUrl={post.url}>
@@ -40,7 +41,8 @@ const PostImageWrapper = ({post, userValid}: PostImageWrapperProps) => {
 			<PostControllWrapper>
 				<PostLikeBtn postId={post._id['$oid']}
 										 like={post.fav_cnt}
-										 userValid={userValid} />				
+										 userValid={userValid}
+										 userLikedPosts={userLikedPosts} />				
 				<PostShareBtn url={post.url} />				
 			</PostControllWrapper>
 		</Container>

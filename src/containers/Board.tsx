@@ -22,12 +22,19 @@ const Board = ({boardName}: BoardProps) => {
 	const [imgSrc, setImgSrc] = useState<string>('/icons/1x/home.png');
 	const [loading, setLoading] = useState<boolean>(true);
 	const userValid = useSelector((state: RootState) => state.auth.login);
+	const userLikedPosts: string[] = useSelector((state: RootState) => state.auth.user.favList).map(post => post._id);
 
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
-			return <PostTextWrapper key={post['_id']['$oid']} post={post} userValid={userValid} />;
+			return <PostTextWrapper key={post['_id']['$oid']} 
+															post={post} 
+															userValid={userValid}
+															userLikedPosts={userLikedPosts} />;
 		} else {
-			return <PostImageWrapper key={post['_id']['$oid']} post={post} userValid={userValid} />;
+			return <PostImageWrapper key={post['_id']['$oid']} 
+															 post={post} 
+															 userValid={userValid}
+															 userLikedPosts={userLikedPosts} />;
 		}
 	});
 

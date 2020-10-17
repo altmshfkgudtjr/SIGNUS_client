@@ -19,7 +19,7 @@ export const Login = (id: string, pw: string) => (dispatch: any) => {
 			window.localStorage.setItem('tk', res['access_token']);
 			window.location.reload();
 		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			dispatch(initSnackbar("아이디 혹은 비밀번호가 맞지 않습니다.", "error"));
 		}
 	});
 }

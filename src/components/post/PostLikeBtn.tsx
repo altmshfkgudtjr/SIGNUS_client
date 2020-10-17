@@ -14,10 +14,11 @@ interface PostLikeBtnProps {
 	postId: string;
 	like: number;
 	userValid: boolean;
+	userLikedPosts: string[];
 }
-const PostLikeBtn = ({postId, like, userValid}: PostLikeBtnProps) => {
+const PostLikeBtn = ({postId, like, userValid, userLikedPosts}: PostLikeBtnProps) => {
 	const dispatch = useDispatch();
-	const [liked, setLiked] = useState<boolean>(false);
+	const [liked, setLiked] = useState<boolean>(userLikedPosts.indexOf(postId) !== -1);
 	const [likeCount, setLikeCount] = useState<number>(like);
 
 	/* 포스트 Like/UnLike API 실행 */
@@ -27,14 +28,28 @@ const PostLikeBtn = ({postId, like, userValid}: PostLikeBtnProps) => {
 			return;
 		}
 
+		setLiked(!liked);
+		const currentLikeCount = likeCount;
+		const currentLiked = liked;
 		if (liked) {
 			setLikeCount(likeCount - 1);
-			postAPI.PostLike(postId);
+			postAPI.PostUnlike(postId).then(res => {
+				if (!res) {
+					dispatch(initSnackbar("잠시 후 다시 시도해주세요.", "error"));
+					setLiked(currentLiked);
+					setLikeCount(currentLikeCount);
+				}
+			});
 		} else {
 			setLikeCount(likeCount + 1);
-			postAPI.PostUnlike(postId);
+			postAPI.PostLike(postId).then(res => {
+				if (!res) {
+					dispatch(initSnackbar("잠시 후 다시 시도해주세요.", "error"));
+					setLiked(currentLiked);
+					setLikeCount(currentLikeCount);
+				}
+			});
 		}
-		setLiked(!liked);
 	}
 
 	return (
