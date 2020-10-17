@@ -1,17 +1,37 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 // components
 import ContentWrapper from '../components/sidebar/ContentWrapper'
 import Title from '../components/sidebar/Title'
+import NoticeSideMenuItem from 'components/notice/NoticeSideMenuItem'
 // lib
 import media, { mediaQuery } from '../lib/styles/media'
+// modules
+import { RootState } from 'store/index'
 
 const Sidebar = () => {
+	const noticeList = useSelector((state: RootState) => state.notice.noticeList);
+
+	const notices = noticeList.map(
+		(notice, idx) => {
+			// 표시될 공지사항 최대개수: 4개
+			if (idx === 4) return null;
+			return (
+				<NoticeSideMenuItem key={notice.id}
+														noticeId={notice.id}
+														message={notice.title}
+														date={notice.date} />
+			);
+		}
+	);
+
 	return (
 		<Container>
 			<StickyWrapper>
 				<ContentWrapper>
 						<Title message="공지사항"></Title>
+						{notices}
 					</ContentWrapper>
 	
 				<ContentWrapper>

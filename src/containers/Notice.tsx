@@ -13,14 +13,19 @@ interface NoticeProps {
 const Notice = ({noticeId}: NoticeProps) => {
 	const dispatch = useDispatch();
 	const userId = useSelector((state: RootState) => state.auth.user['id']);
+	const isAdmin = useSelector((state: RootState) => state.auth.admin);
 	const noticeList = useSelector((state: RootState) => state.notice.noticeList);
 	const notice = useSelector((state: RootState) => state.notice.notice);
 
 	/* 공지사항 API 호출 */
 	useEffect(() => {
 		dispatch(GetNotice(noticeId));
-		dispatch(Validation(userId));
-	}, [noticeId, userId, dispatch]);
+	}, [noticeId, dispatch]);
+
+	/* 공지사항 권한 API 호출 */
+	useEffect(() => {
+		dispatch(Validation());
+	}, [userId, isAdmin, dispatch]);
 
 	/* 공지사항 목록 API 호출 */
 	useEffect(() => {

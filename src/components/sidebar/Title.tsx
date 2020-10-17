@@ -8,6 +8,7 @@ const Content = styled.div`
 	line-height: 2rem;
 	font-weight: 600;
 	border-bottom: 1px solid #DDD;
+	margin-bottom: .5rem;
 `;
 
 type TitleProps = {

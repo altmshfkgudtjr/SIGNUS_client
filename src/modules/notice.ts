@@ -7,6 +7,7 @@ export const GetNotice = (noticeId: string) => (dispatch: any) => {
 	noticeAPI.GetNotice(noticeId).then((res: any) => {
 		if (res) {
 			dispatch(addNotice(res));
+			dispatch(Validation());
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
@@ -36,6 +37,7 @@ export const UpdateNotice = (title: string, post: string, noticeId: string) => (
 					valid: false
 				}
 			));
+			dispatch(Validation());
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
@@ -52,9 +54,12 @@ export const DeleteNotice = (noticeId: string) => (dispatch: any) => {
 	});
 }
 
-export const Validation = (userId: string) => (dispatch: any, getState: Function) => {
+export const Validation = () => (dispatch: any, getState: Function) => {
 	const state = getState();
-	if (!!userId && userId === state.notice.notice.author) {
+	const isAdmin = state.auth.admin;
+	const userId = state.auth.user.id;
+
+	if (isAdmin && !!userId && userId === state.notice.notice.author) {
 		dispatch(validationNotice(true));
 	} else {
 		dispatch(validationNotice(false));
