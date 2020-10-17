@@ -27,8 +27,8 @@ export const initSnackbar = (message: string, type: string) => async (dispatch: 
 
 
 /* 액션 */
-const APPEND_SNACKBAR = 'auth/APPEND_SNACKBAR' as const;
-const DELETE_SNACKBAR = 'auth/DELETE_SNACKBAR' as const;
+const APPEND_SNACKBAR = 'snackbar/APPEND_SNACKBAR' as const;
+const DELETE_SNACKBAR = 'snackbar/DELETE_SNACKBAR' as const;
 
 export const appendSnackbar = (data: Snackbar) => ({type: APPEND_SNACKBAR, payload: data});
 export const deleteSnackbar = () => ({type: DELETE_SNACKBAR});

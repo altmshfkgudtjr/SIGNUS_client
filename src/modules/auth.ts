@@ -81,7 +81,7 @@ const initialState: AuthState = {
 
 
 /* 리듀서 */
-function newsfeed(state: AuthState = initialState, action: AuthAction): AuthState {
+function auth(state: AuthState = initialState, action: AuthAction): AuthState {
 	switch (action.type) {
 		case SET_USER:
 			/* 사용자 로그인 */
@@ -112,4 +112,4 @@ function newsfeed(state: AuthState = initialState, action: AuthAction): AuthStat
 	}
 }
 
-export default newsfeed;
+export default auth;

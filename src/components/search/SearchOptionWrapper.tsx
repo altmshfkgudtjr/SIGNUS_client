@@ -12,16 +12,19 @@ import palette from 'lib/styles/palette'
 import media, { mediaValue } from 'lib/styles/media'
 
 const SearchOptionWrapper = () => {
-	// const [view, setView] = useState<string>('GRID');				// or LIST
+	const [view, setView] = useState<string>('GRID');				// or LIST
 	const [type, setType] = useState<string>('RELEVEANCE');	// or NEWEST
 	const [term, setTerm] = useState<string>('YEAR');				// or ALL
+	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const [optionShow, setOptionShow] = useState<boolean>(true);
 
 	const onChangeWindowWidth = () => {
 		if (window.innerWidth <= mediaValue.small) {
 			setOptionShow(false);
+			setIsMobile(true);
 		} else {
 			setOptionShow(true);
+			setIsMobile(false);
 		}
 	};
 
@@ -40,15 +43,22 @@ const SearchOptionWrapper = () => {
 
 	return (
 		<Container>
-			{optionShow && <PageInfo icon_src="/icons/1x/search.png"
-																small_info="검색"
-																large_info="Search" />}
+			{!isMobile && <PageInfo icon_src="/icons/1x/search.png"
+															small_info="검색"
+															large_info="Search" />}
 			<BoardInfoMobile small_info="검색"
 											 large_info="Search" />
 
 			{!optionShow && <SearchOptionBtn onClick={optionToggle} />}
 			
 			{optionShow && <OptionContainer>
+				{!isMobile && <SearchOption title="보기">
+					<SearchOptionItem message="격자" onClick={() => { setView('GRID') }} 
+														selected={view==='GRID'}/>
+					<SearchOptionItem message="목록" onClick={() => { setView('LIST') }}
+														selected={view==='LIST'}/>
+				</SearchOption>}
+
 				<SearchOption title="설정">
 					<SearchOptionItem message="관련도순" onClick={() => { setType('RELEVEANCE') }} 
 														selected={type==='RELEVEANCE'}/>
@@ -74,6 +84,7 @@ const Container = styled.div`
 	position: relative;
 	width: 300px;
 	padding-right: 2rem;
+	flex-shrink: 0;
 
 	${media.small} {
 		width: 100%;

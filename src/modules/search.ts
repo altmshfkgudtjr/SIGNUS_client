@@ -23,7 +23,7 @@ export const searchKeyword = (keyword: string) => (dispatch: any) => {
 
 export const loadPosts = () => (dispatch: any, getState: Function) => {
 	const state = getState();
-	const posts = state.newsfeed.waitingPosts.slice(0,40);
+	const posts = state.search.waitingPosts.slice(0,40);
 	
 	if (posts.length === 0) {
 		return;
@@ -34,10 +34,10 @@ export const loadPosts = () => (dispatch: any, getState: Function) => {
 }
 
 /* 액션 */
-const CLEAR_POSTS = 'newsfeed/CLEAR_POSTS' as const;
-const INIT_POSTS = 'newsfeed/INIT_POSTS' as const;
-const PUSH_POSTS = 'newsfeed/PUSH_POSTS' as const;
-const POP_POSTS = 'newsfeed/POP_POSTS' as const;
+const CLEAR_POSTS = 'search/CLEAR_POSTS' as const;
+const INIT_POSTS = 'search/INIT_POSTS' as const;
+const PUSH_POSTS = 'search/PUSH_POSTS' as const;
+const POP_POSTS = 'search/POP_POSTS' as const;
 
 export const clearPosts = () => ({type: CLEAR_POSTS});
 export const initPosts = (data: {posts: Post[], waits: Post[]}) => ({type: INIT_POSTS, payload: data});
