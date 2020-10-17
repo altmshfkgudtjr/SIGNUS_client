@@ -6,6 +6,7 @@ import { Post } from './newsfeed'
 
 /* Thunk 함수 */
 export const searchKeyword = (keyword: string) => (dispatch: any) => {
+	dispatch(clearPosts());
 	searchAPI.Search(keyword).then(res => {
 		if (res) {
 			const prevPosts = res.posts;
@@ -33,15 +34,18 @@ export const loadPosts = () => (dispatch: any, getState: Function) => {
 }
 
 /* 액션 */
+const CLEAR_POSTS = 'newsfeed/CLEAR_POSTS' as const;
 const INIT_POSTS = 'newsfeed/INIT_POSTS' as const;
 const PUSH_POSTS = 'newsfeed/PUSH_POSTS' as const;
 const POP_POSTS = 'newsfeed/POP_POSTS' as const;
 
+export const clearPosts = () => ({type: CLEAR_POSTS});
 export const initPosts = (data: {posts: Post[], waits: Post[]}) => ({type: INIT_POSTS, payload: data});
 export const pushPosts = (posts: Post[]) => ({type: PUSH_POSTS, payload: posts});
 export const popPosts = () => ({type: POP_POSTS});
 
 type SearchAction =
+	| ReturnType<typeof clearPosts>
 	| ReturnType<typeof initPosts>
 	| ReturnType<typeof pushPosts>
 	| ReturnType<typeof popPosts>
@@ -65,6 +69,11 @@ const initialState: SearchState = {
 /* 리듀서 */
 function search(state: SearchState = initialState, action: SearchAction): SearchState {
 	switch (action.type) {
+		case CLEAR_POSTS:
+			/* 포스트 비우기 */
+			return produce(state, draft => {
+				draft.posts = [];
+			});
 		case INIT_POSTS:
 			/* 포스트 새로 추가 */
 			return produce(state, draft => {

@@ -4,7 +4,7 @@ import Fetch from './fetch'
 	:::: 로그인 ::::
 */
 export const Login = (id: string, pw: string) => {
-	const sendDate = {
+	const sendData = {
 		id: id,
 		pw: pw
 	};
@@ -14,7 +14,7 @@ export const Login = (id: string, pw: string) => {
 			'access_token': "Test Signus Access token"
 		});
 	});
-	return Fetch("/api/user/signin", "POST", sendDate).then((res) => {
+	return Fetch("/api/user/signin", "POST", sendData).then((res) => {
 		if (res.msg === 'success') {
 			return res.result;
 		} else {

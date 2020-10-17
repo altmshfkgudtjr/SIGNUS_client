@@ -12,14 +12,17 @@ import * as styles from '../../../lib/styles/styles'
 import animations from '../../../lib/styles/animations'
 import media from '../../../lib/styles/media'
 import zIndex from '../../../lib/styles/zIndex'
+// type
+import { Notice } from 'modules/notice'
 
 interface MenuModalWrapperProps {
 	onClose(): void;
 	loginValid: boolean;
 	onLogout(): void;
 	name: string;
+	notice: (Notice | undefined);
 }
-const MenuModalWrapper = ({onClose, loginValid, onLogout, name}: MenuModalWrapperProps) => {
+const MenuModalWrapper = ({onClose, loginValid, onLogout, name, notice}: MenuModalWrapperProps) => {
 	const ModalRef = useRef<HTMLInputElement>(null);
 
 	/* 메뉴 모달 닫기 */
@@ -51,7 +54,7 @@ const MenuModalWrapper = ({onClose, loginValid, onLogout, name}: MenuModalWrappe
 											 loginValid={loginValid}
 											 name={name} />
 			<MenuBoardContent onClose={onClose} />
-			<NoticeBar />
+			<NoticeBar notice={notice} />
 			<MenuLinkContent onClose={onClose} />
 			{loginValid && <LogoutBtn onClose={onClose} onLogout={onLogout} />}
 		</Container>

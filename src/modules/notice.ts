@@ -113,7 +113,7 @@ const initialState: NoticeState = {
 
 
 /* 리듀서 */
-function newsfeed(state: NoticeState = initialState, action: AuthAction): NoticeState {
+function notice(state: NoticeState = initialState, action: AuthAction): NoticeState {
 	switch (action.type) {
 		case ADD_NOTICE:
 			/* 단일 공지사항 설정 */
@@ -175,4 +175,4 @@ function newsfeed(state: NoticeState = initialState, action: AuthAction): Notice
 	}
 }
 
-export default newsfeed;
+export default notice;

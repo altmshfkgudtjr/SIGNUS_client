@@ -1,22 +1,33 @@
 import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 // lib
 import * as styles from '../../../lib/styles/styles'
 import palette from '../../../lib/styles/palette'
 import animations from '../../../lib/styles/animations'
+// type
+import { Notice } from 'modules/notice'
 
-const NoticeBar = () => {
+interface NoticeBarProps {
+	notice: (Notice | undefined);
+}
+const NoticeBar = ({notice}: NoticeBarProps) => {
+	const location = useLocation();
+
+	const title = notice ? notice.title : "공지사항이 없습니다.";
+	const link = notice ? `/notice/${notice.id}` : location.pathname;
+
 	return (
-		<Container>
+		<Container to={link}>
 			<Title>공지</Title>
 			<MessageWrapper>
-				<Message>시그너스 V1 업데이트 변경사항</Message>
+				<Message>{title}</Message>
 			</MessageWrapper>
 		</Container>
 	);
 }
 
-const Container = styled.div`
+const Container = styled(Link)`
 	position: relative;
 	display: flex;
 	width: 100%;
