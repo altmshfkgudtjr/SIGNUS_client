@@ -66,10 +66,12 @@ type User = {
 /* 초기상태 */
 type AuthState = {
 	login: boolean,
+	admin: boolean,
 	user: User
 };
 const initialState: AuthState = {
 	login: false,
+	admin: false,
 	user: {
 		id: '',
 		favList: [],
@@ -87,6 +89,7 @@ function auth(state: AuthState = initialState, action: AuthAction): AuthState {
 			/* 사용자 로그인 */
 			return produce(state, draft => {
 				draft.login = true;
+				draft.admin = action.payload['admin'];
 				draft.user.id = action.payload['user_id'];
 				draft.user.favList = action.payload['fav_list'];
 				draft.user.viewList = action.payload['view_list'];
@@ -98,6 +101,7 @@ function auth(state: AuthState = initialState, action: AuthAction): AuthState {
 			/* 사용자 로그아웃 */
 			return produce(state, draft => {
 				draft.login = false;
+				draft.admin = false;
 				draft.user = {
 					id: '',
 					favList: [],

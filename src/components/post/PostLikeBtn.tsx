@@ -1,22 +1,38 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // lib
 import * as styles from '../../lib/styles/styles'
 import palette from '../../lib/styles/palette'
 import animations from '../../lib/styles/animations'
+// controllers
+import * as postAPI from 'controllers/post'
+// modules
+import { initSnackbar } from 'modules/snackbar'
 
 interface PostLikeBtnProps {
-	like: number
+	postId: string;
+	like: number;
+	userValid: boolean;
 }
-const PostLikeBtn = ({like}: PostLikeBtnProps) => {
+const PostLikeBtn = ({postId, like, userValid}: PostLikeBtnProps) => {
+	const dispatch = useDispatch();
 	const [liked, setLiked] = useState<boolean>(false);
 	const [likeCount, setLikeCount] = useState<number>(like);
 
+	/* 포스트 Like/UnLike API 실행 */
 	const onClick = () => {
+		if (!userValid) {
+			dispatch(initSnackbar("로그인이 필요합니다.", "warning"));
+			return;
+		}
+
 		if (liked) {
 			setLikeCount(likeCount - 1);
+			postAPI.PostLike(postId);
 		} else {
 			setLikeCount(likeCount + 1);
+			postAPI.PostUnlike(postId);
 		}
 		setLiked(!liked);
 	}

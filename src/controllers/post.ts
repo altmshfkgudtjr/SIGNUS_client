@@ -4,7 +4,7 @@ import Fetch from './fetch'
 	:::: 게시글 조회 ::::
 */
 export const PostView = (postId: string) => {
-	return Fetch("/api/user/view/push/"+postId, "PUT").then((res) => {
+	return Fetch("/api/signus/v1/post/view/"+postId, "PATCH").then((res) => {
 		if (res.msg === 'success') {
 			return res.result;
 		} else {

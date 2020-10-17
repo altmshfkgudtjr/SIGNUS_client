@@ -21,12 +21,13 @@ const Board = ({boardName}: BoardProps) => {
 	const posts = useSelector((state: RootState) => state.newsfeed.posts);
 	const [imgSrc, setImgSrc] = useState<string>('/icons/1x/home.png');
 	const [loading, setLoading] = useState<boolean>(true);
+	const userValid = useSelector((state: RootState) => state.auth.login);
 
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
-			return <PostTextWrapper key={post['_id']['$oid']} post={post} />;
+			return <PostTextWrapper key={post['_id']['$oid']} post={post} userValid={userValid} />;
 		} else {
-			return <PostImageWrapper key={post['_id']['$oid']} post={post} />;
+			return <PostImageWrapper key={post['_id']['$oid']} post={post} userValid={userValid} />;
 		}
 	});
 
@@ -63,13 +64,11 @@ const Board = ({boardName}: BoardProps) => {
 
 	/* 페이지네이션 등록 */
 	useEffect(() => {
-		window.scrollTo(0,0);
-
 		document.addEventListener('scroll', pagination);
 		return () => {
 			document.removeEventListener('scroll', pagination);
 		}
-	});
+	}, [pagination]);
 
 	/* 게시판 정보 설정 */
 	useEffect(() => {

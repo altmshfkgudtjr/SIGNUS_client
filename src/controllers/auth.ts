@@ -33,7 +33,9 @@ export const GetUser = () => {
 			"user_id": 'altmgudtjr',
 			"fav_list": [],
 			"view_list": [],
-			"newsfeed_list": []
+			"newsfeed_list": [],
+			"search_list": [],
+			"admin": true
 		});
 	});
 	return Fetch("/api/user", "GET").then((res) => {

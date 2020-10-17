@@ -19,6 +19,7 @@ const Search = ({keyword}: SearchProps) => {
 	const dispatch = useDispatch();
 	const posts = useSelector((state: RootState) => state.search.posts);
 	const [loading, setLoading] = useState<boolean>(false);
+	const userValid = useSelector((state: RootState) => state.auth.login);
 
 	const loadingCount = new Array(8).fill(undefined);
 	const LoadingPosts = loadingCount.map(
@@ -27,9 +28,9 @@ const Search = ({keyword}: SearchProps) => {
 
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
-			return <PostTextWrapper key={idx} post={post} />;
+			return <PostTextWrapper key={idx} post={post} userValid={userValid} />;
 		} else {
-			return <PostImageWrapper key={idx} post={post} />;
+			return <PostImageWrapper key={idx} post={post} userValid={userValid} />;
 		}
 	});
 
@@ -54,7 +55,6 @@ const Search = ({keyword}: SearchProps) => {
 	/* 페이지네이션 등록 & 검색 */
 	/* eslint-disable */
 	useEffect(() => {
-		window.scrollTo(0,0);
 		dispatch(searchKeyword(keyword));
 
 		document.addEventListener('scroll', pagination);

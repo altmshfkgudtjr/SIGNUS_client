@@ -1,15 +1,32 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // lib
 import * as styles from '../../lib/styles/styles'
 import palette from '../../lib/styles/palette'
+// utils
+import * as postUtils from 'lib/utils/postUtils'
+// modules
+import { initSnackbar } from 'modules/snackbar'
 
 interface PostShareBtnProps {
 	url: string
 }
 const PostShareBtn = ({url}: PostShareBtnProps) => {
+	const dispatch = useDispatch();
+	const [copy, setCopy] = useState<boolean>(false);
+	const textareaRef = useRef<HTMLTextAreaElement>(null);
+	
 	const onClick = () => {
-		console.log("\n%c[미완성]", 'color: #dc3545', url ,"\n\n");
+		dispatch(initSnackbar("게시글 URL이 복사되었습니다.", "success"));
+		setCopy(true);
+		setTimeout(() => {
+			if (textareaRef.current) {
+				postUtils.clipboardCopy(textareaRef.current).then(() => {
+					setCopy(false);
+				});
+			}
+		}, 0);
 	};
 
 	return (
@@ -18,6 +35,8 @@ const PostShareBtn = ({url}: PostShareBtnProps) => {
 				<Icon src="/icons/1x/export.png" alt="공유" />
 				<Message>공유하기</Message>
 			</Content>
+
+			{copy && <UnvisibleInput ref={textareaRef} defaultValue={url} />}
 		</Container>
 	);
 }
@@ -40,22 +59,27 @@ const Container = styled.div`
 
 const Content = styled.div`
 	position: relative;
+	display: flex;
+	align-items: center;
 `;
 
 const Icon = styled.img`
 	position: relative;
-	vertical-align: top;
 	width: 14px;
 	height: 14px;
-	padding: 4px 6px 2px 0px;
+	padding-right: 6px;
 `;
 
 const Message = styled.span`
 	position: relative;
 	text-align: right;
-	vertical-align: top;
 	font-size: 14px;
 	line-height: 20px;
+`;
+
+const UnvisibleInput = styled.textarea`
+	width: 0px;
+	height: 0px;
 `;
 
 export default PostShareBtn

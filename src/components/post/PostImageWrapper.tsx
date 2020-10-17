@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
+import PostLinkWrapper from './PostLinkWrapper'
 import PostImage from './PostImage'
 import PostTitle from './PostTitle'
 import PostBody from './PostBody'
@@ -12,16 +13,17 @@ import PostShareBtn from './PostShareBtn'
 // lib
 import * as styles from '../../lib/styles/styles'
 import media, { mediaValue } from '../../lib/styles/media'
-// modules
+// types
 import { Post } from '../../modules/newsfeed'
 
 interface PostImageWrapperProps {
 	post: Post;
+	userValid: boolean;
 };
-const PostImageWrapper = ({post}: PostImageWrapperProps) => {
+const PostImageWrapper = ({post, userValid}: PostImageWrapperProps) => {
 	return (
 		<Container>
-			<PostLink href={post.url} target="_blank">
+			<PostLinkWrapper postId={post._id['$oid']} postUrl={post.url}>
 				<PostImage src={post.img} />
 				
 				<PostContentWrapper>
@@ -33,10 +35,12 @@ const PostImageWrapper = ({post}: PostImageWrapperProps) => {
 
 					<PostDate date={post.date} endDate={post.end_date} />
 				</PostContentWrapper>
-			</PostLink>
+			</PostLinkWrapper>
 
 			<PostControllWrapper>
-				<PostLikeBtn like={post.fav_cnt} />				
+				<PostLikeBtn postId={post._id['$oid']}
+										 like={post.fav_cnt}
+										 userValid={userValid} />				
 				<PostShareBtn url={post.url} />				
 			</PostControllWrapper>
 		</Container>
@@ -71,12 +75,6 @@ const Container = styled.div`
 		min-height: 300px;
 		margin-bottom: 1rem;
 	}
-`;
-
-const PostLink = styled.a`
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
 `;
 
 const Blank = styled.div`

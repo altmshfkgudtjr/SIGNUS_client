@@ -12,3 +12,15 @@ export const dateFormatter = (date: number): string => {
 
 	return msg;
 }
+
+export const clipboardCopy = (ele: HTMLTextAreaElement): Promise<void> => {
+	if (navigator && navigator.clipboard) {
+		navigator.clipboard.writeText(ele.value);
+	} else {
+		ele.select();
+		ele.setSelectionRange(0, 9999);
+		document.execCommand('Copy');
+	}
+
+	return Promise.resolve();
+}

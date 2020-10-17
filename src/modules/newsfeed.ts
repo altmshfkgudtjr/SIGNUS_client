@@ -12,6 +12,7 @@ export const addRecommendationPosts = () => (dispatch: any) => {
 				posts: posts, 
 				waits: res
 			}));
+			window.scrollTo(0,0);
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 			}
@@ -27,6 +28,7 @@ export const addPopularityPosts = () => (dispatch: any) => {
 				posts: posts, 
 				waits: res
 			}));
+			window.scrollTo(0,0);
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 			}
@@ -42,6 +44,7 @@ export const addCategoryPosts = (category: string) => (dispatch: any) => {
 				posts: posts, 
 				waits: res
 			}));
+			window.scrollTo(0,0);
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}

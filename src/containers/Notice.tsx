@@ -24,8 +24,8 @@ const Notice = ({noticeId}: NoticeProps) => {
 
 	/* 공지사항 목록 API 호출 */
 	useEffect(() => {
-		window.scrollTo(0,0);
 		dispatch(GetNoticeList());
+		window.scrollTo(0,0);
 	}, [dispatch]);
 
 	/* 공지사항 수정 */

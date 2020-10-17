@@ -15,7 +15,8 @@ export const searchKeyword = (keyword: string) => (dispatch: any) => {
 				posts: posts, 
 				waits: prevPosts
 			}));
-			} else {
+			window.scrollTo(0,0);
+		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
