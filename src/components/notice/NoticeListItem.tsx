@@ -66,6 +66,7 @@ const Post = styled.div`
 	margin-bottom: 1rem;
 
 	${media.small} {
+		margin-bottom: .5rem;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;

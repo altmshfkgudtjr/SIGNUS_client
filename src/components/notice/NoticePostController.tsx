@@ -32,7 +32,7 @@ const Btn = styled.button`
 	padding: 4px 1rem;
 	background-color: ${palette.gray1};
 	border-radius: 50px;
-	transition: .2s ${styles.transition};
+	transition: .1s ${styles.transition};
 	margin-right: 1rem;
 	box-shadow: ${styles.boxShadow.btn};
 	font-size: 14px;
@@ -42,7 +42,7 @@ const Btn = styled.button`
 	}
 
 	&:hover {
-		background-color: ${palette.teal1};
+		background-color: ${palette.gray2};
 	}
 
 	&:active {

@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 // components
 import NoticeSideMenu from 'components/notice/NoticeSideMenu'
 import NoticePost from 'components/notice/NoticePost'
 // modules
 import { RootState } from 'store/index'
-import { GetNotice, GetNoticeList, Validation } from 'modules/notice'
+import { GetNotice, GetNoticeList, Validation, DeleteNotice } from 'modules/notice'
 
 interface NoticeProps {
 	noticeId: string;
 }
 const Notice = ({noticeId}: NoticeProps) => {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const userId = useSelector((state: RootState) => state.auth.user['id']);
 	const isAdmin = useSelector((state: RootState) => state.auth.admin);
@@ -35,12 +37,22 @@ const Notice = ({noticeId}: NoticeProps) => {
 
 	/* 공지사항 수정 */
 	const onEdit = () => {
-		console.log("\n%c[미완성]", 'color: #dc3545', "공지사항 수정 기능\n\n");
+		history.push('/notice/write?id=' + noticeId);
 	};
 
 	/* 공지사항 삭제 */
 	const onDelete = () => {
-		console.log("\n%c[미완성]", 'color: #dc3545', "공지사항 삭제 기능\n\n");
+		const result = window.confirm("공지사항을 삭제하시겠습니까?");
+		if (result) {
+			dispatch(DeleteNotice(noticeId))
+			/* Redux-thunk Type Error를 해결한 후에, 아래 Code 이어붙이기 */
+			// .then((res) => {
+			// 	if (res) {
+			// 		history.push('/notice');
+			// 		window.location.reload();
+			// 	}
+			// });
+		}
 	};
 
 	return (

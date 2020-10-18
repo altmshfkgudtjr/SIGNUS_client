@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async"
 // containers
 import Header from 'containers/Header'
 import Sidebar from 'containers/Sidebar'
-import NoticeList from 'containers/NoticeList'
+import NoticeList from 'containers/notice/NoticeList'
 // components
 import NoticeLayout from 'components/notice/NoticeLayout'
 

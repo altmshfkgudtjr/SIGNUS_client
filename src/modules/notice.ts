@@ -1,6 +1,8 @@
 import produce from 'immer';
-import * as noticeAPI from '../controllers/notice'
+import * as noticeAPI from 'controllers/notice'
 import { initSnackbar } from './snackbar'
+// lib
+import { dateFormatter } from 'lib/utils/postUtils'
 
 /* Thunk 함수 */
 export const GetNotice = (noticeId: string) => (dispatch: any) => {
@@ -45,11 +47,13 @@ export const UpdateNotice = (title: string, post: string, noticeId: string) => (
 }
 
 export const DeleteNotice = (noticeId: string) => (dispatch: any) => {
-	noticeAPI.DeleteNotice(noticeId).then((res: any) => {
+	return noticeAPI.DeleteNotice(noticeId).then((res: any) => {
 		if (res) {
 			dispatch(deleteNotice(noticeId));
+			return true;
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			return false;
 		}
 	});
 }
@@ -63,6 +67,28 @@ export const Validation = () => (dispatch: any, getState: Function) => {
 		dispatch(validationNotice(true));
 	} else {
 		dispatch(validationNotice(false));
+	}
+}
+
+export const SendNotice = (noticeId: (string | null), title: string, post: string) => (dispatch: any) => {
+	if (!noticeId) {
+		return noticeAPI.AddNotice(title, post).then((res: any) => {
+			if (res) {
+				return true;
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return false;
+			}
+		});
+	} else {
+		return noticeAPI.UpdateNotice(title, post, noticeId).then((res: any) => {
+			if (res) {
+				return true;
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return false;
+			}
+		});
 	}
 }
 
@@ -123,22 +149,22 @@ function notice(state: NoticeState = initialState, action: AuthAction): NoticeSt
 		case ADD_NOTICE:
 			/* 단일 공지사항 설정 */
 			return produce(state, draft => {
-				draft.notice.id = action.payload['_id'];
+				draft.notice.id = action.payload['_id']['$oid'];
 				draft.notice.title = action.payload['title'];
 				draft.notice.author = action.payload['author'];
 				draft.notice.post = action.payload['post'];
-				draft.notice.date = action.payload['date'];
+				draft.notice.date = dateFormatter(action.payload['date']['$date']);
 			});
 
 		case ADD_NOTICELIST:
 			/* 공지사항 전체 추가 */
 			return produce(state, draft => {
 				draft.noticeList = action.payload.map(notice => ({
-					id: notice['_id'],
+					id: notice['_id']['$oid'],
 					title: notice['title'],
 					author: notice['author'],
 					post: notice['post'],
-					date: notice['date'],
+					date: dateFormatter(notice['date']['$date']),
 					valid: false
 				}));
 			});

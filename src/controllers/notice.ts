@@ -8,10 +8,10 @@ export const GetNotice = (postId: (string | null)) => {
 	if (postId) {
 		return new Promise((resolve, reject) => {
 			resolve({
-				_id: "5f860df0asd0fxcxz6",
+				_id: {"$oid": "5f860df0asd0fxcxz6"},
 				title: "시그너스 v2 업데이트 변경사항",
-				author: "altmgudtjr",
-				date: "2020년 10월 9일",
+				author: "SIGNUS",
+				date: {"$date": 1603060567610},
 				post: `안녕하세요. 시그너스입니다.
 
 항상 시그너스 서비스를 이용해 주시는 고객님께 깊은 감사를 드립니다. 
@@ -56,17 +56,17 @@ export const GetNotice = (postId: (string | null)) => {
 		return new Promise((resolve, reject) => {
 			resolve([
 				{
-					_id: "5f860df0asd0fxcxz6",
+					_id: {"$oid": "5f860df0asd0fxcxz6"},
 					title: "시그너스 v2 업데이트 변경사항",
-					author: "altmgudtjr",
-					date: "2020년 10월 9일",
+					author: "SIGNUS",
+					date: {"$date": 1603060567610},
 					post: `안녕하세요. 시그너스입니다. 항상 시그너스 서비스를 이용해 주시는 고객님께 깊은 감사를 드립니다. 더욱 안정적인 서비스를 제공해 드리기 위해 시그너스계정 시스템 점검이 진행될 예정입니다.`
 				},
 				{
-					_id: "52860df0asd0fxcxz7",
+					_id: {"$oid": "5f860df0asd0fxcxz7"},
 					title: "시그너스 v1 업데이트 변경사항",
-					author: "altmgudtjr",
-					date: "2020년 10월 6일",
+					author: "SIGNUS",
+					date: {"$date": 1603060567610},
 					post: `안녕하세요. 시그너스입니다. 항상 시그너스 서비스를 이용해 주시는 고객님께 깊은 감사를 드립니다. 더욱 안정적인 서비스를 제공해 드리기 위해 시그너스계정 시스템 점검이 진행될 예정입니다.`
 				},
 			]);
@@ -79,7 +79,7 @@ export const GetNotice = (postId: (string | null)) => {
 
 	return Fetch(url, "GET").then((res) => {
 		if (res.msg === 'success') {
-			return res.result;
+			return JSON.parse(res.result);
 		} else {
 			return false;
 		}

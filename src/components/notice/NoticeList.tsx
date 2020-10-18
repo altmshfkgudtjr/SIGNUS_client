@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 // components
 import NoticeListItem from 'components/notice/NoticeListItem'
+import NoticeWriteBtn from 'components/notice/NoticeWriteBtn'
 // lib
 import media from 'lib/styles/media'
 import palette from 'lib/styles/palette'
@@ -10,8 +11,9 @@ import { Notice as NoticeType } from 'modules/notice'
 
 interface NoticeListProps {
 	noticeList: NoticeType[];
+	isAdmin: boolean;
 }
-const NoticeList = ({noticeList}: NoticeListProps) => {
+const NoticeList = ({noticeList, isAdmin}: NoticeListProps) => {
 	const noticeItems = noticeList.map(notice =>
 		<NoticeListItem key={notice.id}
 										notice={notice} />
@@ -19,6 +21,7 @@ const NoticeList = ({noticeList}: NoticeListProps) => {
 
 	return (
 		<Container>
+			{isAdmin && <NoticeWriteBtn />}
 			{noticeItems}
 		</Container>
 	);

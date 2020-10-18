@@ -10,7 +10,8 @@ import { GetNoticeList } from 'modules/notice'
 const Notice = () => {
 	const dispatch = useDispatch();
 	const noticeList = useSelector((state: RootState) => state.notice.noticeList);
-	
+	const isAdmin = useSelector((state: RootState) => state.auth.admin);
+
 	/* 공지사항 목록 API 호출 */
 	useEffect(() => {
 		dispatch(GetNoticeList());
@@ -21,7 +22,8 @@ const Notice = () => {
 		<>
 			<NoticeSideMenu info="Notice List"
 											noticeList={noticeList} />
-			<NoticeList noticeList={noticeList} />
+			<NoticeList noticeList={noticeList}
+									isAdmin={isAdmin} />
 		</>
 	);
 }
