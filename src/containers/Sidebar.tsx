@@ -1,18 +1,23 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components'
 // components
 import ContentWrapper from '../components/sidebar/ContentWrapper'
 import Title from '../components/sidebar/Title'
 import NoticeSideMenuItem from 'components/notice/NoticeSideMenuItem'
+import KeywordBtn from 'components/sidebar/KeywordBtn'
 import Copyright from 'components/commons/Copyright'
 // lib
 import media, { mediaQuery } from '../lib/styles/media'
 // modules
 import { RootState } from 'store/index'
+import { GetNoticeList } from 'modules/notice'
+import { getTopKeywords } from 'modules/search'
 
 const Sidebar = () => {
+	const dispatch = useDispatch();
 	const noticeList = useSelector((state: RootState) => state.notice.noticeList);
+	const keywordList = useSelector((state: RootState) => state.search.topKeywords);
 
 	const notices = noticeList.map(
 		(notice, idx) => {
@@ -27,6 +32,23 @@ const Sidebar = () => {
 		}
 	);
 
+	const keywords = keywordList.map(
+		(keyword, idx) => {
+			// 표시될 키워드 최대개수: 10개
+			if (idx === 10) return null;
+			return (
+				<KeywordBtn key={idx}
+										message={keyword} />
+			);
+		}
+	);
+
+	/* 공지사항 리스트 호출 */
+	useEffect(() => {
+		dispatch(GetNoticeList());
+		dispatch(getTopKeywords());
+	}, [dispatch]);
+
 	return (
 		<Container>
 			<StickyWrapper>
@@ -37,6 +59,7 @@ const Sidebar = () => {
 	
 				<ContentWrapper>
 					<Title message="인기 키워드"></Title>
+					{keywords}
 				</ContentWrapper>
 
 				<Copyright />

@@ -13,7 +13,6 @@ import Copyright from 'components/modal/menu/Copyright'
 // modules
 import { RootState } from 'store/index'
 import { Logout } from 'modules/auth'
-import { GetNoticeList } from 'modules/notice'
 // lib
 import { mediaValue } from 'lib/styles/media'
 
@@ -35,11 +34,6 @@ const MenuModal = ({display, onClose}: MenuModalProps) => {
 	const onLogout = () => {
 		dispatch(Logout());
 	}
-
-	/* 공지사항 리스트 호출 */
-	useEffect(() => {
-		dispatch(GetNoticeList());
-	}, [dispatch]);
 
 	const onChangeWindowWidth = () => {
 		if (window.innerWidth <= mediaValue.small) {
