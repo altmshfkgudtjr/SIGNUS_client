@@ -19,10 +19,11 @@ interface BoardProps {
 const Board = ({boardName}: BoardProps) => {
 	const dispatch = useDispatch();
 	const posts = useSelector((state: RootState) => state.newsfeed.posts);
-	const [imgSrc, setImgSrc] = useState<string>('/icons/1x/home.png');
-	const [loading, setLoading] = useState<boolean>(true);
 	const userValid = useSelector((state: RootState) => state.auth.login);
 	const userLikedPosts: string[] = useSelector((state: RootState) => state.auth.user.favList).map(post => post._id);
+	
+	const [imgSrc, setImgSrc] = useState<string>('/icons/1x/home.png');
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
@@ -42,14 +43,6 @@ const Board = ({boardName}: BoardProps) => {
 	const LoadingPosts = loadingCount.map(
 		(node, idx) => <PostLoadingWrapper key={idx} />
 	);
-
-	useEffect(() => {
-		if (Posts.length === 0) {
-			setLoading(true);
-		} else {
-			setLoading(false);
-		}
-	}, [Posts]);
 
 	/* 페이지네이션 함수 */
 	const pagination = useCallback(throttle(async () => {
@@ -79,6 +72,7 @@ const Board = ({boardName}: BoardProps) => {
 
 	/* 게시판 정보 설정 */
 	useEffect(() => {
+		setLoading(true);
 		if (boardName === 'Top News') {
 			dispatch(addRecommendationPosts());
 			setImgSrc('/icons/1x/home.png');
@@ -98,6 +92,11 @@ const Board = ({boardName}: BoardProps) => {
 			dispatch(addCategoryPosts('동아리-모임'));
 			setImgSrc('/icons/1x/job.png');
 		}
+		/* Redux-thunk Type Error를 해결한 후에, 아래 Code 이어붙이기 */
+		// .then(() => {
+		// 	setLoading(false);
+		// });
+		setLoading(false);
 	}, [boardName, dispatch]);
 
 	return (

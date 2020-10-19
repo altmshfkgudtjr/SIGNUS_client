@@ -5,16 +5,19 @@ import { initSnackbar } from './snackbar'
 import { Post } from './newsfeed'
 
 /* Thunk 함수 */
-export const searchKeyword = (keyword: string) => (dispatch: any) => {
+export const searchKeyword = (keyword: string) => (dispatch: any, getState: Function) => {
+	const state = getState();
+	const sortOption = state.search.searchOptions.sort === 'NEWEST' ? 1 : 0;
+
 	dispatch(clearPosts());
-	searchAPI.Search(keyword).then(res => {
+	searchAPI.Search(keyword, sortOption).then(res => {
+		window.scrollTo(0,0);
 		if (res) {
 			const posts = res.splice(0,40);
 			dispatch(initPosts({
 				posts: posts, 
 				waits: res
 			}));
-			window.scrollTo(0,0);
 		} else {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
@@ -43,40 +46,53 @@ export const getTopKeywords = () => (dispatch: any) => {
 	})
 }
 
+
 /* 액션 */
 const CLEAR_POSTS = 'search/CLEAR_POSTS' as const;
 const INIT_POSTS = 'search/INIT_POSTS' as const;
 const PUSH_POSTS = 'search/PUSH_POSTS' as const;
 const POP_POSTS = 'search/POP_POSTS' as const;
 const SET_TOP_KEYWORDS = 'search/SET_TOP_KEYWORDS' as const;
+const SET_OPTIONS = 'search/SET_OPTIONS' as const;
 
 export const clearPosts = () => ({type: CLEAR_POSTS});
 export const initPosts = (data: {posts: Post[], waits: Post[]}) => ({type: INIT_POSTS, payload: data});
 export const pushPosts = (posts: Post[]) => ({type: PUSH_POSTS, payload: posts});
 export const popPosts = () => ({type: POP_POSTS});
 export const updateTopKeywords = (data: any) => ({type: SET_TOP_KEYWORDS, payload: data});
+export const setOptions = (data: SearchOptions) => ({type: SET_OPTIONS, payload: data });
 
+
+/* 타입 */
 type SearchAction =
 	| ReturnType<typeof clearPosts>
 	| ReturnType<typeof initPosts>
 	| ReturnType<typeof pushPosts>
 	| ReturnType<typeof popPosts>
 	| ReturnType<typeof updateTopKeywords>
+	| ReturnType<typeof setOptions>
 
-
-/* 타입 */
+type SearchOptions = {
+	sort: string;
+}
 type PostsState = Post[];
 
 
 /* 초기상태 */
 export type SearchState = {
+	searchOptions: SearchOptions,
 	posts: PostsState,
 	waitingPosts: PostsState,
+
 	topKeywords: string[],
 }
 const initialState: SearchState = {
+	searchOptions: {
+		sort: 'RELEVEANCE'
+	},
 	posts: [],
 	waitingPosts: [],
+	
 	topKeywords: []
 };
 
@@ -109,6 +125,11 @@ function search(state: SearchState = initialState, action: SearchAction): Search
 			/* 인기 키워드 설정 */
 			return produce(state, draft => {
 				draft.topKeywords = action.payload;
+			});
+		case SET_OPTIONS:
+			/* 검색 옵션 설정 */
+			return produce(state, draft => {
+				draft.searchOptions = action.payload;
 			});
 		default:
 			return state;

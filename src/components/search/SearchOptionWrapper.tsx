@@ -11,10 +11,13 @@ import SearchOptionCloseBtn from 'components/search/SearchOptionCloseBtn'
 import palette from 'lib/styles/palette'
 import media, { mediaValue } from 'lib/styles/media'
 
-const SearchOptionWrapper = () => {
-	const [view, setView] = useState<string>('GRID');				// or LIST
-	const [type, setType] = useState<string>('RELEVEANCE');	// or NEWEST
-	const [term, setTerm] = useState<string>('YEAR');				// or ALL
+interface SearchOptionWrapperProps {
+	sort: string;
+	setSearchOptions(sort: string): void;
+	view: string;
+	setView: React.Dispatch<React.SetStateAction<string>>;
+}
+const SearchOptionWrapper = ({sort, setSearchOptions, view, setView}: SearchOptionWrapperProps) => {
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const [optionShow, setOptionShow] = useState<boolean>(true);
 
@@ -53,24 +56,21 @@ const SearchOptionWrapper = () => {
 			
 			{optionShow && <OptionContainer>
 				{!isMobile && <SearchOption title="보기">
-					<SearchOptionItem message="격자" onClick={() => { setView('GRID') }} 
+					<SearchOptionItem message="격자" 
+														onClick={() => { setView('GRID') }} 
 														selected={view==='GRID'}/>
-					<SearchOptionItem message="목록" onClick={() => { setView('LIST') }}
+					<SearchOptionItem message="목록"
+														onClick={() => { setView('LIST') }}
 														selected={view==='LIST'}/>
 				</SearchOption>}
 
-				<SearchOption title="설정">
-					<SearchOptionItem message="관련도순" onClick={() => { setType('RELEVEANCE') }} 
-														selected={type==='RELEVEANCE'}/>
-					<SearchOptionItem message="최신순" onClick={() => { setType('NEWEST') }}
-														selected={type==='NEWEST'}/>
-				</SearchOption>
-
-				<SearchOption title="기간">
-					<SearchOptionItem message="1년 이내" onClick={() => { setTerm('YEAR') }} 
-														selected={term==='YEAR'}/>
-					<SearchOptionItem message="전체" onClick={() => { setTerm('ALL') }} 
-														selected={term==='ALL'}/>
+				<SearchOption title="정렬">
+					<SearchOptionItem message="관련도순" 
+														onClick={() => { setSearchOptions("RELEVEANCE") }} 
+														selected={sort==='RELEVEANCE'}/>
+					<SearchOptionItem message="최신순" 
+														onClick={() => { setSearchOptions("NEWEST") }}
+														selected={sort==='NEWEST'}/>
 				</SearchOption>
 
 				<SearchOptionCloseBtn onClick={optionToggle} />

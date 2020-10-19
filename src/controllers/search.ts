@@ -1,9 +1,9 @@
 import Fetch from './fetch'
 
-export const Search = (keyword: string) => {
+export const Search = (keyword: string, sort: number) => {
 	const sendData = {
 		keywords: keyword,
-		order: 1
+		order: sort
 	};
 	return Fetch("/api/signus/v1/search", "POST", sendData).then((res) => {
 		if (res.msg === 'success') {
