@@ -11,6 +11,7 @@ const AuthInfoImage = () => {
 
 const Container = styled.div`
 	position: relative;
+	width: 360px;
 	margin: 3.5rem auto 2rem auto;
 `;
 

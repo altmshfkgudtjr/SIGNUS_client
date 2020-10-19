@@ -15,7 +15,7 @@ const KeywordBtn = ({message}: KeywordBtnProps) => {
 const Btn = styled(Link)`
 	display: inline-block;
 	margin: 0 1rem 1rem 0;
-	padding: 4px 1rem;
+	padding: .5rem 1rem;
 	background-color: ${palette.gray1};
 	border-radius: 50px;
 	transition: .1s ${styles.transition};

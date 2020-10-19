@@ -46,3 +46,20 @@ export const SignUp = (id: string, pw: string) => {
 		}
 	});
 }
+
+/* 
+	:::: 사용자 인증 ::::
+*/
+export const AuthorizingUser = (id: string, pw: string) => {
+	const sendData = {
+		id: id,
+		pw: pw
+	};
+	return Fetch("/api/auth/sejong", "POST", sendData).then((res) => {
+		if (res.msg === 'success') {
+			return res.result;
+		} else {
+			return false;
+		}
+	});
+}

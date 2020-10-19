@@ -41,16 +41,32 @@ export const SignUp = (id: string, pw: string) => (dispatch: any) => {
 	});
 }
 
+export const AuthorizingUser = (id: string, pw: string) => (dispatch: any) => {
+	authAPI.AuthorizingUser(id, pw).then((res: any) => {
+		if (res) {
+			dispatch(setAuthorization({id, pw}));
+		} else {
+			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+		}
+	});
+}
+
 /* 액션 */
 const SET_USER = 'auth/SET_USER' as const;
 const DELETE_USER = 'auth/DELETE_USER' as const;
+const SET_AUTHORIZATION = 'auth/SET_AUTHORIZATION' as const;
+const DELETE_AUTHORIZATION = 'auth/DELETE_AUTHORIZATION' as const;
 
 export const setUser = (user: any) => ({type: SET_USER, payload: user});
 export const deleteUser = () => ({type: DELETE_USER});
+export const setAuthorization = (data: any) => ({type: SET_AUTHORIZATION, payload: data});
+export const deleteAuthorization = () => ({type: DELETE_AUTHORIZATION});
 
 type AuthAction =
 	| ReturnType<typeof setUser>
 	| ReturnType<typeof deleteUser>
+	| ReturnType<typeof setAuthorization>
+	| ReturnType<typeof deleteAuthorization>
 
 
 /* 타입 */
@@ -67,7 +83,8 @@ type User = {
 type AuthState = {
 	login: boolean,
 	admin: boolean,
-	user: User
+	user: User,
+	authorization: any
 };
 const initialState: AuthState = {
 	login: false,
@@ -78,7 +95,8 @@ const initialState: AuthState = {
 		viewList: [],
 		newsfeedList: [],
 		searchList: []
-	}
+	},
+	authorization: {}
 };
 
 
@@ -109,6 +127,18 @@ function auth(state: AuthState = initialState, action: AuthAction): AuthState {
 					newsfeedList: [],
 					searchList: []
 				};
+			});
+
+		case SET_AUTHORIZATION:
+			/* 권한 설정 */
+			return produce(state, draft => {
+				draft.authorization = action.payload;
+			});
+
+		case DELETE_AUTHORIZATION:
+			/* 권한 초기화 */
+			return produce(state, draft => {
+				draft.authorization = {};
 			});
 
 		default:

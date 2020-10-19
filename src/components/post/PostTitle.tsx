@@ -15,6 +15,7 @@ const Content = styled.div`
 	font-weight: 600;
 	line-height: 20px;
 	margin-bottom: 4px;
+	word-break: keep-all;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 3;

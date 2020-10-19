@@ -2,7 +2,9 @@ import React, { useState, createRef } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // components
+import AuthHeaderWrapper from 'components/modal/auth/AuthHeaderWrapper'
 import BackBtn from 'components/modal/auth/BackBtn'
+import AuthInfoTitle from 'components/modal/auth/AuthInfoTitle'
 import UserAccountInput from 'components/modal/auth/UserAccountInput'
 import UserPasswordInput from 'components/modal/auth/UserPasswordInput'
 import AuthBtn from 'components/modal/auth/AuthBtn'
@@ -14,9 +16,9 @@ import { initSnackbar } from 'modules/snackbar'
 
 interface AuthSignUpContentProps {
 	onSignUp(id: string, pw: string): void;
-	openLoginContent(): void;
+	openAuthorizationContent(): void;
 };
-const AuthSignUpContent = ({onSignUp, openLoginContent}: AuthSignUpContentProps) => {
+const AuthSignUpContent = ({onSignUp, openAuthorizationContent}: AuthSignUpContentProps) => {
 	const dispatch = useDispatch();
 	const [userId, setUserId] = useState<string>('');
 	const [userPw, setUserPw] = useState<string>('');
@@ -94,7 +96,10 @@ const AuthSignUpContent = ({onSignUp, openLoginContent}: AuthSignUpContentProps)
 
 	return (
 		<Container>
-			<BackBtn onClose={openLoginContent} />
+			<AuthHeaderWrapper>
+				<BackBtn onClose={openAuthorizationContent} />
+				<AuthInfoTitle message="회원가입" />
+			</AuthHeaderWrapper>
 			<UserAccountInput userId={userId}
 												setUserId={setUserId}
 												onAction={onClick}

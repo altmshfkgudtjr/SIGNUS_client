@@ -3,12 +3,11 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // components
 import BackBtn from 'components/modal/auth/BackBtn'
+import AuthHeaderWrapper from 'components/modal/auth/AuthHeaderWrapper'
 import AuthInfoTitle from 'components/modal/auth/AuthInfoTitle'
-import Logo from 'components/modal/auth/Logo'
 import UserAccountInput from 'components/modal/auth/UserAccountInput'
 import UserPasswordInput from 'components/modal/auth/UserPasswordInput'
 import AuthBtn from 'components/modal/auth/AuthBtn'
-import AuthSignUpBtn from 'components/modal/auth/AuthSignUpBtn'
 // lib
 import media from 'lib/styles/media'
 import * as authUtils from 'lib/utils/authUtils'
@@ -16,11 +15,12 @@ import * as authUtils from 'lib/utils/authUtils'
 import { initSnackbar } from 'modules/snackbar'
 
 interface AuthLoginContentProps {
-	onLogin(id: string, pw: string): void;
+	onCertification(id: string, pw: string): void;
 	onClose(): void;
-	openAuthorizationContent(): void;
+	openSignUpContent(): void;
+	openLoginContent(): void;
 }
-const AuthLoginContent = ({onLogin, onClose, openAuthorizationContent}: AuthLoginContentProps) => {
+const AuthAuthorizationContent = ({onCertification, onClose, openSignUpContent, openLoginContent}: AuthLoginContentProps) => {
 	const dispatch = useDispatch();
 	const [userId, setUserId] = useState<string>('');
 	const [userPw, setUserPw] = useState<string>('');
@@ -48,21 +48,20 @@ const AuthLoginContent = ({onLogin, onClose, openAuthorizationContent}: AuthLogi
 			setUserPwValid(true);
 		}
 
-		onLogin(userId, userPw);
+		onCertification(userId, userPw);
 	}
 
 	return (
 		<Container>
 			<AuthHeaderWrapper>
-				<BackBtn onClose={onClose} />
-				<AuthInfoTitle message="로그인" />
+				<BackBtn onClose={openLoginContent} />
+				<AuthInfoTitle message="세종대학교학생 인증" />
 			</AuthHeaderWrapper>
-			<Logo />
 			<UserAccountInput userId={userId}
 												setUserId={setUserId}
 												onAction={onClick}
 												ref={InputIdRef}
-												placeholder="시그너스계정"
+												placeholder="학번"
 												valid={userIdValid} />
 			<UserPasswordInput userPw={userPw}
 												 setUserPw={setUserPw}
@@ -70,8 +69,8 @@ const AuthLoginContent = ({onLogin, onClose, openAuthorizationContent}: AuthLogi
 												 ref={InputPwRef}
 												 placeholder="비밀번호"
 												 valid={userPwValid} />
-			<AuthBtn onClick={onClick} message="로그인" />
-			<AuthSignUpBtn onClick={openAuthorizationContent} />
+			<AuthBtn onClick={onClick} message="인증" />
+			<Info>포탈 학번 및 비밀번호 정보는 저장되지 않으며, 회원가입 시 최초 1회 사용됩니다.</Info>
 		</Container>
 	);
 }
@@ -93,14 +92,14 @@ const Container = styled.div`
 	}
 `;
 
-const AuthHeaderWrapper = styled.div`
+const Info = styled.div`
 	position: relative;
-	display: none;
-	margin-bottom: 1rem;
+	font-size: 14px;
+	margin-top: auto;
 
 	${media.small} {
-		display: flex;
+		margin-top: 3rem;
 	}
 `;
 
-export default AuthLoginContent
+export default AuthAuthorizationContent

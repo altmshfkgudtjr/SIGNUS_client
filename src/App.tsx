@@ -12,7 +12,7 @@ import RedirectPage from 'pages/RedirectPage'
 // containers
 import Snackbar from 'containers/Snackbar'
 // components
-import NoticeBar from 'components/commons/NoticeBar'
+// import NoticeBar from 'components/commons/NoticeBar'
 // modules
 import { GetUser } from 'modules/auth'
 

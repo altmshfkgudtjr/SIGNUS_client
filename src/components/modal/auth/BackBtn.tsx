@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-// lib
-import media from '../../../lib/styles/media'
 
 interface BackBtnProps {
 	onClose(): void;
@@ -17,17 +15,13 @@ const BackBtn = ({onClose}: BackBtnProps) => {
 const Btn = styled.div`
 	position: relative;
 	width: 20px;
-	height: 40px;
-	margin-bottom: 1rem;
+	padding-right: 1rem;
+	margin-right: 1rem;
 	cursor: pointer;
 
 	&:active,
 	&:hover {
 		filter: invert(61%) sepia(19%) saturate(7010%) hue-rotate(122deg) brightness(94%) contrast(86%);
-	}
-
-	${media.small} {
-		display: block;
 	}
 `;
 
@@ -35,7 +29,7 @@ const Icon = styled.img`
 	position: relative;
 	width: 20px;
 	height: 20px;
-	padding: 10px 0;
+	padding: 4px 0;
 `;
 
 export default BackBtn

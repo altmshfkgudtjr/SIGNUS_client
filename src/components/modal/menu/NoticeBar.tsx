@@ -39,8 +39,9 @@ const NoticeBar = ({notice, onClose}: NoticeBarProps) => {
 const Container = styled(Link)`
 	position: relative;
 	display: flex;
+	align-items: center;
 	width: 100%;
-	height: 40px;
+	height: 50px;
 	border-radius: 4px;
 	background-color: ${palette.gray1};
 	box-sizing: border-box;

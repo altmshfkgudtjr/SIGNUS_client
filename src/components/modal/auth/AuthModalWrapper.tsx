@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import styled from 'styled-components'
 // containers
 import AuthLoginContent from 'containers/modal/auth/AuthLoginContent'
+import AuthAuthorizationContent from 'containers/modal/auth/AuthAuthorizationContent'
 import AuthSignUpContent from 'containers/modal/auth/AuthSignUpContent'
 // components
 import AuthInfoContent from 'components/modal/auth/AuthInfoContent'
@@ -15,9 +16,11 @@ interface AuthModalWrapperProps {
 	onLogin(id: string, pw: string): void;
 	onSignUp(id: string, pw: string): void;
 	onClose(): void;
+	onCertification(id: string, pw: string): void;
 }
-const AuthModalWrapper = ({onLogin, onSignUp, onClose}: AuthModalWrapperProps) => {
+const AuthModalWrapper = ({onLogin, onSignUp, onClose, onCertification}: AuthModalWrapperProps) => {
 	const [loginDisplay, setLoginDisplay] = useState<boolean>(true);
+	const [authorizationDisplay, setAuthorizationDisplay] = useState<boolean>(false);
 	const [signupDisplay, setSignupDisplay] = useState<boolean>(false);
 	const ModalRef = useRef<HTMLInputElement>(null);
 
@@ -41,19 +44,30 @@ const AuthModalWrapper = ({onLogin, onSignUp, onClose}: AuthModalWrapperProps) =
 		};
 	}, [closeModal]);
 
-	/* 회원가입 Form 열기 */
-	const openSignUpContent = () => {
-		setTimeout(function() {
-			setLoginDisplay(false);
-			setSignupDisplay(true);
-		}, 0);
-	}
-
 	/* 로그인 Form 열기 */
 	const openLoginContent = () => {
 		setTimeout(function() {
 			setLoginDisplay(true);
+			setAuthorizationDisplay(false);
 			setSignupDisplay(false);
+		}, 0);
+	}
+
+	/* 사용자 인증 Form 열기 */
+	const openAuthorizationContent = () => {
+		setTimeout(function() {
+			setLoginDisplay(false);
+			setAuthorizationDisplay(true);
+			setSignupDisplay(false);
+		}, 0);
+	}
+
+	/* 회원가입 Form 열기 */
+	const openSignUpContent = () => {
+		setTimeout(function() {
+			setLoginDisplay(false);
+			setAuthorizationDisplay(false);
+			setSignupDisplay(true);
 		}, 0);
 	}
 
@@ -63,9 +77,13 @@ const AuthModalWrapper = ({onLogin, onSignUp, onClose}: AuthModalWrapperProps) =
 			<Contour />
 			{loginDisplay && <AuthLoginContent onLogin={onLogin}
 																				 onClose={onClose}
-																				 openSignUpContent={openSignUpContent} />}
+																				 openAuthorizationContent={openAuthorizationContent} />}
+			{authorizationDisplay && <AuthAuthorizationContent onCertification={onCertification}
+																												 onClose={onClose}
+																												 openSignUpContent={openSignUpContent}
+																												 openLoginContent={openLoginContent} />}
 			{signupDisplay && <AuthSignUpContent onSignUp={onSignUp}
-																					 openLoginContent={openLoginContent} />}
+																					 openAuthorizationContent={openAuthorizationContent} />}
 		</Container>
 	);
 }
@@ -75,7 +93,8 @@ const Container = styled.div`
 	display: flex;
 	width: 100%;
 	max-width: 700px;
-	height: 400px;
+	height: auto;
+	min-height: 400px;
 	border-radius: 4px;
 	background-color: #FFF;
 	box-shadow: ${styles.boxShadow.regular};
@@ -87,7 +106,7 @@ const Container = styled.div`
 		height: 100%;
 		width: 100%;
 		max-width: 800px;
-		animation: .5s ${animations.fadeInRight};
+		animation: .3s ${animations.fadeInRight};
 	}
 `;
 

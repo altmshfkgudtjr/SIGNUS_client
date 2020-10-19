@@ -20,7 +20,8 @@ const Container = styled.div`
 
 	${media.small} {
 		width: 95%;
-		margin: .5rem auto 1rem auto;
+		margin: 1rem auto .5rem auto;
+		border-bottom: 1px solid rgba(0,0,0,0);
 	}
 `;
 

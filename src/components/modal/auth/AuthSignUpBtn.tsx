@@ -1,17 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 // lib
-import * as styles from '../../../lib/styles/styles'
-import palette from '../../../lib/styles/palette'
+import * as styles from 'lib/styles/styles'
+import palette from 'lib/styles/palette'
+import media from 'lib/styles/media'
 
 interface AuthSignUpBtnProps {
-	openSignUpContent(): void;
+	onClick(): void;
 }
-const AuthSignUpBtn = ({openSignUpContent}: AuthSignUpBtnProps) => {
+const AuthSignUpBtn = ({onClick}: AuthSignUpBtnProps) => {
 	return (
 		<Container>
 			<Info>아직 계정이 없으신가요?</Info>
-			<Btn onClick={openSignUpContent}>계정 만들기</Btn>
+			<Btn onClick={onClick}>계정 만들기</Btn>
 		</Container>
 	);
 }
@@ -20,8 +21,12 @@ const Container = styled.div`
 	position: relative;
 	width: 100%;
 	height: 20px;
-	margin-top: 52px;
+	margin-top: auto;
 	text-align: right;
+
+	${media.small} {
+		margin-top: 3rem;
+	}
 `;
 
 const Info = styled.span`

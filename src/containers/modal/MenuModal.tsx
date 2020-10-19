@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import styled from 'styled-components'
 import Portal from 'portal'
 // components
 import MenuModalWrapper from 'components/modal/menu/MenuModalWrapper'
-import CloseBtn from 'components/modal/auth/CloseBtn'
+import AuthInfoTitle from 'components/modal/auth/AuthInfoTitle'
+import BackBtn from 'components/modal/auth/BackBtn'
 import MenuAuthContent from 'components/modal/menu/MenuAuthContent'
 import MenuBoardContent from 'components/modal/menu/MenuBoardContent'
 import NoticeBar from 'components/modal/menu/NoticeBar'
@@ -14,6 +16,7 @@ import Copyright from 'components/modal/menu/Copyright'
 import { RootState } from 'store/index'
 import { Logout } from 'modules/auth'
 // lib
+import media from 'lib/styles/media'
 import { mediaValue } from 'lib/styles/media'
 
 interface MenuModalProps {
@@ -54,7 +57,10 @@ const MenuModal = ({display, onClose}: MenuModalProps) => {
 	return (
 		<Portal id='modal'>
 			{display && <MenuModalWrapper onClose={onClose}>
-				<CloseBtn onClose={onClose} />
+				{isMobile && <MenuHeaderWrapper>
+					<BackBtn onClose={onClose} />
+					<AuthInfoTitle message="메뉴" />
+				</MenuHeaderWrapper>}
 				<MenuAuthContent onClose={onClose}
 												 loginValid={loginValid}
 												 name={name} />
@@ -67,5 +73,16 @@ const MenuModal = ({display, onClose}: MenuModalProps) => {
 		</Portal>
 	);
 }
+
+const MenuHeaderWrapper = styled.div`
+	position: relative;
+	display: none;
+	margin-bottom: 1rem;
+
+	${media.small} {
+		display: flex;
+	}
+`;
+
 
 export default MenuModal

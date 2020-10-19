@@ -5,7 +5,7 @@ import Portal from 'portal'
 import ModalBackground from 'components/modal/ModalBackground'
 import AuthModalWrapper from 'components/modal/auth/AuthModalWrapper'
 // modules
-import { Login, SignUp } from 'modules/auth'
+import { Login, SignUp, AuthorizingUser, deleteAuthorization } from 'modules/auth'
 
 interface AuthModalProps {
 	display: boolean;
@@ -19,9 +19,20 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 		dispatch(Login(id, pw));
 	}
 
+	/* 사용자 인증 */
+	const onCertification = (id: string, pw: string) => {
+		dispatch(AuthorizingUser(id, pw));
+	}
+
 	/* 회원가입 */
 	const onSignUp = (id: string, pw: string) => {
 		dispatch(SignUp(id, pw));
+	}
+
+	/* 사용자 권한 초기화 & 모달 닫기 */
+	const onCloseAndInit = () => {
+		dispatch(deleteAuthorization());
+		onClose();
 	}
 
 	return (
@@ -29,7 +40,8 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 			{display && <ModalBackground>
 				<AuthModalWrapper onLogin={onLogin}
 													onSignUp={onSignUp}
-													onClose={onClose} />
+													onClose={onCloseAndInit}
+													onCertification={onCertification} />
 			</ModalBackground>}
 		</Portal>
 	);
