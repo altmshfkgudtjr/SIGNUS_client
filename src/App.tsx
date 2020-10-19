@@ -11,6 +11,8 @@ import NotFound from 'pages/NotFound'
 import RedirectPage from 'pages/RedirectPage'
 // containers
 import Snackbar from 'containers/Snackbar'
+// components
+import NoticeBar from 'components/commons/NoticeBar'
 // modules
 import { GetUser } from 'modules/auth'
 
@@ -32,6 +34,7 @@ const App = () => {
 
 	return (
 		<>
+			{/*<NoticeBar />*/}
 			{isRedirect
 				? <Route path="*" component={RedirectPage} />
 				: <Switch>
