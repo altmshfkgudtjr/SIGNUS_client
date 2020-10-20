@@ -18,7 +18,6 @@ export const Search = (keyword: string, sort: number) => {
 export const TopKeywords = () => {
 	return Fetch("/api/signus/v1/realtime", "GET").then((res) => {
 		if (res.msg === 'success') {
-			console.log(res);
 			return res.result;
 		} else {
 			return false;

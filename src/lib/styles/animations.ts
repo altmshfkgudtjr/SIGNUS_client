@@ -69,6 +69,9 @@ const blink = keyframes`
 	50% { opacity: .5; }
 	100% { opacity: 1; }
 `;
+const spin = keyframes`
+	to { transform: rotate(360deg); }
+`;
 const animations = {
 	fadeIn,
 	fadeOut,
@@ -85,7 +88,8 @@ const animations = {
 	tooltip,
 	noticeSlider,
 	doLike,
-	blink
+	blink,
+	spin
 };
 
 export default animations

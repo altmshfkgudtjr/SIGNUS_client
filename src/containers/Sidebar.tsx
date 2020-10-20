@@ -12,6 +12,7 @@ import media, { mediaQuery } from '../lib/styles/media'
 // modules
 import { RootState } from 'store/index'
 import { getTopKeywords } from 'modules/search'
+import { GetNoticeList } from 'modules/notice'
 
 const Sidebar = () => {
 	const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Sidebar = () => {
 	const notices = noticeList.map(
 		(notice, idx) => {
 			// 표시될 공지사항 최대개수: 4개
-			if (idx === 4) return null;
+			if (idx >= 4) return null;
 			return (
 				<NoticeSideMenuItem key={notice.id}
 														noticeId={notice.id}
@@ -34,7 +35,7 @@ const Sidebar = () => {
 	const keywords = keywordList.map(
 		(keyword, idx) => {
 			// 표시될 키워드 최대개수: 10개
-			if (idx === 10) return null;
+			if (idx >= 10) return null;
 			return (
 				<KeywordBtn key={idx}
 										message={keyword} />
@@ -44,6 +45,7 @@ const Sidebar = () => {
 
 	/* 공지사항 리스트 호출 */
 	useEffect(() => {
+		dispatch(GetNoticeList());
 		dispatch(getTopKeywords());
 	}, [dispatch]);
 

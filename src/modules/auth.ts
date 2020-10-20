@@ -39,8 +39,12 @@ export const Logout = (): AuthThunk => {
 }
 
 export const SignUp = (id: string, pw: string): AuthThunk => {
-	return async dispatch => {
-		await authAPI.SignUp(id, pw).then((res: any) => {
+	return async (dispatch, getState) => {
+		const state = getState();
+		const sj_id = state.auth.authorization.id;
+		const sj_pw = state.auth.authorization.pw;
+
+		await authAPI.SignUp(id, pw, sj_id, sj_pw).then((res: any) => {
 			if (res) {
 				window.localStorage.setItem('tk', res['access_token']);
 				window.location.reload();
@@ -57,6 +61,7 @@ export const AuthorizingUser = (id: string, pw: string): AuthThunk => {
 	return async dispatch => {
 		await authAPI.AuthorizingUser(id, pw).then((res: any) => {
 			if (res) {
+				dispatch(initSnackbar("인증이 성공하였습니다.", "success"));
 				dispatch(setAuthorization({id, pw}));
 				return Promise.resolve();
 			} else {

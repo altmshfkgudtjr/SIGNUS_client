@@ -57,8 +57,9 @@ const Board = ({boardName}: BoardProps) => {
 
 		if (scrollBottom < 1000) {
 			setLoading(true);
-			await dispatch(loadPosts());
-			setLoading(false);
+			Promise.resolve(dispatch(loadPosts())).then(() => {
+				setLoading(false);
+			});
 		}
 	}, 100), [loading]);
 
@@ -74,29 +75,42 @@ const Board = ({boardName}: BoardProps) => {
 	useEffect(() => {
 		setLoading(true);
 		if (boardName === 'Top News') {
-			dispatch(addRecommendationPosts());
+			Promise.resolve(dispatch(addRecommendationPosts()))
+			.then(() => {
+				setLoading(false);
+			});
 			setImgSrc('/icons/1x/home.png');
 		} else if (boardName === '인기') {
-			dispatch(addPopularityPosts());
+			Promise.resolve(dispatch(addPopularityPosts()))
+			.then(() => {
+				setLoading(false);
+			});
 			setImgSrc('/icons/1x/flame.png');
 		} else if (boardName === '대학') {
-			dispatch(addCategoryPosts('대학교'));
+			Promise.resolve(dispatch(addCategoryPosts('대학교')))
+			.then(() => {
+				setLoading(false);
+			});
 			setImgSrc('/icons/1x/graduate.png');
 		} else if (boardName === '공모전&행사') {
-			dispatch(addCategoryPosts('공모전-행사'));
+			Promise.resolve(dispatch(addCategoryPosts('공모전-행사')))
+			.then(() => {
+				setLoading(false);
+			});
 			setImgSrc('/icons/1x/award.png');
 		} else if (boardName === '동아리&모임') {
-			dispatch(addCategoryPosts('진로-구인'));
+			Promise.resolve(dispatch(addCategoryPosts('진로-구인')))
+			.then(() => {
+				setLoading(false);
+			});
 			setImgSrc('/icons/1x/group.png');
 		} else if (boardName === '진로&구인') {
-			dispatch(addCategoryPosts('동아리-모임'));
+			Promise.resolve(dispatch(addCategoryPosts('동아리-모임')))
+			.then(() => {
+				setLoading(false);
+			});
 			setImgSrc('/icons/1x/job.png');
 		}
-		/* Redux-thunk Type Error를 해결한 후에, 아래 Code 이어붙이기 */
-		// .then(() => {
-		// 	setLoading(false);
-		// });
-		setLoading(false);
 	}, [boardName, dispatch]);
 
 	return (

@@ -17,7 +17,7 @@ const NoticeBar = ({notice, onClose}: NoticeBarProps) => {
 	const location = useLocation();
 
 	const title = notice ? notice.title : "공지사항이 없습니다.";
-	const link = notice ? `/notice/${notice.id}` : location.pathname;
+	const link = notice ? `/notice/${notice.id}` : '/notice';
 
 	const onClick = () => {
 		commonUtils.modalToggle(false);

@@ -33,10 +33,12 @@ export const GetUser = () => {
 /*
 	:::: 회원가입 ::::
 */
-export const SignUp = (id: string, pw: string) => {
+export const SignUp = (id: string, pw: string, sj_id: string, sj_pw: string) => {
 	const sendData = {
 		id: id,
-		pw: pw
+		pw: pw,
+		sj_id: sj_id,
+		sj_pw: sj_pw
 	};
 	return Fetch("/api/auth/signup", "POST", sendData).then((res) => {
 		if (res.msg === 'success') {
@@ -55,7 +57,7 @@ export const AuthorizingUser = (id: string, pw: string) => {
 		sj_id: id,
 		sj_pw: pw
 	};
-	return Fetch("/api/auth/sejong", "POST", sendData).then((res) => {
+	return Fetch("/api/auth/sj_signup", "POST", sendData).then((res) => {
 		if (res.msg === 'success') {
 			return res.result;
 		} else {

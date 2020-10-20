@@ -5,13 +5,12 @@ import Portal from 'portal'
 import AuthLoginContent from 'containers/modal/auth/AuthLoginContent'
 import AuthAuthorizationContent from 'containers/modal/auth/AuthAuthorizationContent'
 import AuthSignUpContent from 'containers/modal/auth/AuthSignUpContent'
-
 // components
 import ModalBackground from 'components/modal/ModalBackground'
 import AuthModalWrapper from 'components/modal/auth/AuthModalWrapper'
 import AuthInfoContent from 'components/modal/auth/AuthInfoContent'
 import Contour from 'components/modal/auth/Contour'
-
+import Loading from 'components/commons/Loading'
 // modules
 import { Login, SignUp, AuthorizingUser, deleteAuthorization } from 'modules/auth'
 
@@ -25,6 +24,7 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 	const [loginDisplay, setLoginDisplay] = useState<boolean>(true);
 	const [authorizationDisplay, setAuthorizationDisplay] = useState<boolean>(false);
 	const [signupDisplay, setSignupDisplay] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
 	
 	/* 로그인 Form 열기 */
 	const openLoginContent = () => {
@@ -55,19 +55,27 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 
 	/* 로그인 */
 	const onLogin = (id: string, pw: string) => {
-		dispatch(Login(id, pw));
+		setLoading(true);
+		Promise.resolve(dispatch(Login(id, pw))).then(() => {
+			setLoading(false);
+		});
 	}
 
 	/* 사용자 인증 */
 	const onCertification = (id: string, pw: string) => {
+		setLoading(true);
 		Promise.resolve(dispatch(AuthorizingUser(id, pw))).then(() => {
 			openSignUpContent();
+			setLoading(false);
 		});
 	}
 
 	/* 회원가입 */
 	const onSignUp = (id: string, pw: string) => {
-		dispatch(SignUp(id, pw));
+		setLoading(true);
+		Promise.resolve(dispatch(SignUp(id, pw))).then(() => {
+			setLoading(false);
+		});
 	}
 
 	/* 사용자 권한 초기화 & 모달 닫기 */
@@ -91,6 +99,7 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 																														 openLoginContent={openLoginContent} />}
 					{signupDisplay && <AuthSignUpContent onSignUp={onSignUp}
 																							 openAuthorizationContent={openAuthorizationContent} />}
+					{loading && <Loading />}
 				</AuthModalWrapper>
 			</ModalBackground>}
 		</Portal>
