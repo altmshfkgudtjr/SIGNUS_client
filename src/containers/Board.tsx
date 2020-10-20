@@ -9,7 +9,7 @@ import PostImageWrapper from 'components/post/PostImageWrapper'
 import PostLoadingWrapper from 'components/post/PostLoadingWrapper'
 // modules
 import { RootState } from '../store/index'
-import { addRecommendationPosts, addPopularityPosts, addCategoryPosts, loadPosts } from '../modules/newsfeed'
+import { addRecommendationPosts, addPopularityPosts, addCategoryPosts, loadPosts, setView } from '../modules/newsfeed'
 // lib
 import { throttle } from 'lib/lazyEvent'
 
@@ -21,7 +21,8 @@ const Board = ({boardName}: BoardProps) => {
 	const posts = useSelector((state: RootState) => state.newsfeed.posts);
 	const userValid = useSelector((state: RootState) => state.auth.login);
 	const userLikedPosts: string[] = useSelector((state: RootState) => state.auth.user.favList).map(post => post._id);
-	
+	const view = useSelector((state: RootState) => state.newsfeed.view);
+
 	const [imgSrc, setImgSrc] = useState<string>('/icons/1x/home.png');
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -113,11 +114,22 @@ const Board = ({boardName}: BoardProps) => {
 		}
 	}, [boardName, dispatch]);
 
+	/* 보기 방식 설정 (GRID | LIST) */
+	const setViewGrid = () => {
+		dispatch(setView("GRID"));
+	}
+	const setViewList = () => {
+		dispatch(setView("LIST"));
+	}
+
 	return (
 		<PostLayout>
 			<BoardInfo icon_src={imgSrc}
 								 small_info="뉴스피드"
-								 large_info={boardName} />
+								 large_info={boardName}
+								 view={view}
+								 setViewGrid={setViewGrid}
+								 setViewList={setViewList} />
 			<BoardInfoMobile small_info="뉴스피드"
 											 large_info={boardName} />
 			{Posts}

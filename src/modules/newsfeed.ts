@@ -79,17 +79,20 @@ const CLEAR_POSTS = 'newsfeed/CLEAR_POSTS' as const;
 const INIT_POSTS = 'newsfeed/INIT_POSTS' as const;
 const PUSH_POSTS = 'newsfeed/PUSH_POSTS' as const;
 const POP_POSTS = 'newsfeed/POP_POSTS' as const;
+const SET_VIEW = 'newsfeed/SET_VIEW' as const;
 
 export const clearPosts = () => ({type: CLEAR_POSTS});
 export const initPosts = (data: {posts: Post[], waits: Post[]}) => ({type: INIT_POSTS, payload: data});
 export const pushPosts = (posts: Post[]) => ({type: PUSH_POSTS, payload: posts});
 export const popPosts = () => ({type: POP_POSTS});
+export const setView = (view: string) => ({type: SET_VIEW, payload: view});
 
 export type NewsfeedAction =
 	| ReturnType<typeof clearPosts>
 	| ReturnType<typeof initPosts>
 	| ReturnType<typeof pushPosts>
 	| ReturnType<typeof popPosts>
+	| ReturnType<typeof setView>
 
 
 /* 타입 */
@@ -109,10 +112,12 @@ type PostsState = Post[];
 
 /* 초기상태 */
 export type NewsfeedState = {
+	view: string,
 	posts: PostsState,
 	waitingPosts: PostsState
 }
 const initialState: NewsfeedState = {
+	view: "GRID",		// or LIST
 	posts: [],
 	waitingPosts: []
 };
@@ -141,6 +146,11 @@ function newsfeed(state: NewsfeedState = initialState, action: NewsfeedAction): 
 			/* 포스트 제거 */
 			return produce(state, draft => {
 				draft.waitingPosts.splice(0, 40);
+			});
+		case SET_VIEW:
+			/* 뷰 선택 */
+			return produce(state, draft => {
+				draft.view = action.payload;
 			});
 		default:
 			return state;

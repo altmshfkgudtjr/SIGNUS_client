@@ -11,8 +11,11 @@ interface BoardInfoProps {
 	icon_src: string;
 	small_info: string;
 	large_info: string;
+	view: string;
+	setViewGrid(): void;
+	setViewList(): void;
 };
-const BoardInfo = ({icon_src, small_info, large_info}: BoardInfoProps) => {
+const BoardInfo = ({icon_src, small_info, large_info, view, setViewGrid, setViewList}: BoardInfoProps) => {
 	return (
 		<Container>
 			<PageInfo icon_src={icon_src}
@@ -20,8 +23,8 @@ const BoardInfo = ({icon_src, small_info, large_info}: BoardInfoProps) => {
 								large_info={large_info} />
 
 			<OptionWrapper title="보기">
-				<OptionItem message="격자" onClick={() => {}} selected={true} />
-				<OptionItem message="목록" onClick={() => {}} selected={false} />
+				<OptionItem message="격자" onClick={setViewGrid} selected={view === 'GRID'} />
+				<OptionItem message="목록" onClick={setViewList} selected={view === 'LIST'} />
 			</OptionWrapper>
 		</Container>
 	);
