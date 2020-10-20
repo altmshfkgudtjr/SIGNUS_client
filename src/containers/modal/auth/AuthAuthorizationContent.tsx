@@ -16,11 +16,9 @@ import { initSnackbar } from 'modules/snackbar'
 
 interface AuthLoginContentProps {
 	onCertification(id: string, pw: string): void;
-	onClose(): void;
-	openSignUpContent(): void;
 	openLoginContent(): void;
 }
-const AuthAuthorizationContent = ({onCertification, onClose, openSignUpContent, openLoginContent}: AuthLoginContentProps) => {
+const AuthAuthorizationContent = ({onCertification, openLoginContent}: AuthLoginContentProps) => {
 	const dispatch = useDispatch();
 	const [userId, setUserId] = useState<string>('');
 	const [userPw, setUserPw] = useState<string>('');

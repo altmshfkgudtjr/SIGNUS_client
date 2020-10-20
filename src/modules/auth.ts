@@ -49,6 +49,8 @@ export const AuthorizingUser = (id: string, pw: string) => (dispatch: any) => {
 			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 		}
 	});
+
+	return Promise.resolve(true);
 }
 
 /* 액션 */

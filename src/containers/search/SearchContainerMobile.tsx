@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import SearchInput from '../../components/search/SearchInput'
-import SearchBtn from '../../components/header/SearchBtn'
-import CloseBtn from '../../components/search/CloseBtn'
+import SearchInput from 'components/search/SearchInput'
+import SearchBtn from 'components/header/SearchBtn'
+import CloseBtn from 'components/search/CloseBtn'
 // lib
-import * as styles from '../../lib/styles/styles'
-import zIndex from '../../lib/styles/zIndex'
-import animations from '../../lib/styles/animations'
+import * as styles from 'lib/styles/styles'
+import zIndex from 'lib/styles/zIndex'
+import animations from 'lib/styles/animations'
 
 type SearchContainerMobileProps = {
 	searchWord: string,
