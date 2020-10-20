@@ -65,7 +65,7 @@ const SmallInfo = styled.div`
 
 const LargeInfo = styled.div`
 	position: relative;
-	font-size: 40px;
+	font-size: 38px;
 	font-weight: 600;
 
 	${media.small} {

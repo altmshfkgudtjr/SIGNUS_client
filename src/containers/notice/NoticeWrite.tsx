@@ -33,26 +33,19 @@ const NoticeWrite = ({noticeId}: NoticeWriteProps) => {
 			setTitle(notice.title);
 			setPost(notice.post);
 		} else {
-			dispatch(GetNotice(noticeId))
-			/* Redux-thunk Type Error를 해결한 후에, 아래 Code 이어붙이기 */
-			// .catch(() => {
-			// 	dispatch(initSnackbar("존재하지 않는 공지사항입니다.", "error"));
-			// 	history.push('/notice');
-			// });
+			Promise.resolve(dispatch(GetNotice(noticeId))).catch(() => {
+				history.push('/notice');
+			});
 		}
 	}, [noticeId, dispatch]);
 	/* eslint-enable */
 
 	/* 공지사항 작성/수정 완료 함수 */
 	const noticeSubmit = () => {
-		dispatch(SendNotice(noticeId, title, post))
-		/* Redux-thunk Type Error를 해결한 후에, 아래 Code 이어붙이기 */
-		// .then((res) => {
-		// 	if (res) {
-		// 		history.push('/notice');
-		// 		window.location.reload();
-		// 	}
-		// });
+		Promise.resolve(dispatch(SendNotice(noticeId, title, post))).then(() => {
+			history.push('/notice');
+			window.location.reload();
+		});
 	}
 
 	/* 공지사항 취소 함수 */

@@ -11,7 +11,6 @@ import Copyright from 'components/commons/Copyright'
 import media, { mediaQuery } from '../lib/styles/media'
 // modules
 import { RootState } from 'store/index'
-import { GetNoticeList } from 'modules/notice'
 import { getTopKeywords } from 'modules/search'
 
 const Sidebar = () => {
@@ -45,7 +44,6 @@ const Sidebar = () => {
 
 	/* 공지사항 리스트 호출 */
 	useEffect(() => {
-		dispatch(GetNoticeList());
 		dispatch(getTopKeywords());
 	}, [dispatch]);
 

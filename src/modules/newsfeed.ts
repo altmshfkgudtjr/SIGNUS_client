@@ -1,66 +1,76 @@
 import produce from 'immer';
-import * as newfeedAPI from '../controllers/newsfeed'
-import { initSnackbar } from './snackbar'
+import * as newfeedAPI from 'controllers/newsfeed'
+import { initSnackbar } from 'modules/snackbar'
+// types
+import { NewsfeedThunk } from 'modules/types'
 
 /* Thunk 함수 */
-export const addRecommendationPosts = () => (dispatch: any) => {
+export const addRecommendationPosts = (): NewsfeedThunk => {
+	return async dispatch => {
 	dispatch(clearPosts());
-	newfeedAPI.RecommendationPosts().then(res => {
-		if (res) {
-			const posts = res.splice(0,40);
-			dispatch(initPosts({
-				posts: posts, 
-				waits: res
-			}));
-			window.scrollTo(0,0);
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+		await newfeedAPI.RecommendationPosts().then(res => {
+			if (res) {
+				const posts = res.splice(0,40);
+				dispatch(initPosts({
+					posts: posts, 
+					waits: res
+				}));
+				window.scrollTo(0,0);
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 			}
-	});
-}
-
-export const addPopularityPosts = () => (dispatch: any) => {
-	dispatch(clearPosts());
-	newfeedAPI.PopularityPosts().then(res => {
-		if (res) {
-			const posts = res.splice(0,40);
-			dispatch(initPosts({
-				posts: posts, 
-				waits: res
-			}));
-			window.scrollTo(0,0);
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-			}
-	});
-}
-
-export const addCategoryPosts = (category: string) => (dispatch: any) => {
-	dispatch(clearPosts());
-	newfeedAPI.CategoryPosts(category).then(res => {
-		if (res) {
-			const posts = res.splice(0,40);
-			dispatch(initPosts({
-				posts: posts, 
-				waits: res
-			}));
-			window.scrollTo(0,0);
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	});
-}
-
-export const loadPosts = () => (dispatch: any, getState: Function) => {
-	const state = getState();
-	const posts = state.newsfeed.waitingPosts.slice(0,40);
-	
-	if (posts.length === 0) {
-		return;
+		});
 	}
+}
 
-	dispatch(pushPosts(posts));
-	dispatch(popPosts());
+export const addPopularityPosts = (): NewsfeedThunk => {
+	return async dispatch => {
+		dispatch(clearPosts());
+		await newfeedAPI.PopularityPosts().then(res => {
+			if (res) {
+				const posts = res.splice(0,40);
+				dispatch(initPosts({
+					posts: posts, 
+					waits: res
+				}));
+				window.scrollTo(0,0);
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			}
+		});
+	}
+}
+
+export const addCategoryPosts = (category: string): NewsfeedThunk => {
+	return async dispatch => {
+		dispatch(clearPosts());
+		newfeedAPI.CategoryPosts(category).then(res => {
+			if (res) {
+				const posts = res.splice(0,40);
+				dispatch(initPosts({
+					posts: posts, 
+					waits: res
+				}));
+				window.scrollTo(0,0);
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			}
+		});
+	}
+}
+
+export const loadPosts = (): NewsfeedThunk => {
+	return async (dispatch, getState) => {
+		const state = getState();
+		const posts = state.newsfeed.waitingPosts.slice(0,40);
+		
+		if (posts.length === 0) {
+			return Promise.resolve();
+		}
+	
+		dispatch(pushPosts(posts));
+		dispatch(popPosts());
+	}
 }
 
 
@@ -75,7 +85,7 @@ export const initPosts = (data: {posts: Post[], waits: Post[]}) => ({type: INIT_
 export const pushPosts = (posts: Post[]) => ({type: PUSH_POSTS, payload: posts});
 export const popPosts = () => ({type: POP_POSTS});
 
-type NewsfeedAction =
+export type NewsfeedAction =
 	| ReturnType<typeof clearPosts>
 	| ReturnType<typeof initPosts>
 	| ReturnType<typeof pushPosts>

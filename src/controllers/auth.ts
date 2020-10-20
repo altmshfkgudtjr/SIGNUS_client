@@ -52,8 +52,8 @@ export const SignUp = (id: string, pw: string) => {
 */
 export const AuthorizingUser = (id: string, pw: string) => {
 	const sendData = {
-		id: id,
-		pw: pw
+		sj_id: id,
+		sj_pw: pw
 	};
 	return Fetch("/api/auth/sejong", "POST", sendData).then((res) => {
 		if (res.msg === 'success') {

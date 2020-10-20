@@ -1,94 +1,113 @@
 import produce from 'immer';
 import * as noticeAPI from 'controllers/notice'
-import { initSnackbar } from './snackbar'
+import { initSnackbar } from 'modules/snackbar'
+// types
+import { NoticeThunk } from 'modules/types'
 // lib
 import { dateFormatter } from 'lib/utils/postUtils'
 
 /* Thunk 함수 */
-export const GetNotice = (noticeId: string) => (dispatch: any) => {
-	noticeAPI.GetNotice(noticeId).then((res: any) => {
-		if (res) {
-			dispatch(addNotice(res));
-			dispatch(Validation());
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	});
-}
-
-export const GetNoticeList = () => (dispatch: any) => {
-	noticeAPI.GetNotice(null).then((res: any) => {
-		if (res) {
-			dispatch(addNoticeList(res));
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	});
-}
-
-export const UpdateNotice = (title: string, post: string, noticeId: string) => (dispatch: any) => {
-	noticeAPI.UpdateNotice(title, post, noticeId).then((res: any) => {
-		if (res) {
-			dispatch(updateNotice(
-				{
-					id: noticeId,
-					title: title,
-					author: '',
-					post: post,
-					date: '',
-					valid: false
-				}
-			));
-			dispatch(Validation());
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	});
-}
-
-export const DeleteNotice = (noticeId: string) => (dispatch: any) => {
-	return noticeAPI.DeleteNotice(noticeId).then((res: any) => {
-		if (res) {
-			dispatch(deleteNotice(noticeId));
-			return true;
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-			return false;
-		}
-	});
-}
-
-export const Validation = () => (dispatch: any, getState: Function) => {
-	const state = getState();
-	const isAdmin = state.auth.admin;
-	const userId = state.auth.user.id;
-
-	if (isAdmin && !!userId && userId === state.notice.notice.author) {
-		dispatch(validationNotice(true));
-	} else {
-		dispatch(validationNotice(false));
+export const GetNotice = (noticeId: string): NoticeThunk => {
+	return async dispatch => {
+		await noticeAPI.GetNotice(noticeId).then((res: any) => {
+			if (res) {
+				dispatch(addNotice(res));
+				dispatch(Validation());
+				return Promise.resolve();
+			} else {
+				dispatch(initSnackbar("존재하지 않는 공지사항입니다.", "error"));
+				return Promise.reject();
+			}
+		});
 	}
 }
 
-export const SendNotice = (noticeId: (string | null), title: string, post: string) => (dispatch: any) => {
-	if (!noticeId) {
-		return noticeAPI.AddNotice(title, post).then((res: any) => {
+export const GetNoticeList = (): NoticeThunk => {
+	return async dispatch => {
+		await noticeAPI.GetNotice(null).then((res: any) => {
 			if (res) {
-				return true;
+				dispatch(addNoticeList(res));
 			} else {
 				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-				return false;
 			}
 		});
-	} else {
-		return noticeAPI.UpdateNotice(title, post, noticeId).then((res: any) => {
+	}
+}
+
+export const UpdateNotice = (title: string, post: string, noticeId: string): NoticeThunk => {
+	return async dispatch => {
+		await noticeAPI.UpdateNotice(title, post, noticeId).then((res: any) => {
 			if (res) {
-				return true;
+				dispatch(updateNotice(
+					{
+						id: noticeId,
+						title: title,
+						author: '',
+						post: post,
+						date: '',
+						valid: false
+					}
+				));
+				dispatch(Validation());
+				return Promise.resolve();
 			} else {
 				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-				return false;
+				return Promise.reject();
 			}
 		});
+	}
+}
+
+export const DeleteNotice = (noticeId: string): NoticeThunk => {
+	return async dispatch => {
+		await noticeAPI.DeleteNotice(noticeId).then((res: any) => {
+			if (res) {
+				dispatch(deleteNotice(noticeId));
+				return Promise.resolve();
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return Promise.reject();
+			}
+		});
+	}
+}
+
+export const Validation = (): NoticeThunk => {
+	return async (dispatch, getState) => {
+		const state = getState();
+		const isAdmin = state.auth.admin;
+		const userId = state.auth.user.id;
+	
+		if (isAdmin && !!userId && userId === state.notice.notice.author) {
+			dispatch(validationNotice(true));
+		} else {
+			dispatch(validationNotice(false));
+		}
+		return Promise.resolve();
+	}
+}
+
+export const SendNotice = (noticeId: (string | null), title: string, post: string): NoticeThunk => {
+	return async dispatch => {
+		if (!noticeId) {
+			await noticeAPI.AddNotice(title, post).then((res: any) => {
+				if (res) {
+					return Promise.resolve();
+				} else {
+					dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+					return Promise.reject();
+				}
+			});
+		} else {
+			await noticeAPI.UpdateNotice(title, post, noticeId).then((res: any) => {
+				if (res) {
+					return Promise.resolve();
+				} else {
+					dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+					return Promise.reject();
+				}
+			});
+		}
 	}
 }
 
@@ -106,7 +125,7 @@ export const updateNotice = (notice: Notice) => ({type: UPDATE_NOTICE, payload: 
 export const deleteNotice = (noticeId: string) => ({type: DELETE_NOTICE, payload: noticeId});
 export const validationNotice = (valid: boolean) => ({type: VALIDATION_NOTICE, payload: valid});
 
-type AuthAction =
+export type NoticeAction =
 	| ReturnType<typeof addNotice>
 	| ReturnType<typeof addNoticeList>
 	| ReturnType<typeof updateNotice>
@@ -144,7 +163,7 @@ const initialState: NoticeState = {
 
 
 /* 리듀서 */
-function notice(state: NoticeState = initialState, action: AuthAction): NoticeState {
+function notice(state: NoticeState = initialState, action:  NoticeAction): NoticeState {
 	switch (action.type) {
 		case ADD_NOTICE:
 			/* 단일 공지사항 설정 */

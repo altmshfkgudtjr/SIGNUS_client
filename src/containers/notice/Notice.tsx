@@ -44,14 +44,10 @@ const Notice = ({noticeId}: NoticeProps) => {
 	const onDelete = () => {
 		const result = window.confirm("공지사항을 삭제하시겠습니까?");
 		if (result) {
-			dispatch(DeleteNotice(noticeId))
-			/* Redux-thunk Type Error를 해결한 후에, 아래 Code 이어붙이기 */
-			// .then((res) => {
-			// 	if (res) {
-			// 		history.push('/notice');
-			// 		window.location.reload();
-			// 	}
-			// });
+			Promise.resolve(dispatch(DeleteNotice(noticeId))).then(() => {
+				history.push('/notice');
+				window.location.reload();
+			});
 		}
 	};
 

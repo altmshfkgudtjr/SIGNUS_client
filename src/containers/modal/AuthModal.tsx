@@ -60,11 +60,9 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 
 	/* 사용자 인증 */
 	const onCertification = (id: string, pw: string) => {
-		dispatch(AuthorizingUser(id, pw));
-		/* Redux-thunk Type Error를 해결한 후에, 아래 Code 이어붙이기 */
-		// .then(() => {
-		// 	openSignUpContent();
-		// });
+		Promise.resolve(dispatch(AuthorizingUser(id, pw))).then(() => {
+			openSignUpContent();
+		});
 	}
 
 	/* 회원가입 */

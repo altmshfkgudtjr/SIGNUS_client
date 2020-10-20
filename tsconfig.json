@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
+      "es2018.promise",
       "dom",
       "dom.iterable",
       "esnext"

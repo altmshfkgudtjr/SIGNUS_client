@@ -62,30 +62,26 @@ const Search = ({keyword}: SearchProps) => {
 
 		if (scrollBottom < 1000) {
 			setLoading(true);
-			await dispatch(loadPosts());
-			setLoading(false);
+			Promise.resolve(dispatch(loadPosts())).then(() => {
+				setLoading(false);
+			});
 		}
 	}, 100), [loading]);
 
 	/* 페이지네이션 등록 */
-	/* eslint-disable */
 	useEffect(() => {
 		document.addEventListener('scroll', pagination);
 		return () => {
 			document.removeEventListener('scroll', pagination);
 		}
 	}, [pagination]);
-	/* eslint-enable */
 
 	/* 검색 옵션 변경 재검색 */
 	useEffect(() => {
 		setLoading(true);
-		dispatch(searchKeyword(keyword));
-		setLoading(false);
-		/* Redux-thunk Type Error를 해결한 후에, 아래 Code 이어붙이기 */
-		// .then(() => {
-		// 	setLoading(false);
-		// });
+		Promise.resolve(dispatch(searchKeyword(keyword))).then(() => {
+			setLoading(false);
+		});
 	}, [dispatch, searchOptions, keyword]);
 
 	return (

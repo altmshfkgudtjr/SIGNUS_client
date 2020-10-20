@@ -1,56 +1,70 @@
 import produce from 'immer';
 import * as authAPI from '../controllers/auth'
 import { initSnackbar } from './snackbar'
+// types
+import { AuthThunk } from 'modules/types'
 
 /* Thunk 함수 */
-export const GetUser = () => (dispatch: any) => {
-	authAPI.GetUser().then((res: any) => {
-		if (res) {
-			dispatch(setUser(res));
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	});
+export const GetUser = (): AuthThunk => {
+	return async dispatch => {
+		await authAPI.GetUser().then((res: any) => {
+			if (res) {
+				dispatch(setUser(res));
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			}
+		});
+	}
 }
 
-export const Login = (id: string, pw: string) => (dispatch: any) => {
-	authAPI.Login(id, pw).then((res: any) => {
-		if (res) {
-			window.localStorage.setItem('tk', res['access_token']);
-			window.location.reload();
-		} else {
-			dispatch(initSnackbar("아이디 혹은 비밀번호가 맞지 않습니다.", "error"));
-		}
-	});
+export const Login = (id: string, pw: string): AuthThunk => {
+	return async dispatch => {
+		await authAPI.Login(id, pw).then((res: any) => {
+			if (res) {
+				window.localStorage.setItem('tk', res['access_token']);
+				window.location.reload();
+			} else {
+				dispatch(initSnackbar("아이디 혹은 비밀번호가 맞지 않습니다.", "error"));
+			}
+		});
+	}
 }
 
-export const Logout = () => (dispatch: any) => {
-	window.localStorage.removeItem('tk');
-	dispatch(deleteUser());
-	window.location.reload();
+export const Logout = (): AuthThunk => {
+	return async dispatch => {
+		window.localStorage.removeItem('tk');
+		dispatch(deleteUser());
+		window.location.reload();
+	}
 }
 
-export const SignUp = (id: string, pw: string) => (dispatch: any) => {
-	authAPI.SignUp(id, pw).then((res: any) => {
-		if (res) {
-			window.localStorage.setItem('tk', res['access_token']);
-			window.location.reload();
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	});
+export const SignUp = (id: string, pw: string): AuthThunk => {
+	return async dispatch => {
+		await authAPI.SignUp(id, pw).then((res: any) => {
+			if (res) {
+				window.localStorage.setItem('tk', res['access_token']);
+				window.location.reload();
+				return Promise.resolve();
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return Promise.reject();
+			}
+		});
+	}
 }
 
-export const AuthorizingUser = (id: string, pw: string) => (dispatch: any) => {
-	authAPI.AuthorizingUser(id, pw).then((res: any) => {
-		if (res) {
-			dispatch(setAuthorization({id, pw}));
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	});
-
-	return Promise.resolve(true);
+export const AuthorizingUser = (id: string, pw: string): AuthThunk => {
+	return async dispatch => {
+		await authAPI.AuthorizingUser(id, pw).then((res: any) => {
+			if (res) {
+				dispatch(setAuthorization({id, pw}));
+				return Promise.resolve();
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return Promise.reject();
+			}
+		});
+	}
 }
 
 /* 액션 */
@@ -64,7 +78,7 @@ export const deleteUser = () => ({type: DELETE_USER});
 export const setAuthorization = (data: any) => ({type: SET_AUTHORIZATION, payload: data});
 export const deleteAuthorization = () => ({type: DELETE_AUTHORIZATION});
 
-type AuthAction =
+export type AuthAction =
 	| ReturnType<typeof setUser>
 	| ReturnType<typeof deleteUser>
 	| ReturnType<typeof setAuthorization>

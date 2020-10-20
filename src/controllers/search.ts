@@ -16,11 +16,9 @@ export const Search = (keyword: string, sort: number) => {
 
 /* eslint-disable */
 export const TopKeywords = () => {
-	return new Promise((resolve, reject) => {
-		resolve(['시그너스', '공모전', '인공지능', '무중력지대', '대학내일', '장학금', '비대면수업', '코로나']);
-	});
-	return Fetch("/api/signus/v1/keywords", "GET").then((res) => {
+	return Fetch("/api/signus/v1/realtime", "GET").then((res) => {
 		if (res.msg === 'success') {
+			console.log(res);
 			return res.result;
 		} else {
 			return false;

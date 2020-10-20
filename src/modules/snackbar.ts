@@ -1,28 +1,34 @@
 import produce from 'immer';
+// types
+import { SnackbarThunk } from 'modules/types'
 
 // setTimeout 참조 넣어두는 리스트
 const RefEvent: ReturnType<typeof setTimeout>[] = [];
 
 /* Thunk 함수 */
-export const initSnackbar = (message: string, type: string) => async (dispatch: any) => {
-	if(RefEvent.length !== 0) {
-		const event = RefEvent.shift();
-		clearTimeout(event);
+export const initSnackbar = (message: string, type: string): SnackbarThunk => {
+	return async dispatch => {
+		if(RefEvent.length !== 0) {
+			const event = RefEvent.shift();
+			clearTimeout(event);
+		}
+		dispatch(deleteSnackbar());
+		await setTimeout(function() {
+			dispatch(appendSnackbar(
+				{
+					display: true,
+					message: message, 
+					type: type
+				}
+			));
+			const event = setTimeout(function() {
+				dispatch(deleteSnackbar());
+			}, 4000);
+			RefEvent.push(event);
+		}, 50);
+
+		return Promise.resolve();
 	}
-	dispatch(deleteSnackbar());
-	await setTimeout(function() {
-		dispatch(appendSnackbar(
-			{
-				display: true,
-				message: message, 
-				type: type
-			}
-		));
-		const event = setTimeout(function() {
-			dispatch(deleteSnackbar());
-		}, 4000);
-		RefEvent.push(event);
-	}, 50)
 }
 
 
@@ -33,7 +39,7 @@ const DELETE_SNACKBAR = 'snackbar/DELETE_SNACKBAR' as const;
 export const appendSnackbar = (data: Snackbar) => ({type: APPEND_SNACKBAR, payload: data});
 export const deleteSnackbar = () => ({type: DELETE_SNACKBAR});
 
-type SnackbarAction =
+export type SnackbarAction =
 	| ReturnType<typeof appendSnackbar>
 	| ReturnType<typeof deleteSnackbar>
 

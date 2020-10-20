@@ -1,49 +1,57 @@
 import produce from 'immer';
 import * as searchAPI from 'controllers/search'
-import { initSnackbar } from './snackbar'
+import { initSnackbar } from 'modules/snackbar'
 // types
-import { Post } from './newsfeed'
+import { Post } from 'modules/newsfeed'
+import { SearchThunk } from 'modules/types'
 
-/* Thunk 함수 */
-export const searchKeyword = (keyword: string) => (dispatch: any, getState: Function) => {
-	const state = getState();
-	const sortOption = state.search.searchOptions.sort === 'NEWEST' ? 1 : 0;
-
-	dispatch(clearPosts());
-	searchAPI.Search(keyword, sortOption).then(res => {
-		window.scrollTo(0,0);
-		if (res) {
-			const posts = res.splice(0,40);
-			dispatch(initPosts({
-				posts: posts, 
-				waits: res
-			}));
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	});
+export const searchKeyword = (keyword: string): SearchThunk => {
+	return async (dispatch, getState) => {
+		const state = getState();
+		const sortOption = state.search.searchOptions.sort === 'NEWEST' ? 1 : 0;
+	
+		dispatch(clearPosts());
+		await searchAPI.Search(keyword, sortOption).then(res => {
+			window.scrollTo(0,0);
+			if (res) {
+				const posts = res.splice(0,40);
+				dispatch(initPosts({
+					posts: posts, 
+					waits: res
+				}));
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			}
+		});
+	}
 };
 
-export const loadPosts = () => (dispatch: any, getState: Function) => {
-	const state = getState();
-	const posts = state.search.waitingPosts.slice(0,40);
+export const loadPosts = (): SearchThunk => {
+	return async (dispatch, getState) => {
+		const state = getState();
+		const posts = state.search.waitingPosts.slice(0,40);
+		
+		if (posts.length === 0) {
+			return Promise.resolve();
+		}
 	
-	if (posts.length === 0) {
-		return;
+		dispatch(pushPosts(posts));
+		dispatch(popPosts());
 	}
-
-	dispatch(pushPosts(posts));
-	dispatch(popPosts());
 }
 
-export const getTopKeywords = () => (dispatch: any) => {
-	searchAPI.TopKeywords().then(res => {
-		if (res) {
-			dispatch(updateTopKeywords(res));
-		} else {
-			dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
-		}
-	})
+export const getTopKeywords = (): SearchThunk => {
+	return async (dispatch, getState) => {
+		await searchAPI.TopKeywords().then(res => {
+			if (res) {
+				const keywordList: any[] = res.realtime;
+				const keywords = keywordList.map(keyword => keyword[0]);
+				dispatch(updateTopKeywords(keywords));
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+			}
+		});
+	};
 }
 
 
@@ -64,7 +72,7 @@ export const setOptions = (data: SearchOptions) => ({type: SET_OPTIONS, payload:
 
 
 /* 타입 */
-type SearchAction =
+export type SearchAction =
 	| ReturnType<typeof clearPosts>
 	| ReturnType<typeof initPosts>
 	| ReturnType<typeof pushPosts>
