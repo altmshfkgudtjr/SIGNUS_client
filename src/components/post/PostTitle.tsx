@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+// lib
+import media from 'lib/styles/media'
 
 interface PostTitleProps {
 	message: string
@@ -20,6 +22,10 @@ const Content = styled.div`
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 3;
 	overflow: hidden;
+
+	${media.xsmall} {
+		word-break: break-all;
+	}
 `;
 
 export default PostTitle

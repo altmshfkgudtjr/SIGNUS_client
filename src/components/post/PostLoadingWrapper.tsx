@@ -6,10 +6,13 @@ import * as styles from 'lib/styles/styles'
 import media from 'lib/styles/media'
 import animations from 'lib/styles/animations'
 
-const PostLoadingWrapper = () => {
+interface PostLoadingWrapperProps {
+	view: string;
+}
+const PostLoadingWrapper = ({view}: PostLoadingWrapperProps) => {
 	return (
-		<Container>
-			<Image />
+		<Container isList={view === 'LIST'}>
+			<Image isList={view === 'LIST'} />
 			<TextContainer>
 				<Title />
 				<Post />
@@ -25,7 +28,10 @@ const PostLoadingWrapper = () => {
 	);
 }
 
-const Container = styled.div`
+interface ContainerStyled {
+	isList: boolean;
+}
+const Container = styled.div<ContainerStyled>`
 	grid-row-end: span 2;
 	display: flex;
 	flex-direction: column;
@@ -33,6 +39,8 @@ const Container = styled.div`
 	box-shadow: ${styles.boxShadow.light};
 	border-radius: 4px;
 	animation: ${animations.blink} 1.5s infinite ease-in-out;
+	${props => props.isList && `margin-bottom: 1rem`};
+	${props => props.isList && `width: 100%`};
 
 	${media.small} {
 		display: block;
@@ -40,10 +48,15 @@ const Container = styled.div`
 	}
 `;
 
-const Image = styled.div`
+interface ImageStyled {
+	isList: boolean;
+}
+const Image = styled.div<ImageStyled>`
 	width: 100%;
 	height: 222px;
 	background-color: ${palette.gray1};
+
+	${props => props.isList && `display: none`};
 
 	${media.small} {
 		display: none;

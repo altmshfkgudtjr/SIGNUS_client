@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import * as styles from '../../lib/styles/styles'
 import palette from '../../lib/styles/palette'
 import animations from '../../lib/styles/animations'
+import media from 'lib/styles/media'
 // controllers
 import * as postAPI from 'controllers/post'
 // modules
@@ -15,8 +16,9 @@ interface PostLikeBtnProps {
 	like: number;
 	userValid: boolean;
 	userLikedPosts: string[];
+	isList: boolean;
 }
-const PostLikeBtn = ({postId, like, userValid, userLikedPosts}: PostLikeBtnProps) => {
+const PostLikeBtn = ({postId, like, userValid, userLikedPosts, isList}: PostLikeBtnProps) => {
 	const dispatch = useDispatch();
 	const [liked, setLiked] = useState<boolean>(userLikedPosts.indexOf(postId) !== -1);
 	const [likeCount, setLikeCount] = useState<number>(like);
@@ -53,7 +55,7 @@ const PostLikeBtn = ({postId, like, userValid, userLikedPosts}: PostLikeBtnProps
 	}
 
 	return (
-		<Container onClick={onClick}>
+		<Container onClick={onClick} isList={isList}>
 			<Content>
 				{liked 
 					? <Icon doLike={true} src="/icons/1x/like_filled.png" alt="좋아요 수" />
@@ -65,9 +67,19 @@ const PostLikeBtn = ({postId, like, userValid, userLikedPosts}: PostLikeBtnProps
 	);
 }
 
-const Container = styled.div`
+interface ContainerStyled {
+	isList: boolean;
+};
+const Container = styled.div<ContainerStyled>`
 	position: relative;
-	width: 50%;
+	width: ${props => props.isList
+		? '100%'
+		: '50%'
+	};
+	height: ${props => props.isList
+		? '50%'
+		: '100%'
+	};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -78,6 +90,11 @@ const Container = styled.div`
 	&:active,
 	&:hover {
 		background-color: ${palette.gray0};
+	}
+
+	${media.small} {
+		width: 50%;
+		height: 100%;
 	}
 `;
 

@@ -8,13 +8,14 @@ import palette from 'lib/styles/palette'
 
 interface SearchPostWrapperProps {
 	keyword: string;
+	view: string;
 	children: React.ReactNode;
 };
-const SearchPostWrapper = ({keyword, children}: SearchPostWrapperProps) => {
+const SearchPostWrapper = ({keyword, view, children}: SearchPostWrapperProps) => {
 	return (
 		<Container>
 			<SearchKeywordInfo keyword={keyword} />
-			<PostWrapper>
+			<PostWrapper isList={view === 'LIST'}>
 				{children}
 			</PostWrapper>
 		</Container>
@@ -32,9 +33,15 @@ const Container = styled.div`
 	}
 `;
 
-const PostWrapper = styled.div`
+interface PostWrapperStyled {
+	isList: boolean;
+}
+const PostWrapper = styled.div<PostWrapperStyled>`
 	position: relative;
-	display: grid;
+	display: ${props => props.isList
+		? 'block'
+		: 'grid'
+	};
 	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 	grid-gap: 1rem;
 	grid-auto-rows: 200px;

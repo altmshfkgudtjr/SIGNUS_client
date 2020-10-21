@@ -10,18 +10,21 @@ import media, { mediaValue } from 'lib/styles/media'
 interface BoardInfoMobileProps {
 	small_info: string;
 	large_info: string;
+	view: string;
+	setViewGrid(): void;
+	setViewList(): void;
 };
-const BoardInfoMobile = ({small_info, large_info}: BoardInfoMobileProps) => {
+const BoardInfoMobile = ({small_info, large_info, view, setViewGrid, setViewList}: BoardInfoMobileProps) => {
 	return (
 		<Container>
 			<PageInfo small_info={small_info}
 								large_info={large_info} />
 
 			<OptionWrapper>
-				<OptionItem selected={true}>
+				<OptionItem onClick={setViewGrid} selected={view === 'GRID'}>
 					<OptionIcon src="/icons/1x/card_view.png" alt="격자" />
 				</OptionItem>
-				<OptionItem selected={false}>
+				<OptionItem onClick={setViewList} selected={view === 'LIST'}>
 					<OptionIcon src="/icons/1x/list_view.png" alt="목록" />
 				</OptionItem>
 			</OptionWrapper>

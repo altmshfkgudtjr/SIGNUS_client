@@ -22,12 +22,11 @@ const Search = ({keyword}: SearchProps) => {
 	const userLikedPosts: string[] = useSelector((state: RootState) => state.auth.user.favList).map(post => post._id);
 	const searchOptions = useSelector((state: RootState) => state.search.searchOptions);
 
-	const [view, setView] = useState<string>('GRID');				// or LIST
 	const [loading, setLoading] = useState<boolean>(true);
 
 	const loadingCount = new Array(8).fill(undefined);
 	const LoadingPosts = loadingCount.map(
-		(node, idx) => <PostLoadingWrapper key={idx} />
+		(node, idx) => <PostLoadingWrapper key={idx} view={searchOptions.view} />
 	);
 
 	const Posts = posts.map((post, idx) => {
@@ -35,18 +34,20 @@ const Search = ({keyword}: SearchProps) => {
 			return <PostTextWrapper key={idx} 
 															post={post} 
 															userValid={userValid}
-															userLikedPosts={userLikedPosts} />;
+															userLikedPosts={userLikedPosts}
+															view={searchOptions.view} />;
 		} else {
 			return <PostImageWrapper key={idx} 
 															 post={post} 
 															 userValid={userValid}
-															 userLikedPosts={userLikedPosts} />;
+															 userLikedPosts={userLikedPosts}
+															 view={searchOptions.view} />;
 		}
 	});
 
 	/* 검색 옵션 변경 */
-	const setSearchOptions = (sort: string) => {
-		dispatch(setOptions({sort}));
+	const setSearchOptions = (sort: string, view: string) => {
+		dispatch(setOptions({sort, view}));
 	}
 
 	/* 페이지네이션 함수 */
@@ -82,15 +83,15 @@ const Search = ({keyword}: SearchProps) => {
 		Promise.resolve(dispatch(searchKeyword(keyword))).then(() => {
 			setLoading(false);
 		});
-	}, [dispatch, searchOptions, keyword]);
+	}, [dispatch, searchOptions.sort, keyword]);
 
 	return (
 		<>
 			<SearchOptionWrapper sort={searchOptions.sort}
-													 setSearchOptions={setSearchOptions}
-													 view={view}
-													 setView={setView} />
-			<SearchPostWrapper keyword={keyword}>
+													 view={searchOptions.view}
+													 setSearchOptions={setSearchOptions} />
+			<SearchPostWrapper keyword={keyword}
+												 view={searchOptions.view}>
 				{Posts}
 				{loading && LoadingPosts}
 			</SearchPostWrapper>

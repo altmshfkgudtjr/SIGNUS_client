@@ -1,21 +1,52 @@
 import React from 'react'
 import styled from 'styled-components'
 // lib
-import palette from '../../lib/styles/palette'
+import palette from 'lib/styles/palette'
+import media from 'lib/styles/media'
 
 interface PostControllWrapperProps {
-	children: React.ReactNode
+	children: React.ReactNode;
+	isList: boolean;
 }
-const PostControllWrapper = ({children}: PostControllWrapperProps) => {
-	return <Container>{children}</Container>;
+const PostControllWrapper = ({children, isList}: PostControllWrapperProps) => {
+	return <Container isList={isList}>{children}</Container>;
 }
 
-const Container = styled.div`
+interface ContainerStyled {
+	isList: boolean;
+}
+const Container = styled.div<ContainerStyled>`
 	position: relative;
 	display: flex;
-	width: 100%;
-	height: 40px;
-	border-top: 1px solid ${palette.gray1};
+	flex-direction: ${props => props.isList
+		? 'column'
+		: 'row'
+	};
+	min-width: ${props => props.isList
+		? '140px'
+		: '100%'
+	};
+	height: ${props => props.isList
+		? 'auto'
+		: '40px'
+	};
+	border-top: ${props => props.isList
+		? 'none'
+		: `1px solid ${palette.gray1}`
+	};
+	margin-left: ${props => props.isList
+		? '1rem'
+		: '0'
+	};
+
+	${media.small} {
+		flex-direction: row;
+		min-width: 100%;
+		height: 40px;
+		border-top: 1px solid ${palette.gray1};
+		margin-left: 0;
+		margin-top: .5rem;
+	}
 `;
 
 export default PostControllWrapper

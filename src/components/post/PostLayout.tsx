@@ -5,11 +5,12 @@ import media from 'lib/styles/media'
 
 interface PostLayoutProps {
 	children: React.ReactNode;
+	view: string;
 };
-const PostLayout = ({children}: PostLayoutProps) => {
+const PostLayout = ({children, view}: PostLayoutProps) => {
 	return (
 		<Container>
-			<PostWrapper>
+			<PostWrapper isList={view === 'LIST'}>
 				{children}
 			</PostWrapper>
 		</Container>
@@ -22,9 +23,15 @@ const Container = styled.div`
 	flex-grow: 1;
 `;
 
-const PostWrapper = styled.div`
+interface PostWrapperStyled {
+	isList: boolean;
+}
+const PostWrapper = styled.div<PostWrapperStyled>`
 	position: relative;
-	display: grid;
+	display: ${props => props.isList
+		? 'flex'
+		: 'grid'
+	};
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	gap: 2rem;
 	grid-auto-rows: 200px;

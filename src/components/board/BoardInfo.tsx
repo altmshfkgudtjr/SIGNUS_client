@@ -34,6 +34,8 @@ const Container = styled.div`
 	position: relative;
 	display: inline-block;
 	width: 100%;
+	max-width: 300px;
+	min-width: 300px;
 	grid-row-end: span 1;
 
 	${media.small} {

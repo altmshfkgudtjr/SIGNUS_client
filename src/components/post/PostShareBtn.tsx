@@ -4,15 +4,17 @@ import styled from 'styled-components'
 // lib
 import * as styles from '../../lib/styles/styles'
 import palette from '../../lib/styles/palette'
+import media from 'lib/styles/media'
 // utils
 import * as postUtils from 'lib/utils/postUtils'
 // modules
 import { initSnackbar } from 'modules/snackbar'
 
 interface PostShareBtnProps {
-	url: string
+	url: string;
+	isList: boolean;
 }
-const PostShareBtn = ({url}: PostShareBtnProps) => {
+const PostShareBtn = ({url, isList}: PostShareBtnProps) => {
 	const dispatch = useDispatch();
 	const [copy, setCopy] = useState<boolean>(false);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -30,7 +32,7 @@ const PostShareBtn = ({url}: PostShareBtnProps) => {
 	};
 
 	return (
-		<Container onClick={onClick}>
+		<Container onClick={onClick} isList={isList}>
 			<Content>
 				<Icon src="/icons/1x/export.png" alt="공유" />
 				<Message>공유하기</Message>
@@ -41,9 +43,19 @@ const PostShareBtn = ({url}: PostShareBtnProps) => {
 	);
 }
 
-const Container = styled.div`
+interface ContainerStyled {
+	isList: boolean;
+};
+const Container = styled.div<ContainerStyled>`
 	position: relative;
-	width: 50%;
+	width: ${props => props.isList
+		? '100%'
+		: '50%'
+	};
+	height: ${props => props.isList
+		? '50%'
+		: '100%'
+	};
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -54,6 +66,11 @@ const Container = styled.div`
 	&:active,
 	&:hover {
 		background-color: ${palette.gray0};
+	}
+
+	${media.small} {
+		width: 50%;
+		height: 100%;
 	}
 `;
 

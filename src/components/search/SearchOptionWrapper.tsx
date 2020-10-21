@@ -13,11 +13,10 @@ import media, { mediaValue } from 'lib/styles/media'
 
 interface SearchOptionWrapperProps {
 	sort: string;
-	setSearchOptions(sort: string): void;
 	view: string;
-	setView: React.Dispatch<React.SetStateAction<string>>;
+	setSearchOptions(sort: string, view: string): void;
 }
-const SearchOptionWrapper = ({sort, setSearchOptions, view, setView}: SearchOptionWrapperProps) => {
+const SearchOptionWrapper = ({sort, view, setSearchOptions}: SearchOptionWrapperProps) => {
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const [optionShow, setOptionShow] = useState<boolean>(true);
 
@@ -50,26 +49,29 @@ const SearchOptionWrapper = ({sort, setSearchOptions, view, setView}: SearchOpti
 															small_info="검색"
 															large_info="Search" />}
 			<BoardInfoMobile small_info="검색"
-											 large_info="Search" />
+											 large_info="Search"
+											 view={view}
+											 setViewGrid={() => { setSearchOptions(sort, 'GRID') }}
+											 setViewList={() => { setSearchOptions(sort, 'LIST') }} />
 
 			{!optionShow && <SearchOptionBtn onClick={optionToggle} />}
 			
 			{optionShow && <OptionContainer>
 				{!isMobile && <SearchOption title="보기">
 					<SearchOptionItem message="격자" 
-														onClick={() => { setView('GRID') }} 
+														onClick={() => { setSearchOptions(sort, 'GRID') }} 
 														selected={view==='GRID'}/>
 					<SearchOptionItem message="목록"
-														onClick={() => { setView('LIST') }}
+														onClick={() => { setSearchOptions(sort, 'LIST') }}
 														selected={view==='LIST'}/>
 				</SearchOption>}
 
 				<SearchOption title="정렬">
 					<SearchOptionItem message="관련도순" 
-														onClick={() => { setSearchOptions("RELEVEANCE") }} 
+														onClick={() => { setSearchOptions("RELEVEANCE", view,) }} 
 														selected={sort==='RELEVEANCE'}/>
 					<SearchOptionItem message="최신순" 
-														onClick={() => { setSearchOptions("NEWEST") }}
+														onClick={() => { setSearchOptions("NEWEST", view) }}
 														selected={sort==='NEWEST'}/>
 				</SearchOption>
 

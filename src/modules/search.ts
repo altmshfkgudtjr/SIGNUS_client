@@ -81,7 +81,8 @@ export type SearchAction =
 	| ReturnType<typeof setOptions>
 
 type SearchOptions = {
-	sort: string;
+	sort: string,
+	view: string
 }
 type PostsState = Post[];
 
@@ -96,7 +97,8 @@ export type SearchState = {
 }
 const initialState: SearchState = {
 	searchOptions: {
-		sort: 'RELEVEANCE'
+		sort: 'RELEVEANCE',	// or NEWEST
+		view: "GRID"				// or LIST
 	},
 	posts: [],
 	waitingPosts: [],

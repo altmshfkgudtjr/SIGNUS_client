@@ -18,6 +18,7 @@ export const addRecommendationPosts = (): NewsfeedThunk => {
 				window.scrollTo(0,0);
 			} else {
 				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return Promise.reject();
 			}
 		});
 	}
@@ -36,6 +37,7 @@ export const addPopularityPosts = (): NewsfeedThunk => {
 				window.scrollTo(0,0);
 			} else {
 				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return Promise.reject();
 			}
 		});
 	}
@@ -54,6 +56,7 @@ export const addCategoryPosts = (category: string): NewsfeedThunk => {
 				window.scrollTo(0,0);
 			} else {
 				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return Promise.reject();
 			}
 		});
 	}
@@ -87,6 +90,8 @@ export const pushPosts = (posts: Post[]) => ({type: PUSH_POSTS, payload: posts})
 export const popPosts = () => ({type: POP_POSTS});
 export const setView = (view: string) => ({type: SET_VIEW, payload: view});
 
+
+/* 타입 */
 export type NewsfeedAction =
 	| ReturnType<typeof clearPosts>
 	| ReturnType<typeof initPosts>
@@ -94,8 +99,6 @@ export type NewsfeedAction =
 	| ReturnType<typeof popPosts>
 	| ReturnType<typeof setView>
 
-
-/* 타입 */
 export type Post = {
 	_id: {$oid: string},
 	title: string,

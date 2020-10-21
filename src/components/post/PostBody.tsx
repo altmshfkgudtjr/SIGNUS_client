@@ -2,23 +2,33 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface PostBodyProps {
-	message: string
+	message: string;
+	isList: boolean;
 }
-const PostBody = ({message}: PostBodyProps) => {
-	const post = message.length < 45
+const PostBody = ({message, isList}: PostBodyProps) => {
+	const post = message.length < 40
 								? message
-								: message.slice(0, 45) + '...';
+								: message.slice(0, 40) + '...';
 
-	return <Content>{post}</Content>;
+	return <Content isList={isList}>{post}</Content>;
 }
 
-const Content = styled.div`
+interface ContentStyled {
+	isList: boolean;
+}
+const Content = styled.div<ContentStyled>`
 	position: relative;
 	width: 100%;
 	height: auto;
 	font-size: 14px;
 	line-height: 20px;
 	overflow: hidden;
+	${props => props.isList
+		? `display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 1;`
+		: ''
+	};
 `;
 
 export default PostBody

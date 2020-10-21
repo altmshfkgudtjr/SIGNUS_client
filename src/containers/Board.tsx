@@ -6,6 +6,7 @@ import BoardInfo from 'components/board/BoardInfo'
 import BoardInfoMobile from 'components/board/BoardInfoMobile'
 import PostTextWrapper from 'components/post/PostTextWrapper'
 import PostImageWrapper from 'components/post/PostImageWrapper'
+import PostLoadingLayout from 'components/post/PostLoadingLayout'
 import PostLoadingWrapper from 'components/post/PostLoadingWrapper'
 // modules
 import { RootState } from '../store/index'
@@ -31,18 +32,20 @@ const Board = ({boardName}: BoardProps) => {
 			return <PostTextWrapper key={post['_id']['$oid']} 
 															post={post} 
 															userValid={userValid}
-															userLikedPosts={userLikedPosts} />;
+															userLikedPosts={userLikedPosts}
+															view={view} />;
 		} else {
 			return <PostImageWrapper key={post['_id']['$oid']} 
 															 post={post} 
 															 userValid={userValid}
-															 userLikedPosts={userLikedPosts} />;
+															 userLikedPosts={userLikedPosts}
+															 view={view} />;
 		}
 	});
 
 	const loadingCount = new Array(8).fill(undefined);
 	const LoadingPosts = loadingCount.map(
-		(node, idx) => <PostLoadingWrapper key={idx} />
+		(node, idx) => <PostLoadingWrapper key={idx} view={view} />
 	);
 
 	/* 페이지네이션 함수 */
@@ -123,7 +126,7 @@ const Board = ({boardName}: BoardProps) => {
 	}
 
 	return (
-		<PostLayout>
+		<PostLayout view={view}>
 			<BoardInfo icon_src={imgSrc}
 								 small_info="뉴스피드"
 								 large_info={boardName}
@@ -131,10 +134,15 @@ const Board = ({boardName}: BoardProps) => {
 								 setViewGrid={setViewGrid}
 								 setViewList={setViewList} />
 			<BoardInfoMobile small_info="뉴스피드"
-											 large_info={boardName} />
-			{Posts}
+											 large_info={boardName}
+											 view={view}
+											 setViewGrid={setViewGrid}
+											 setViewList={setViewList} />
+			{view === 'GRID' && Posts}
+			{view === 'LIST' && <div>{Posts}</div>}
 
-			{loading && LoadingPosts}
+			{loading && view === 'GRID' && LoadingPosts}
+			{loading && view === 'LIST' && <PostLoadingLayout>{LoadingPosts}</PostLoadingLayout>}
 		</PostLayout>
 	);
 }

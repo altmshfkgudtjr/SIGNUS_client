@@ -5,20 +5,28 @@ interface PostLinkWrapperProps {
 	postId: string;
 	postUrl: string;
 	onClick(): void;
+	isList: boolean;
 	children: React.ReactNode;
 }
-const PostLinkWrapper = ({postId, postUrl, onClick, children}: PostLinkWrapperProps) => {
-	return <Container onClick={onClick}
+const PostLinkWrapper = ({postId, postUrl, onClick, children, isList}: PostLinkWrapperProps) => {
+	return <Container isList={isList}
+										onClick={onClick}
 										href={postUrl}
 										target="_blank"
 										rel="noopener noreferrer">{children}</Container>;
 }
 
-const Container = styled.a`
+interface ContainerStyled {
+	isList: boolean;
+}
+const Container = styled.a<ContainerStyled>`
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
-	padding: .5rem;
+	padding: ${props => props.isList
+		? '0'
+		: '.5rem'
+	};
 `;
 
 export default PostLinkWrapper
