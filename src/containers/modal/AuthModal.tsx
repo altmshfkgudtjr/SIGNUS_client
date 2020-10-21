@@ -56,7 +56,7 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 	/* 로그인 */
 	const onLogin = (id: string, pw: string) => {
 		setLoading(true);
-		Promise.resolve(dispatch(Login(id, pw))).then(() => {
+		Promise.resolve(dispatch(Login(id, pw))).finally(() => {
 			setLoading(false);
 		});
 	}
@@ -66,6 +66,7 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 		setLoading(true);
 		Promise.resolve(dispatch(AuthorizingUser(id, pw))).then(() => {
 			openSignUpContent();
+		}).finally(() => {
 			setLoading(false);
 		});
 	}
@@ -73,9 +74,9 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 	/* 회원가입 */
 	const onSignUp = (id: string, pw: string) => {
 		setLoading(true);
-		Promise.resolve(dispatch(SignUp(id, pw))).then(() => {
+		Promise.resolve(dispatch(SignUp(id, pw))).finally(() => {
 			setLoading(false);
-		});
+		})
 	}
 
 	/* 사용자 권한 초기화 & 모달 닫기 */

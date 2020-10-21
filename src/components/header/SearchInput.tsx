@@ -24,6 +24,7 @@ const SearchInput = ({searchDisplay, setSearchDisplay, searchWord, setSearchWord
 			const keyword = e.target.value;
 
 			if (searchUtils.searchChecker(keyword)) {
+				if (e.target) e.target.blur();
 				history.push('/search?q=' + keyword);
 			}
 		} else if (e.target) {

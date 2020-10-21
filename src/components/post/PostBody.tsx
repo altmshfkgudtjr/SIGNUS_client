@@ -10,6 +10,9 @@ const PostBody = ({message, isList}: PostBodyProps) => {
 								? message
 								: message.slice(0, 40) + '...';
 
+	if (message === '0') {
+		return null;
+	}
 	return <Content isList={isList}>{post}</Content>;
 }
 

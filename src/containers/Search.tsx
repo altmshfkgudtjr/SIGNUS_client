@@ -23,6 +23,7 @@ const Search = ({keyword}: SearchProps) => {
 	const searchOptions = useSelector((state: RootState) => state.search.searchOptions);
 
 	const [loading, setLoading] = useState<boolean>(true);
+	const [empty, setEmpty] = useState<boolean>(false);
 
 	const loadingCount = new Array(8).fill(undefined);
 	const LoadingPosts = loadingCount.map(
@@ -79,11 +80,21 @@ const Search = ({keyword}: SearchProps) => {
 
 	/* 검색 옵션 변경 재검색 */
 	useEffect(() => {
+		setEmpty(false);
 		setLoading(true);
 		Promise.resolve(dispatch(searchKeyword(keyword))).then(() => {
 			setLoading(false);
 		});
 	}, [dispatch, searchOptions.sort, keyword]);
+
+	/* 검색 결과가 없을 때 */
+	useEffect(() => {
+		if (posts.length === 0) {
+			setEmpty(true);
+		} else {
+			setEmpty(false);
+		}
+	}, [posts]);
 
 	return (
 		<>
@@ -91,7 +102,9 @@ const Search = ({keyword}: SearchProps) => {
 													 view={searchOptions.view}
 													 setSearchOptions={setSearchOptions} />
 			<SearchPostWrapper keyword={keyword}
-												 view={searchOptions.view}>
+												 view={searchOptions.view}
+												 empty={empty}
+												 loading={loading}>
 				{Posts}
 				{loading && LoadingPosts}
 			</SearchPostWrapper>

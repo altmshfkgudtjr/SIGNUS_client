@@ -6,6 +6,8 @@ import PageInfo from 'components/commons/PageInfo'
 import * as styles from 'lib/styles/styles'
 import palette from 'lib/styles/palette'
 import media, { mediaValue } from 'lib/styles/media'
+// icons
+import { CardViewIcon as cardViewIcon, ListViewIcon as listViewIcon } from 'static/svg'
 
 interface BoardInfoMobileProps {
 	small_info: string;
@@ -22,10 +24,10 @@ const BoardInfoMobile = ({small_info, large_info, view, setViewGrid, setViewList
 
 			<OptionWrapper>
 				<OptionItem onClick={setViewGrid} selected={view === 'GRID'}>
-					<OptionIcon src="/icons/1x/card_view.png" alt="격자" />
+					<CardViewIcon />
 				</OptionItem>
 				<OptionItem onClick={setViewList} selected={view === 'LIST'}>
-					<OptionIcon src="/icons/1x/list_view.png" alt="목록" />
+					<ListViewIcon />
 				</OptionItem>
 			</OptionWrapper>
 		</Container>
@@ -93,11 +95,20 @@ const OptionItem = styled.div<ContainerStyled>`
 	`};
 `;
 
-const OptionIcon = styled.img`
+const CardViewIcon = styled(cardViewIcon)`
 	position: relative;
 	display: block;
-	width: 20px;
-	height: 20px;
+	width: 22px;
+	height: 22px;
+	margin: 6px auto;
+	opacity: .4;
+`;
+
+const ListViewIcon = styled(listViewIcon)`
+	position: relative;
+	display: block;
+	width: 22px;
+	height: 22px;
 	margin: 6px auto;
 	opacity: .4;
 `;

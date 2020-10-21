@@ -34,7 +34,7 @@ const Container = styled.div`
 
 	${media.small} {
 		margin-top: .5rem;
-		border-top: .5rem solid ${palette.gray1};
+		border-top: 1px solid ${palette.gray2};
 	}
 `;
 

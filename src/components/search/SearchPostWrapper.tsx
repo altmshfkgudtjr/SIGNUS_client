@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 // components
 import SearchKeywordInfo from 'components/search/SearchKeywordInfo'
+import EmptyContent from 'components/search/EmptyContent'
 // lib
 import media from 'lib/styles/media'
 import palette from 'lib/styles/palette'
@@ -9,12 +10,15 @@ import palette from 'lib/styles/palette'
 interface SearchPostWrapperProps {
 	keyword: string;
 	view: string;
+	empty: boolean;
+	loading: boolean;
 	children: React.ReactNode;
 };
-const SearchPostWrapper = ({keyword, view, children}: SearchPostWrapperProps) => {
+const SearchPostWrapper = ({keyword, view, empty, loading, children}: SearchPostWrapperProps) => {
 	return (
 		<Container>
 			<SearchKeywordInfo keyword={keyword} />
+			{!loading && empty && <EmptyContent />}
 			<PostWrapper isList={view === 'LIST'}>
 				{children}
 			</PostWrapper>

@@ -45,6 +45,7 @@ const Container = styled(Link)`
 		box-shadow: ${styles.boxShadow.light};
 		padding: 1rem .5rem;
 		margin: .5rem auto 0 auto;
+		background-color: #FFF;
 	}
 `;
 
