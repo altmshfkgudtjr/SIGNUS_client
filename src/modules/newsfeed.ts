@@ -133,6 +133,7 @@ function newsfeed(state: NewsfeedState = initialState, action: NewsfeedAction): 
 			/* 포스트 비우기 */
 			return produce(state, draft => {
 				draft.posts = [];
+				draft.waitingPosts = [];
 			});
 		case INIT_POSTS:
 			/* 포스트 새로 추가 */
