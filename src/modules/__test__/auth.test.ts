@@ -19,7 +19,7 @@ describe('auth', () => {
 		let state = reducer(undefined, {});
 	});
 
-	it('should create actions', () => {
+	it('should create actions.', () => {
 		const expectedActions = [
 			{ type: 'auth/SET_USER', payload: {} },
 			{ type: 'auth/DELETE_USER' },
@@ -36,7 +36,7 @@ describe('auth', () => {
 	});
 
 	describe('reducer', () => {
-		it('should return the initialState', () => {
+		it('should return the initialState.', () => {
 			expect(state).toEqual(initialState);
 		});
 
@@ -72,7 +72,7 @@ describe('auth', () => {
 			expect(state.user.id).toBe('');
 		});
 
-		it('should set authorization', () => {
+		it('should set authorization.', () => {
 			const data = {
 				id: '12345678',
 				pw: ''
@@ -83,7 +83,7 @@ describe('auth', () => {
 			expect(state.authorization).toEqual(data);
 		});
 
-		it('should delete authorization', () => {
+		it('should delete authorization.', () => {
 			state = reducer(state, actions.deleteAuthorization());
 
 			expect(state.authorization).toEqual({});

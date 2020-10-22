@@ -22,7 +22,7 @@ describe('notice', () => {
 		let state = reducer(undefined, {});
 	});
 
-	it('should create actions', () => {
+	it('should create actions.', () => {
 		const data = MockNoticeData(0);
 
 		const expectedActions = [
@@ -43,7 +43,7 @@ describe('notice', () => {
 	});
 
 	describe('reducer', () => {
-		it('should return the initialState', () => {
+		it('should return the initialState.', () => {
 			expect(state).toEqual(initialState);
 		});
 
@@ -110,7 +110,7 @@ describe('notice', () => {
 			]);
 		});
 
-		it('should set validation of notice', () => {
+		it('should set validation of notice.', () => {
 			state = reducer(state, actions.addNotice(MockNotice(0)));
 			state = reducer(state, actions.validationNotice(true));
 

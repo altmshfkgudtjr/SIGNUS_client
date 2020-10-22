@@ -67,7 +67,7 @@ export const clearPosts = () => ({type: CLEAR_POSTS});
 export const initPosts = (data: {posts: Post[], waits: Post[]}) => ({type: INIT_POSTS, payload: data});
 export const pushPosts = (posts: Post[]) => ({type: PUSH_POSTS, payload: posts});
 export const popPosts = () => ({type: POP_POSTS});
-export const updateTopKeywords = (data: any) => ({type: SET_TOP_KEYWORDS, payload: data});
+export const updateTopKeywords = (data: string[]) => ({type: SET_TOP_KEYWORDS, payload: data});
 export const setOptions = (data: SearchOptions) => ({type: SET_OPTIONS, payload: data });
 
 

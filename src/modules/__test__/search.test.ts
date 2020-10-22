@@ -1,39 +1,46 @@
-import reducer, * as actions from 'modules/newsfeed'
+import reducer, * as actions from 'modules/search'
 // type
 import { Post } from 'modules/newsfeed'
 
-describe('newsfeed', () => {
+describe('search', () => {
 	const initialState = {
-		view: "GRID",
+		searchOptions: {
+			sort: 'RELEVEANCE',
+			view: "GRID"
+		},
 		posts: [],
-		waitingPosts: []
+		waitingPosts: [],
+		
+		topKeywords: []
 	};
 	let state = reducer(undefined, {});
 
-	beforeEach(() => {         
+	beforeEach(() => {
 		let state = reducer(undefined, {});
 	});
 
 	it('should create actions.', () => {
 		const expectedActions = [
-			{ type: 'newsfeed/CLEAR_POSTS' },
-			{ type: 'newsfeed/INIT_POSTS', payload: {posts: [], waits: []} },
-			{ type: 'newsfeed/PUSH_POSTS', payload: [] },
-			{ type: 'newsfeed/POP_POSTS' },
-			{ type: 'newsfeed/SET_VIEW', payload: '' },
+			{ type: 'search/CLEAR_POSTS' },
+			{ type: 'search/INIT_POSTS', payload: {posts: [], waits: []} },
+			{ type: 'search/PUSH_POSTS', payload: [] },
+			{ type: 'search/POP_POSTS' },
+			{ type: 'search/SET_TOP_KEYWORDS', payload: [] },
+			{ type: 'search/SET_OPTIONS', payload: {sort: '', view: ''} },
 		];
 		const newsfeedActions = [
 			actions.clearPosts(),
 			actions.initPosts({posts: [], waits: []}),
 			actions.pushPosts([]),
 			actions.popPosts(),
-			actions.setView(''),
+			actions.updateTopKeywords([]),
+			actions.setOptions({sort: '', view: ''})
 		];
 		expect(newsfeedActions).toEqual(expectedActions);
 	});
 
 	describe('reducer', () => {
-		it('should return the initialState', () => {
+		it('should return the initialState.', () => {
 			expect(state).toEqual(initialState);
 		});
 
@@ -96,15 +103,23 @@ describe('newsfeed', () => {
 			expect(state.posts).toEqual([]);
 			expect(state.waitingPosts).toEqual([]);
 		});
+		
+		it('should set top keywords.', () => {
+			const keywords = ['가', '나', '다', '라'];
 
-		it('should set view.', () => {
-			state = reducer(state, actions.setView('LIST'));
+			state = reducer(state, actions.updateTopKeywords(keywords));
 
-			expect(state.view).toBe('LIST');
+			expect(state.topKeywords).toEqual(keywords);
+		});
 
-			state = reducer(state, actions.setView('GRID'));
+		it('should set search options.', () => {
+			state = reducer(state, actions.setOptions({
+				sort: 'NEWEST',
+				view: 'LIST'
+			}));
 
-			expect(state.view).toBe('GRID');
+			expect(state.searchOptions.sort).toBe('NEWEST');
+			expect(state.searchOptions.view).toBe('LIST');
 		});
 	});
 });
