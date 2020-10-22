@@ -10,7 +10,7 @@ describe('newsfeed', () => {
 	};
 	let state = reducer(undefined, {});
 
-	beforeEach(() => {
+	beforeEach(() => {         
 		let state = reducer(undefined, {});
 	});
 

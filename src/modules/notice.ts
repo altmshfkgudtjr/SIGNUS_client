@@ -194,16 +194,16 @@ function notice(state: NoticeState = initialState, action:  NoticeAction): Notic
 				draft.notice.title = action.payload['title'];
 				draft.notice.post = action.payload['post'];
 
-				const filled = draft.noticeList.filter(node => node.id === action.payload['id'])[0];
+				const filtered = draft.noticeList.filter(node => node.id === action.payload['id'])[0];
 
-				filled.title = action.payload['title'];
-				filled.post = action.payload['post'];
+				filtered.title = action.payload['title'];
+				filtered.post = action.payload['post'];
 			});
 
 		case DELETE_NOTICE:
 			/* 공지사항 삭제 */
 			return produce(state, draft => {
-				draft.noticeList.filter(node => node.id !== action.payload);
+				draft.noticeList = draft.noticeList.filter(node => node.id !== action.payload);
 				if (draft.notice.id === action.payload) {
 					draft.notice.id = '';
 					draft.notice.title = '';

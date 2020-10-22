@@ -58,10 +58,6 @@ const Container = styled.div<ContainerStyled>`
 		}
 	}
 
-	& > img {
-		max-width: 100%;
-	}
-
 	${media.small} {
 		height: ${props => props.isList && '108px'};
 	}
