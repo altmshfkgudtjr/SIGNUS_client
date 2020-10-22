@@ -89,3 +89,32 @@ export const validationRePwChecker = (pw: string, rePw: string): validationType 
 		type: "SUCCESS"
 	};
 }
+
+/* 닉네임 값 유효성 검사 */
+export const validationNicknameChecker = (keyword: string): validationType => {
+	if (!emptyChecker(keyword)) {
+		return {
+			valid: false,
+			type: "EMPTY"
+		}
+	}
+
+	if (keyword.length < 1) {
+		return {
+			valid: false,
+			type: "TOO_SHORT"
+		};
+	}
+
+	if (10 < keyword.length) {
+		return {
+			valid: false,
+			type: "TOO_LONG"
+		};
+	}
+
+	return {
+		valid: true,
+		type: "SUCCESS"
+	};
+}

@@ -72,9 +72,9 @@ const AuthModal = ({display, onClose}: AuthModalProps) => {
 	}
 
 	/* 회원가입 */
-	const onSignUp = (id: string, pw: string) => {
+	const onSignUp = (id: string, pw: string, nickname: string) => {
 		setLoading(true);
-		Promise.resolve(dispatch(SignUp(id, pw))).finally(() => {
+		Promise.resolve(dispatch(SignUp(id, pw, nickname))).finally(() => {
 			setLoading(false);
 		})
 	}

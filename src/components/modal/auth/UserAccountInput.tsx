@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 // lib
 import * as styles from '../../../lib/styles/styles'
@@ -13,15 +13,6 @@ interface UserAccountInputProps {
 	message?: string;
 }
 const UserAccountInput = forwardRef(({userId, setUserId, onAction, placeholder, valid, message}: UserAccountInputProps, ref: any) => {
-	/* 자동 포커스 실행 */
-	/* eslint-disable */
-	useEffect(() => {
-		if (ref.current) {
-			ref.current.focus();
-		}
-	}, []);
-	/* eslint-enable */
-
 	const onKeyUp = (e: any) => {
 		if (e.keyCode === 13) {
 			onAction();

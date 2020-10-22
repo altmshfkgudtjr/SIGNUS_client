@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // components
@@ -15,7 +15,7 @@ import * as authUtils from 'lib/utils/authUtils'
 import { initSnackbar } from 'modules/snackbar'
 
 interface AuthSignUpContentProps {
-	onSignUp(id: string, pw: string): void;
+	onSignUp(id: string, pw: string, nickname: string): void;
 	openAuthorizationContent(): void;
 };
 const AuthSignUpContent = ({onSignUp, openAuthorizationContent}: AuthSignUpContentProps) => {
@@ -23,18 +23,33 @@ const AuthSignUpContent = ({onSignUp, openAuthorizationContent}: AuthSignUpConte
 	const [userId, setUserId] = useState<string>('');
 	const [userPw, setUserPw] = useState<string>('');
 	const [userRePw, setUserRePw] = useState<string>('');
+	const [userNickname, setUserNickname] = useState<string>('');
+
 	const [userIdValid, setUserIdValid] = useState<boolean>(true);
 	const [userPwValid, setUserPwValid] = useState<boolean>(true);
 	const [userRePwValid, setUserRePwValid] = useState<boolean>(true);
+	const [userNicknameValid, setUserNicknameValid] = useState<boolean>(true);
+
 	const InputIdRef: React.RefObject<HTMLInputElement> = createRef();
 	const InputPwRef: React.RefObject<HTMLInputElement> = createRef();
 	const InputRePwRef: React.RefObject<HTMLInputElement> = createRef();
+	const InputNicknameRef: React.RefObject<HTMLInputElement> = createRef();
+
+	/* 자동 포커스 실행 */
+	/* eslint-disable */
+	useEffect(() => {
+		if (InputIdRef.current) {
+			InputIdRef.current.focus();
+		}
+	}, []);
+	/* eslint-enable */
 
 	/* 회원가입 실행 */
 	const onClick = () => {
 		const idValidation = authUtils.validationIdChecker(userId);
 		const pwValidation = authUtils.validationPwChecker(userPw);
 		const rePwValidation = authUtils.validationRePwChecker(userPw, userRePw);
+		const nicknameValidation = authUtils.validationNicknameChecker(userNickname);
 
 		if (!idValidation.valid) {
 			if (idValidation.type === 'EMPTY') {
@@ -91,7 +106,26 @@ const AuthSignUpContent = ({onSignUp, openAuthorizationContent}: AuthSignUpConte
 			setUserRePwValid(true);
 		}
 
-		onSignUp(userId, userPw); 
+		if (!nicknameValidation.valid) {
+			if (nicknameValidation.type === 'EMPTY') {
+				dispatch(initSnackbar("닉네임을 입력해주세요.", "warning"));
+			} else if (nicknameValidation.type === 'TOO_SHORT') {
+				dispatch(initSnackbar("닉네임이 너무 짧습니다.", "warning"));
+			} else if (nicknameValidation.type === 'TOO_LONG') {
+				dispatch(initSnackbar("닉네임이 너무 깁니다. (10자 이하)", "warning"));
+			}
+
+			if (InputNicknameRef.current) {
+				InputNicknameRef.current.focus();
+			}
+			setUserNicknameValid(false);
+
+			return;
+		} else {
+			setUserNicknameValid(true);
+		}
+
+		onSignUp(userId, userPw, userNickname); 
 	}
 
 	return (
@@ -120,6 +154,12 @@ const AuthSignUpContent = ({onSignUp, openAuthorizationContent}: AuthSignUpConte
 												 ref={InputRePwRef}
 												 placeholder="비밀번호 확인"
 												 valid={userRePwValid} />
+			<UserAccountInput userId={userNickname}
+												setUserId={setUserNickname}
+												onAction={onClick}
+												ref={InputNicknameRef}
+												placeholder="닉네임"
+												valid={userNicknameValid} />
 			<AuthBtn onClick={onClick} message="가입하기" />
 		</Container>
 	);

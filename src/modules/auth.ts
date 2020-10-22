@@ -14,7 +14,7 @@ export const GetUser = (): AuthThunk => {
 				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 			}
 		});
-	}
+	};
 }
 
 export const Login = (id: string, pw: string): AuthThunk => {
@@ -27,7 +27,7 @@ export const Login = (id: string, pw: string): AuthThunk => {
 				dispatch(initSnackbar("아이디 혹은 비밀번호가 맞지 않습니다.", "error"));
 			}
 		});
-	}
+	};
 }
 
 export const Logout = (): AuthThunk => {
@@ -35,16 +35,16 @@ export const Logout = (): AuthThunk => {
 		window.localStorage.removeItem('tk');
 		dispatch(deleteUser());
 		window.location.reload();
-	}
+	};
 }
 
-export const SignUp = (id: string, pw: string): AuthThunk => {
+export const SignUp = (id: string, pw: string, nickname: string): AuthThunk => {
 	return async (dispatch, getState) => {
 		const state = getState();
 		const sj_id = state.auth.authorization.id;
 		const sj_pw = state.auth.authorization.pw;
 
-		await authAPI.SignUp(id, pw, sj_id, sj_pw).then((res: any) => {
+		await authAPI.SignUp(id, pw, nickname, sj_id, sj_pw).then((res: any) => {
 			if (res) {
 				window.localStorage.setItem('tk', res['access_token']);
 				window.location.reload();
@@ -54,7 +54,7 @@ export const SignUp = (id: string, pw: string): AuthThunk => {
 				return Promise.reject();
 			}
 		});
-	}
+	};
 }
 
 export const AuthorizingUser = (id: string, pw: string): AuthThunk => {
@@ -69,7 +69,22 @@ export const AuthorizingUser = (id: string, pw: string): AuthThunk => {
 				return Promise.reject();
 			}
 		});
-	}
+	};
+}
+
+export const SucessionUser = (): AuthThunk => {
+	return async dispatch => {
+		await authAPI.Sucession().then((res: any) => {
+			if (res) {
+				window.localStorage.removeItem('tk');
+				alert("성공적으로 탈퇴되었습니다.");
+				window.location.reload();
+			} else {
+				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
+				return Promise.reject();
+			}
+		});
+	};
 }
 
 /* 액션 */
@@ -93,6 +108,7 @@ export type AuthAction =
 /* 타입 */
 type User = {
 	id: string,
+	nickname: string,
 	favList: any[],
 	viewList: any[],
 	newsfeedList: any[],
@@ -112,6 +128,7 @@ const initialState: AuthState = {
 	admin: false,
 	user: {
 		id: '',
+		nickname: '세종인',
 		favList: [],
 		viewList: [],
 		newsfeedList: [],
@@ -130,6 +147,7 @@ function auth(state: AuthState = initialState, action: AuthAction): AuthState {
 				draft.login = true;
 				draft.admin = action.payload['admin'];
 				draft.user.id = action.payload['user_id'];
+				draft.user.nickname = action.payload['user_nickname'];
 				draft.user.favList = action.payload['fav_list'];
 				draft.user.viewList = action.payload['view_list'];
 				draft.user.newsfeedList = action.payload['newsfeed_list'];
@@ -143,6 +161,7 @@ function auth(state: AuthState = initialState, action: AuthAction): AuthState {
 				draft.admin = false;
 				draft.user = {
 					id: '',
+					nickname: '세종인',
 					favList: [],
 					viewList: [],
 					newsfeedList: [],

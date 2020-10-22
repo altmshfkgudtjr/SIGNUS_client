@@ -30,6 +30,19 @@ const Search = ({keyword}: SearchProps) => {
 		(node, idx) => <PostLoadingWrapper key={idx} view={searchOptions.view} />
 	);
 
+	/* 페이지 보기 방식 변경: board-view */
+	/* eslint-disable */
+	useEffect(() => {
+		const searchView = window.localStorage.getItem('sv');
+
+		if (!!searchView && (searchView === 'GRID' || searchView === 'LIST')) {
+			dispatch(setOptions({view: searchView, sort: searchOptions.sort}));
+		} else {
+			window.localStorage.setItem('sv', searchOptions.view);
+		}
+	}, []);
+	/* eslint-enable */
+
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
 			return <PostTextWrapper key={idx} 
@@ -48,6 +61,11 @@ const Search = ({keyword}: SearchProps) => {
 
 	/* 검색 옵션 변경 */
 	const setSearchOptions = (sort: string, view: string) => {
+		if (view === 'LIST') {
+			window.localStorage.setItem('sv', "LIST");
+		} else {
+			window.localStorage.setItem('sv', "GRID");
+		}
 		dispatch(setOptions({sort, view}));
 	}
 

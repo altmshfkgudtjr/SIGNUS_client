@@ -28,7 +28,7 @@ const MenuModal = ({display, onClose}: MenuModalProps) => {
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	
 	const loginValid = useSelector((state: RootState) => state.auth.login);
-	const name = useSelector((state: RootState) => state.auth.user.id);
+	const name = useSelector((state: RootState) => state.auth.user.nickname);
 	
 	const noticeList = useSelector((state: RootState) => state.notice.noticeList);
 	const notice = noticeList.length > 0 ? noticeList[0] : undefined;

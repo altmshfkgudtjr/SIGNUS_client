@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import palette from 'lib/styles/palette'
 
 const Copyright = () => {
-	const text = `© SIGNUS, 2020\nAll Rights Reserved. ver.1017`;
+	const text = `© SIGNUS, 2020\nAll Rights Reserved. ver.1022`;
 
 	return <Content>{text}</Content>;
 }

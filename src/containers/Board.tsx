@@ -27,6 +27,19 @@ const Board = ({boardName}: BoardProps) => {
 	const [imgSrc, setImgSrc] = useState<string>('/icons/1x/home.png');
 	const [loading, setLoading] = useState<boolean>(true);
 
+	/* 페이지 보기 방식 변경: board-view */
+	/* eslint-disable */
+	useEffect(() => {
+		const boardView = window.localStorage.getItem('bv');
+
+		if (!!boardView && (boardView === 'GRID' || boardView === 'LIST')) {
+			dispatch(setView(boardView));
+		} else {
+			window.localStorage.setItem('bv', view);
+		}
+	}, []);
+	/* eslint-enable */
+
 	const Posts = posts.map((post, idx) => {
 		if (typeof post['img'] === 'number') {
 			return <PostTextWrapper key={post['_id']['$oid']} 
@@ -120,9 +133,11 @@ const Board = ({boardName}: BoardProps) => {
 	/* 보기 방식 설정 (GRID | LIST) */
 	const setViewGrid = () => {
 		dispatch(setView("GRID"));
+		window.localStorage.setItem('bv', "GRID");
 	}
 	const setViewList = () => {
 		dispatch(setView("LIST"));
+		window.localStorage.setItem('bv', "LIST");
 	}
 
 	return (

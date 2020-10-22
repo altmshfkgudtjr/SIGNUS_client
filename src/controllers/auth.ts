@@ -21,7 +21,7 @@ export const Login = (id: string, pw: string) => {
 	:::: 사용자 정보 반환 ::::
 */
 export const GetUser = () => {
-	return Fetch("/api/auth", "GET").then((res) => {
+	return Fetch("/api/auth/user", "GET").then((res) => {
 		if (res.msg === 'success') {
 			return res.result;
 		} else {
@@ -33,10 +33,11 @@ export const GetUser = () => {
 /*
 	:::: 회원가입 ::::
 */
-export const SignUp = (id: string, pw: string, sj_id: string, sj_pw: string) => {
+export const SignUp = (id: string, pw: string, nickname: string, sj_id: string, sj_pw: string) => {
 	const sendData = {
 		id: id,
 		pw: pw,
+		nickname: nickname,
 		sj_id: sj_id,
 		sj_pw: sj_pw
 	};
@@ -58,6 +59,19 @@ export const AuthorizingUser = (id: string, pw: string) => {
 		sj_pw: pw
 	};
 	return Fetch("/api/auth/sejong", "POST", sendData).then((res) => {
+		if (res.msg === 'success') {
+			return res.result;
+		} else {
+			return false;
+		}
+	});
+}
+
+/*
+	:::: 회원탈퇴 ::::
+*/
+export const Sucession = () => {
+	return Fetch("/api/auth/secession", "DELETE").then((res) => {
 		if (res.msg === 'success') {
 			return res.result;
 		} else {

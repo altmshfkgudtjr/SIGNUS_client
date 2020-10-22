@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // components
@@ -26,6 +26,15 @@ const AuthAuthorizationContent = ({onCertification, openLoginContent}: AuthLogin
 	const [userPwValid, setUserPwValid] = useState<boolean>(true);
 	const InputIdRef: React.RefObject<HTMLInputElement> = createRef();
 	const InputPwRef: React.RefObject<HTMLInputElement> = createRef();
+
+	/* 자동 포커스 실행 */
+	/* eslint-disable */
+	useEffect(() => {
+		if (InputIdRef.current) {
+			InputIdRef.current.focus();
+		}
+	}, []);
+	/* eslint-enable */
 
 	const onClick = () => {
 		if (!authUtils.emptyChecker(userId) && InputIdRef.current) {

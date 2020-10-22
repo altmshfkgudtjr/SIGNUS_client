@@ -12,7 +12,7 @@ const Container = styled.div`
 	position: relative;
 	width: 100%;
 	min-height: 200px;
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 `;
 
 export default ContentWrapper

@@ -16,7 +16,7 @@ const Header = () => {
 	const [scrolled, setScrolled] = useState<boolean>(false);
 	const prevScrollTop = useRef(0);
 	const loginValid = useSelector((state: RootState) => state.auth.login);
-	const userName = useSelector((state: RootState) => state.auth.user.id);
+	const userName = useSelector((state: RootState) => state.auth.user.nickname);
 
 	/* 스크롤했을 때, Header 노출 여부 결정 함수 */
 	const handleScrolled = useCallback(throttle(() => {

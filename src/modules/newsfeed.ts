@@ -46,7 +46,7 @@ export const addPopularityPosts = (): NewsfeedThunk => {
 export const addCategoryPosts = (category: string): NewsfeedThunk => {
 	return async dispatch => {
 		dispatch(clearPosts());
-		newfeedAPI.CategoryPosts(category).then(res => {
+		await newfeedAPI.CategoryPosts(category).then(res => {
 			if (res) {
 				const posts = res.splice(0,40);
 				dispatch(initPosts({

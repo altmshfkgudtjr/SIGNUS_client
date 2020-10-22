@@ -70,7 +70,6 @@ function snackbar(state: Snackbar = initialState, action: SnackbarAction): Snack
 				draft.message = action.payload['message'];
 				draft.type = action.payload['type'];
 			});
-
 		case DELETE_SNACKBAR:
 			/* 스낵바 제거 */
 			return produce(state, draft => {
@@ -78,7 +77,6 @@ function snackbar(state: Snackbar = initialState, action: SnackbarAction): Snack
 				draft.message = '';
 				draft.type = 'info';
 			});
-
 		default:
 			return state;
 	}
