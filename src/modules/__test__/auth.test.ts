@@ -6,7 +6,7 @@ describe('auth', () => {
 		admin: false,
 		user: {
 			id: '',
-			nickname: '',
+			nickname: '세종인',
 			favList: [],
 			viewList: [],
 			newsfeedList: [],
@@ -55,7 +55,6 @@ describe('auth', () => {
 			expect(state.login).toBe(true);
 			expect(state.admin).toBe(true);
 			expect(state.user.id).toBe('SIGNUS');
-			expect(state.user.nickname).toBe('SIGNUS');
 		});
 		
 		it('should delete user.', () => {
@@ -74,7 +73,6 @@ describe('auth', () => {
 			expect(state.login).toBe(false);
 			expect(state.admin).toBe(false);
 			expect(state.user.id).toBe('');
-			expect(state.user.nickname).toBe('');
 		});
 
 		it('should set authorization.', () => {

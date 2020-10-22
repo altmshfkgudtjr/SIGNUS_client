@@ -63,7 +63,7 @@ const Title = styled.div`
 const Post = styled.div`
 	width: 100%;
 	font-size: 14px;
-	font-weight: 200;
+	font-weight: 400;
 	margin-bottom: 1rem;
 
 	${media.small} {
