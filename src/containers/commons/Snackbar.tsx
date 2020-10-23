@@ -2,13 +2,13 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // components
-import Snackbar from '../components/commons/Snackbar'
+import Snackbar from 'components/commons/Snackbar'
 // lib
-import zIndex from '../lib/styles/zIndex'
-import media from '../lib/styles/media'
+import zIndex from 'lib/styles/zIndex'
+import media from 'lib/styles/media'
 // modules
-import { RootState } from '../store/index'
-import { deleteSnackbar } from '../modules/snackbar'
+import { RootState } from 'store/index'
+import { deleteSnackbar } from 'modules/snackbar'
 
 const SnackbarWrapper = () => {
 	const dispatch = useDispatch();

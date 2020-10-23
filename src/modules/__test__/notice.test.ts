@@ -31,6 +31,7 @@ describe('notice', () => {
 			{ type: 'notice/UPDATE_NOTICE', payload: data },
 			{ type: 'notice/DELETE_NOTICE', payload: '' },
 			{ type: 'notice/VALIDATION_NOTICE', payload: true },
+			{ type: 'notice/CLEAR_NOTICE' },
 		];
 		const newsfeedActions = [
 			actions.addNotice({}),
@@ -38,6 +39,7 @@ describe('notice', () => {
 			actions.updateNotice(data),
 			actions.deleteNotice(''),
 			actions.validationNotice(true),
+			actions.clearNotice(),
 		];
 		expect(newsfeedActions).toEqual(expectedActions);
 	});
@@ -115,6 +117,15 @@ describe('notice', () => {
 			state = reducer(state, actions.validationNotice(true));
 
 			expect(state.notice.valid).toBe(true);
+		});
+
+		it('should clear noticec.', () => {
+			state = reducer(state, actions.addNotice(MockNotice(0)));
+
+			state = reducer(state, actions.clearNotice());
+
+			expect(state.notice.id).toBe('');
+			expect(state.notice.valid).toBe(false);
 		});
 	});
 });

@@ -9,6 +9,7 @@ import { dateFormatter } from 'lib/utils/postUtils'
 /* Thunk 함수 */
 export const GetNotice = (noticeId: string): NoticeThunk => {
 	return async dispatch => {
+		dispatch(clearNotice());
 		await noticeAPI.GetNotice(noticeId).then((res: any) => {
 			if (res) {
 				dispatch(addNotice(res));
@@ -26,7 +27,8 @@ export const GetNoticeList = (): NoticeThunk => {
 	return async dispatch => {
 		await noticeAPI.GetNotice(null).then((res: any) => {
 			if (res) {
-				dispatch(addNoticeList(res));
+				const reversed = res.reverse();
+				dispatch(addNoticeList(reversed));
 			} else {
 				dispatch(initSnackbar("서버와의 연결이 원활하지 않습니다.", "error"));
 			}
@@ -118,12 +120,14 @@ const ADD_NOTICELIST = 'notice/ADD_NOTICELIST' as const;
 const UPDATE_NOTICE = 'notice/UPDATE_NOTICE' as const;
 const DELETE_NOTICE = 'notice/DELETE_NOTICE' as const;
 const VALIDATION_NOTICE = 'notice/VALIDATION_NOTICE' as const;
+const CLEAR_NOTICE = 'notice/CLEAR_NOTICE' as const;
 
 export const addNotice = (notice: any) => ({type: ADD_NOTICE, payload: notice});
 export const addNoticeList = (noticeList: any[]) => ({type: ADD_NOTICELIST, payload: noticeList});
 export const updateNotice = (notice: Notice) => ({type: UPDATE_NOTICE, payload: notice});
 export const deleteNotice = (noticeId: string) => ({type: DELETE_NOTICE, payload: noticeId});
 export const validationNotice = (valid: boolean) => ({type: VALIDATION_NOTICE, payload: valid});
+export const clearNotice = () => ({type: CLEAR_NOTICE});
 
 export type NoticeAction =
 	| ReturnType<typeof addNotice>
@@ -131,6 +135,7 @@ export type NoticeAction =
 	| ReturnType<typeof updateNotice>
 	| ReturnType<typeof deleteNotice>
 	| ReturnType<typeof validationNotice>
+	| ReturnType<typeof clearNotice>
 
 
 /* 타입 */
@@ -218,6 +223,17 @@ function notice(state: NoticeState = initialState, action:  NoticeAction): Notic
 			/* 공지사항 권한 변경 */
 			return produce(state, draft => {
 				draft.notice.valid = action.payload;
+			});
+
+		case CLEAR_NOTICE:
+			/* 공지사항 초기화 */
+			return produce(state, draft => {
+				draft.notice.id = '';
+				draft.notice.title = '';
+				draft.notice.author = '';
+				draft.notice.post = '';
+				draft.notice.date = '';
+				draft.notice.valid = false;
 			});
 
 		default:

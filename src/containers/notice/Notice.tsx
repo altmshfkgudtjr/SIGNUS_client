@@ -6,7 +6,7 @@ import NoticeSideMenu from 'components/notice/NoticeSideMenu'
 import NoticePost from 'components/notice/NoticePost'
 // modules
 import { RootState } from 'store/index'
-import { GetNotice, GetNoticeList, Validation, DeleteNotice } from 'modules/notice'
+import { GetNotice, Validation, DeleteNotice } from 'modules/notice'
 
 interface NoticeProps {
 	noticeId: string;
@@ -22,18 +22,13 @@ const Notice = ({noticeId}: NoticeProps) => {
 	/* 공지사항 API 호출 */
 	useEffect(() => {
 		dispatch(GetNotice(noticeId));
+		window.scrollTo(0,0);
 	}, [noticeId, dispatch]);
 
 	/* 공지사항 권한 API 호출 */
 	useEffect(() => {
 		dispatch(Validation());
 	}, [userId, isAdmin, dispatch]);
-
-	/* 공지사항 목록 API 호출 */
-	useEffect(() => {
-		dispatch(GetNoticeList());
-		window.scrollTo(0,0);
-	}, [dispatch]);
 
 	/* 공지사항 수정 */
 	const onEdit = () => {

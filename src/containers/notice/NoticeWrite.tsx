@@ -62,8 +62,8 @@ const NoticeWrite = ({noticeId}: NoticeWriteProps) => {
 			<NoticeWriteTitle title={title} setTitle={setTitle} />
 			<NoticeWritePost post={post} setPost={setPost} />
 			<BtnWrapper>
-				<NoticeWriteSubmitBtn onClick={noticeSubmit} message="작성하기" />
 				<NoticeWriteSubmitBtn onClick={noticeCancel} message="취소하기" />
+				<NoticeWriteSubmitBtn onClick={noticeSubmit} message="작성하기" />
 			</BtnWrapper>
 		</NoticeWriteLayout>
 	);

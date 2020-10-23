@@ -1,6 +1,9 @@
 export const dateFormatter = (date: number): string => {
 	const a = new Date();
 	const b = new Date(date);
+	// DB에 KST(+9) 기준으로 UTC(+0)로 저장되어 있음: Saved Miss
+	// 그래서 표시할 때, 9시간을 빼줌: Revise Time
+	b.setHours(b.getHours() - 9);
 	
 	const yyyy = b.getFullYear();
 	const mm = b.getMonth() + 1;

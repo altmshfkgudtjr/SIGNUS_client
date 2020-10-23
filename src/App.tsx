@@ -10,7 +10,7 @@ import NoticeWritePage from 'pages/NoticeWritePage'
 import NotFound from 'pages/NotFound'
 import RedirectPage from 'pages/RedirectPage'
 // containers
-import Snackbar from 'containers/Snackbar'
+import Snackbar from 'containers/commons/Snackbar'
 // components
 // import NoticeBar from 'components/commons/NoticeBar'
 // modules

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async"
 // containers
 import Header from 'containers/Header'
 import Sidebar from 'containers/Sidebar'
-import Search from 'containers/Search'
+import Search from 'containers/search/Search'
 // components
 import SearchLayout from 'components/search/SearchLayout'
 

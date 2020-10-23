@@ -3,18 +3,23 @@ import styled from 'styled-components'
 // lib
 import palette from 'lib/styles/palette'
 import media from 'lib/styles/media'
+import animations from 'lib/styles/animations'
 
 interface NoticePostInfoProps {
 	userId: string;
 	date: string;
 }
 const NoticePostInfo = ({userId, date}: NoticePostInfoProps) => {
+	const loading: boolean = userId === '';
+
 	return (
 		<Container>
 			<Icon />
-			<Writer>{userId}</Writer>
+			{!loading && <Writer>{userId}</Writer>}
+			{loading && <Loading />}
 			│
-			<Date>{date}</Date>
+			{!loading && <Date>{date}</Date>}
+			{loading && <Loading />}
 		</Container>
 	);
 }
@@ -50,6 +55,14 @@ const Writer = styled.div`
 
 const Date = styled.div`
 	font-weight: 200;
+`;
+
+const Loading = styled.div`
+	width: 80px;
+	height: 20px;
+	background-color: ${palette.gray1};
+	border-radius: 20px;
+	animation: ${animations.blink} 1.5s infinite ease-in-out;
 `;
 
 export default NoticePostInfo

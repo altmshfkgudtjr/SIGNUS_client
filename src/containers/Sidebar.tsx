@@ -7,6 +7,7 @@ import Title from '../components/sidebar/Title'
 import NoticeSideMenuItem from 'components/notice/NoticeSideMenuItem'
 import KeywordBtn from 'components/sidebar/KeywordBtn'
 import Copyright from 'components/commons/Copyright'
+import Email from 'components/commons/Email'
 // lib
 import media, { mediaQuery } from '../lib/styles/media'
 // modules
@@ -63,6 +64,7 @@ const Sidebar = () => {
 				</ContentWrapper>
 
 				<Copyright />
+				<Email />
 			</StickyWrapper>
 		</Container>
 	);

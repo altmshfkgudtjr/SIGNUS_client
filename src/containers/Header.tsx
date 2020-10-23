@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { useSelector } from 'react-redux'
 // containers
-import SearchContainerMobile from './search/SearchContainerMobile'
+import SearchMobile from './search/SearchMobile'
 // components
 import HeaderStatic from '../components/header/HeaderStatic'
 import HeaderCover from '../components/header/HeaderCover'
@@ -54,9 +54,9 @@ const Header = () => {
 									 setSearchModalDisplay={setSearchModalDisplay}
 									 loginValid={loginValid}
 									 userName={userName} />
-			{searchModalDisplay && <SearchContainerMobile searchWord={searchWord}
-																										setSearchWord={setSearchWord}
-																										setSearchModalDisplay={setSearchModalDisplay} />}
+			{searchModalDisplay && <SearchMobile searchWord={searchWord}
+																					 setSearchWord={setSearchWord}
+																					 setSearchModalDisplay={setSearchModalDisplay} />}
 		</>
 	);
 }
