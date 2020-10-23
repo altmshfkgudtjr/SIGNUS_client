@@ -1,3 +1,5 @@
+const IMPOSSIBLE_NAME = ['SIGNUS', '관리자', '운영자'];
+
 export type validationType = {
 	valid: boolean,
 	type: string
@@ -111,6 +113,13 @@ export const validationNicknameChecker = (keyword: string): validationType => {
 			valid: false,
 			type: "TOO_LONG"
 		};
+	}
+
+	if (IMPOSSIBLE_NAME.indexOf(keyword) !== -1) {
+		return {
+			valid: false,
+			type: "IMPOSSIBLE"
+		}
 	}
 
 	return {

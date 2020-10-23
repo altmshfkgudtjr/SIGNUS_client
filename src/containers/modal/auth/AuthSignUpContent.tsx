@@ -113,6 +113,8 @@ const AuthSignUpContent = ({onSignUp, openAuthorizationContent}: AuthSignUpConte
 				dispatch(initSnackbar("닉네임이 너무 짧습니다.", "warning"));
 			} else if (nicknameValidation.type === 'TOO_LONG') {
 				dispatch(initSnackbar("닉네임이 너무 깁니다. (10자 이하)", "warning"));
+			} else if (nicknameValidation.type === 'IMPOSSIBLE') {
+				dispatch(initSnackbar("사용할 수 없는 닉네임입니다.", "warning"));
 			}
 
 			if (InputNicknameRef.current) {
