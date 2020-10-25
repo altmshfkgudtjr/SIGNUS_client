@@ -19,7 +19,7 @@ describe('notice', () => {
 	let state = reducer(undefined, {});
 
 	beforeEach(() => {         
-		let state = reducer(undefined, {});
+		state = reducer(undefined, {});
 	});
 
 	it('should create actions.', () => {
