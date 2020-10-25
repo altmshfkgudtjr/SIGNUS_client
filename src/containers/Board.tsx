@@ -116,13 +116,13 @@ const Board = ({boardName}: BoardProps) => {
 			});
 			setImgSrc('/icons/1x/award.png');
 		} else if (boardName === '동아리&모임') {
-			Promise.resolve(dispatch(addCategoryPosts('진로-구인')))
+			Promise.resolve(dispatch(addCategoryPosts('동아리-모임')))
 			.then(() => {
 				setLoading(false);
 			});
 			setImgSrc('/icons/1x/group.png');
 		} else if (boardName === '진로&구인') {
-			Promise.resolve(dispatch(addCategoryPosts('동아리-모임')))
+			Promise.resolve(dispatch(addCategoryPosts('진로-구인')))
 			.then(() => {
 				setLoading(false);
 			});

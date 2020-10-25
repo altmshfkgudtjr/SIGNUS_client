@@ -8,6 +8,7 @@ import NoticePage from 'pages/NoticePage'
 import NoticeListPage from 'pages/NoticeListPage'
 import NoticeWritePage from 'pages/NoticeWritePage'
 import NotFound from 'pages/NotFound'
+import ServerError from 'pages/ServerError'
 import RedirectPage from 'pages/RedirectPage'
 // containers
 import Snackbar from 'containers/commons/Snackbar'
@@ -46,6 +47,7 @@ const App = () => {
 						<Route path="/notice/write" component={NoticeWritePage} exact />
 						<Route path="/notice/:noticeId" component={NoticePage} exact />
 						<Route path="*" component={NotFound} status={404} />
+						<Route path="*" component={ServerError} status={500} />
 					</Switch>
 			}
 			<Snackbar />
