@@ -21,7 +21,6 @@ const LogoutBtn = ({onClose, onLogout}: LogoutBtnProps) => {
 const Btn = styled.div`
 	position: relative;
 	display: block;
-	font-size: 14px;
 	line-height: 24px;
 	transition: .3s ${styles.transition};
 	padding: 0 .5rem 0 0;

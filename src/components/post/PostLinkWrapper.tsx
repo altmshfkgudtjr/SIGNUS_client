@@ -25,7 +25,7 @@ const Container = styled.a<ContainerStyled>`
 	flex-direction: column;
 	padding: ${props => props.isList
 		? '0'
-		: '.5rem'
+		: '1rem 1rem .5rem 1rem'
 	};
 `;
 

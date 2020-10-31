@@ -38,7 +38,7 @@ const Icon = styled.img`
 const Content = styled.span`
 	position: relative;
 	vertical-align: top;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 20px;
 `;
 
