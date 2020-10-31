@@ -62,7 +62,7 @@ const AuthAuthorizationContent = ({onCertification, openLoginContent}: AuthLogin
 		<Container>
 			<AuthHeaderWrapper>
 				<BackBtn onClose={openLoginContent} />
-				<AuthInfoTitle message="세종대학교학생 인증" />
+				<AuthInfoTitle message="세종대학교 학생 인증" />
 			</AuthHeaderWrapper>
 			<UserAccountInput userId={userId}
 												setUserId={setUserId}
