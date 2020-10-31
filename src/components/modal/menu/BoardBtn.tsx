@@ -53,7 +53,7 @@ const Message = styled.div`
 	position: relative;
 	width: 100%;
 	text-align: center;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 2rem;
 	color: ${palette.gray7};
 `;

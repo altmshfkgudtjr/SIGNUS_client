@@ -23,7 +23,7 @@ const Content = styled.div<ContentStyled>`
 	position: relative;
 	width: 100%;
 	height: auto;
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 20px;
 	overflow: hidden;
 	${props => props.isList

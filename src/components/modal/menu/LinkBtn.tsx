@@ -19,7 +19,7 @@ const Content = styled(Link)`
 	position: relative;
 	display: block;
 	font-size: 14px;
-	line-height: 24px;
+	line-height: 30px;
 	transition: .3s ${styles.transition};
 	padding: 0 .5rem 0 0;
 	border-left: 2px solid rgba(0,0,0,0);

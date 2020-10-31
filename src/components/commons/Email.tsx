@@ -11,10 +11,14 @@ const Email = () => {
 
 const Content = styled.a`
 	position: relative;
-	display: block;
 	font-size: 12px;
 	color: ${palette.gray4};
 	white-space: pre-wrap;
+
+	&:active,
+	&:hover {
+		color: ${palette.gray7};
+	}
 `;
 
 export default Email

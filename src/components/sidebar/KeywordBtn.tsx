@@ -20,7 +20,6 @@ const Btn = styled(Link)`
 	border-radius: 50px;
 	transition: .1s ${styles.transition};
 	box-shadow: ${styles.boxShadow.btn};
-	font-size: 14px;
 
 	&:last-child {
 		margin-right: 0;

@@ -41,12 +41,15 @@ const Name = styled.span`
 	overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-right: 4px;
+  line-height: 20px;
 `;
 
 const Message = styled.span`
 	position: relative;
 	flex-shrink: 0;
 	font-size: 14px;
+  line-height: 20px;
 `;
 
 export default UserContent

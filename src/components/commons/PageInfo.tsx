@@ -59,7 +59,7 @@ const SmallInfo = styled.div`
 	opacity: .5;
 
 	${media.small} {
-		font-size: 11px;
+		font-size: 12px;
 	}
 `;
 

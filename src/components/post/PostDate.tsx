@@ -32,7 +32,7 @@ const Icon = styled.img`
 	vertical-align: top;
 	width: 14px;
 	height: 14px;
-	padding: 4px 3px 2px 3px;
+	padding: 2px 6px 4px 3px;
 `;
 
 const Content = styled.span`
