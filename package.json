@@ -56,5 +56,5 @@
     ]
   },
   "license": "MIT",
-  "proxy": "http://soojle.sejong.ac.kr"
+  "proxy": "https://soojle.sejong.ac.kr"
 }
